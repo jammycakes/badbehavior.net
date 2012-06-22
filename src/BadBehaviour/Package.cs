@@ -8,7 +8,15 @@ namespace BadBehaviour
 {
 	public class Package
 	{
+		/// <summary>
+		///  Gets the HTTP headers case insensitively by key.
+		/// </summary>
+
 		public IDictionary<string, string> Headers { get; private set; }
+
+		/// <summary>
+		///  Gets the <see cref="HttpRequestBase"/> instance being validated.
+		/// </summary>
 
 		public HttpRequestBase Request { get; private set; }
 
