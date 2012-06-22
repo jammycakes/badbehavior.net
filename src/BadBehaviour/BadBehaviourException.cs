@@ -27,22 +27,11 @@ namespace BadBehaviour
 		public HttpRequestBase Request { get; private set; }
 
 		/// <summary>
-		///  The Bad Behaviour code returned when this test fails.
+		///  The <see cref="Error" /> instance indicating which error condition was triggered.
 		/// </summary>
 
-		public string Code { get; private set; }
+		public Error Error { get; private set; }
 
-		/// <summary>
-		///  The HTTP response code to be returned to the server when the test fails.
-		/// </summary>
-
-		public int HttpCode { get; private set; }
-
-		/// <summary>
-		///  The explanation to be returned to the server when the test fails.
-		/// </summary>
-
-		public string Explanation { get; private set; }
 
 		/// <summary>
 		///  Creates a new instance of the <see cref="BadBehaviourException" /> class.
@@ -77,15 +66,12 @@ namespace BadBehaviour
 		///  This should not be shown to the user.
 		/// </remarks>
 
-		public BadBehaviourException(IValidation failedTest, HttpRequestBase request,
-			string code, int httpCode, string explanation, string log)
-			: base(log)
+		public BadBehaviourException(IValidation failedTest, HttpRequestBase request, Error error)
+			: base(error.Log)
 		{
 			this.Request = request;
 			this.FailedTest = failedTest;
-			this.Code = code;
-			this.HttpCode = httpCode;
-			this.Explanation = explanation;
+			this.Error = error;
 		}
 
 		/// <summary>

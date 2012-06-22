@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="BadBehaviourException.cs" />
     <Compile Include="BadBehaviourModule.cs" />
+    <Compile Include="Error.cs" />
     <Compile Include="ValidationResult.cs" />
     <Compile Include="Functions.cs">
       <SubType>Code</SubType>
