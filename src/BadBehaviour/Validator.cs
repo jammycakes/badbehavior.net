@@ -37,8 +37,10 @@ namespace BadBehaviour
 
 		public void Validate(HttpRequestBase request)
 		{
+			var package = new RequestPackage(request);
+
 			foreach (var test in this.Tests) {
-				if (test.Test(request)) {
+				if (test.Test(package)) {
 					throw new BadBehaviourException(test, request);
 				}
 			}

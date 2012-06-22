@@ -43,6 +43,6 @@ namespace BadBehaviour
 		///  otherwise false.
 		/// </returns>
 
-		bool Test(HttpRequestBase request);
+		bool Test(RequestPackage request);
 	}
 }
