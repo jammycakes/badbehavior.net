@@ -18,6 +18,6 @@ namespace BadBehaviour
 		///  Thrown when the request fails to validate against this test.
 		/// </exception>
 
-		ValidationResult Validate(RequestPackage request);
+		ValidationResult Validate(Package request);
 	}
 }

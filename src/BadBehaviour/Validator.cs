@@ -42,7 +42,7 @@ namespace BadBehaviour
 
 		public void Validate(HttpRequestBase request)
 		{
-			var package = new RequestPackage(request);
+			var package = new Package(request);
 
 			foreach (var test in this.Tests) {
 				if (test.Validate(package) == ValidationResult.Stop) return;

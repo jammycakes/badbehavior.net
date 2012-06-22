@@ -6,13 +6,13 @@ using System.Web;
 
 namespace BadBehaviour
 {
-	public class RequestPackage
+	public class Package
 	{
 		public IDictionary<string, string> Headers { get; private set; }
 
 		public HttpRequestBase Request { get; private set; }
 
-		public RequestPackage(HttpRequestBase request)
+		public Package(HttpRequestBase request)
 		{
 			this.Request = request;
 			this.Headers = new Dictionary<string, string>

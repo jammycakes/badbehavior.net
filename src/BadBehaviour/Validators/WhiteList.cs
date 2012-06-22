@@ -7,7 +7,7 @@ namespace BadBehaviour.Validators
 {
 	public class WhiteList : IValidation
 	{
-		public ValidationResult Validate(RequestPackage request)
+		public ValidationResult Validate(Package request)
 		{
 			// NB: return ValidationResult.Stop if this request is whitelisted.
 			// Don't throw from this method.

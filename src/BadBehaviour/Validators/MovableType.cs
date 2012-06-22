@@ -7,7 +7,7 @@ namespace BadBehaviour.Validators
 {
 	public class MovableType : IValidation
 	{
-		public ValidationResult Validate(RequestPackage request)
+		public ValidationResult Validate(Package request)
 		{
 			return ValidationResult.Continue;
 		}

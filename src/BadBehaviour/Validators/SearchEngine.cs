@@ -7,7 +7,7 @@ namespace BadBehaviour.Validators
 {
 	public class SearchEngine : IValidation
 	{
-		public ValidationResult Validate(RequestPackage request)
+		public ValidationResult Validate(Package request)
 		{
 			return ValidationResult.Continue;
 		}
