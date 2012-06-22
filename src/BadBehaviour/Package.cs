@@ -12,6 +12,14 @@ namespace BadBehaviour
 
 		public HttpRequestBase Request { get; private set; }
 
+
+		/* ====== Properties computed by the validators ====== */
+
+		public bool IsBrowser { get; set; }
+
+
+		/* ====== Constructor ====== */
+
 		public Package(HttpRequestBase request)
 		{
 			this.Request = request;
@@ -20,6 +28,7 @@ namespace BadBehaviour
 			foreach (string key in request.Headers.Keys) {
 				this.Headers[key] = request.Headers[key];
 			}
+			this.IsBrowser = false;
 		}
 	}
 }
