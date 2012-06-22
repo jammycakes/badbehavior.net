@@ -13,36 +13,34 @@ namespace BadBehaviour.Validators
 		{
 			// See core.inc.php in BB original.
 
-			string ua = package.Request.UserAgent.ToLowerInvariant();
-
-			if (ua.Contains("; msie")) {
+			if (package.UserAgentI.Contains("; msie")) {
 				package.IsBrowser = true;
-				if (ua.Contains("opera"))
+				if (package.UserAgentI.Contains("opera"))
 					ValidateOpera(package);
 				else
 					ValidateMSIE(package);
 			}
-			else if (ua.Contains("konqueror")) {
+			else if (package.UserAgentI.Contains("konqueror")) {
 				package.IsBrowser = true;
 				ValidateKonqueror(package);
 			}
-			else if (ua.Contains("opera")) {
+			else if (package.UserAgentI.Contains("opera")) {
 				package.IsBrowser = true;
 				ValidateOpera(package);
 			}
-			else if (ua.Contains("safari")) {
+			else if (package.UserAgentI.Contains("safari")) {
 				package.IsBrowser = true;
 				ValidateSafari(package);
 			}
-			else if (ua.Contains("lynx")) {
+			else if (package.UserAgentI.Contains("lynx")) {
 				package.IsBrowser = true;
 				ValidateLynx(package);
 			}
-			else if (ua.Contains("movabletype")) {
+			else if (package.UserAgentI.Contains("movabletype")) {
 				package.IsBrowser = false;
 				ValidateMovableType(package);
 			}
-			else if (ua.StartsWith("mozilla")) {
+			else if (package.UserAgentI.StartsWith("mozilla")) {
 				package.IsBrowser = true;
 				ValidateMozilla(package);
 			}

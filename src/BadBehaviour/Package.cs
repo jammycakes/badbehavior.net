@@ -12,6 +12,12 @@ namespace BadBehaviour
 
 		public HttpRequestBase Request { get; private set; }
 
+		/// <summary>
+		///  Gets the user agent string, translated into lower case.
+		/// </summary>
+
+		public string UserAgentI { get; private set; }
+
 
 		/* ====== Properties computed by the validators ====== */
 
@@ -28,6 +34,8 @@ namespace BadBehaviour
 			foreach (string key in request.Headers.Keys) {
 				this.Headers[key] = request.Headers[key];
 			}
+			this.UserAgentI = this.Request.UserAgent.ToLowerInvariant();
+
 			this.IsBrowser = false;
 		}
 	}
