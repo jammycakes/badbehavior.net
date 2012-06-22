@@ -11,13 +11,13 @@ namespace BadBehaviour
 		/// <summary>
 		///  Tests an HTTP request for conformance to this rule.
 		/// </summary>
-		/// <param name="request">
+		/// <param name="package">
 		///  The HTTP request to be examined. 
 		/// </param>
 		/// <exception cref="BadBehaviourException">
 		///  Thrown when the request fails to validate against this test.
 		/// </exception>
 
-		ValidationResult Validate(Package request);
+		ValidationResult Validate(Package package);
 	}
 }

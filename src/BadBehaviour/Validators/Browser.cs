@@ -9,42 +9,42 @@ namespace BadBehaviour.Validators
 
 	public class Browser : IValidation
 	{
-		public ValidationResult Validate(Package request)
+		public ValidationResult Validate(Package package)
 		{
 			// See core.inc.php in BB original.
 
-			string ua = request.Request.UserAgent.ToLowerInvariant();
+			string ua = package.Request.UserAgent.ToLowerInvariant();
 
 			if (ua.Contains("; msie")) {
-				request.IsBrowser = true;
+				package.IsBrowser = true;
 				if (ua.Contains("opera"))
-					ValidateOpera(request);
+					ValidateOpera(package);
 				else
-					ValidateMSIE(request);
+					ValidateMSIE(package);
 			}
 			else if (ua.Contains("konqueror")) {
-				request.IsBrowser = true;
-				ValidateKonqueror(request);
+				package.IsBrowser = true;
+				ValidateKonqueror(package);
 			}
 			else if (ua.Contains("opera")) {
-				request.IsBrowser = true;
-				ValidateOpera(request);
+				package.IsBrowser = true;
+				ValidateOpera(package);
 			}
 			else if (ua.Contains("safari")) {
-				request.IsBrowser = true;
-				ValidateSafari(request);
+				package.IsBrowser = true;
+				ValidateSafari(package);
 			}
 			else if (ua.Contains("lynx")) {
-				request.IsBrowser = true;
-				ValidateLynx(request);
+				package.IsBrowser = true;
+				ValidateLynx(package);
 			}
 			else if (ua.Contains("movabletype")) {
-				request.IsBrowser = false;
-				ValidateMovableType(request);
+				package.IsBrowser = false;
+				ValidateMovableType(package);
 			}
 			else if (ua.StartsWith("mozilla")) {
-				request.IsBrowser = true;
-				ValidateMozilla(request);
+				package.IsBrowser = true;
+				ValidateMozilla(package);
 			}
 
 			return ValidationResult.Continue;
@@ -54,27 +54,27 @@ namespace BadBehaviour.Validators
 
 		// See browser.inc.php in original BB.
 
-		private void ValidateKonqueror(Package request)
+		private void ValidateKonqueror(Package package)
 		{
 		}
 
-		private void ValidateLynx(Package request)
+		private void ValidateLynx(Package package)
 		{
 		}
 
-		private void ValidateMozilla(Package request)
+		private void ValidateMozilla(Package package)
 		{
 		}
 
-		private void ValidateMSIE(Package request)
+		private void ValidateMSIE(Package package)
 		{
 		}
 
-		private void ValidateOpera(Package request)
+		private void ValidateOpera(Package package)
 		{
 		}
 
-		private void ValidateSafari(Package request)
+		private void ValidateSafari(Package package)
 		{
 		}
 
@@ -83,7 +83,7 @@ namespace BadBehaviour.Validators
 
 		// See movabletype.inc.php in BB original.
 
-		private void ValidateMovableType(Package request)
+		private void ValidateMovableType(Package package)
 		{
 		}
 	}

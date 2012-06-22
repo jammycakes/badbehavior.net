@@ -7,7 +7,7 @@ namespace BadBehaviour.Validators
 {
 	public class Cookies : IValidation
 	{
-		public ValidationResult Validate(Package request)
+		public ValidationResult Validate(Package package)
 		{
 			return ValidationResult.Continue;
 		}
