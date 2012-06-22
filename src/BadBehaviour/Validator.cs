@@ -40,9 +40,7 @@ namespace BadBehaviour
 			var package = new RequestPackage(request);
 
 			foreach (var test in this.Tests) {
-				if (test.Test(package)) {
-					throw new BadBehaviourException(test, request);
-				}
+				test.Assert(package);
 			}
 		}
 	}
