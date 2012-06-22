@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -44,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BadBehaviourException.cs" />
     <Compile Include="BadBehaviourModule.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="ValidationResult.cs" />
     <Compile Include="Functions.cs">
