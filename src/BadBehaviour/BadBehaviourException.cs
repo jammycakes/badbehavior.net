@@ -18,7 +18,7 @@ namespace BadBehaviour
 		///  Gets the test which failed validation.
 		/// </summary>
 
-		public ITest FailedTest { get; private set; }
+		public IValidation FailedTest { get; private set; }
 
 		/// <summary>
 		///  Gets the request which failed to validate.
@@ -73,11 +73,11 @@ namespace BadBehaviour
 		///  recording the request that failed and the test that triggered the failure.
 		/// </summary>
 		/// <remarks>
-		///  The exception message uses the Log property in the <see cref="ITest"/> instance.
+		///  The exception message uses the Log property in the <see cref="IValidation"/> instance.
 		///  This should not be shown to the user.
 		/// </remarks>
 
-		public BadBehaviourException(ITest failedTest, HttpRequestBase request,
+		public BadBehaviourException(IValidation failedTest, HttpRequestBase request,
 			string code, int httpCode, string explanation, string log)
 			: base(log)
 		{

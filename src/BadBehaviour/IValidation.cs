@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BadBehaviour
 {
-	public interface ITest
+	public interface IValidation
 	{
 		/// <summary>
 		///  Tests an HTTP request for conformance to this rule.
@@ -18,6 +18,6 @@ namespace BadBehaviour
 		///  Thrown when the request fails to validate against this test.
 		/// </exception>
 
-		void Assert(RequestPackage request);
+		ValidationResult Validate(RequestPackage request);
 	}
 }
