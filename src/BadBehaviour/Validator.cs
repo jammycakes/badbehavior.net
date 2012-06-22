@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using BadBehaviour.Validators;
 
 namespace BadBehaviour
 {
@@ -13,13 +14,17 @@ namespace BadBehaviour
 		static Validator()
 		{
 			Instance = new Validator(
-				from type in typeof(Validator).Assembly.GetTypes()
-				where typeof(IValidation).IsAssignableFrom(type)
-				let c = type.GetConstructor(Type.EmptyTypes)
-				where c != null
-				let test = c.Invoke(null) as IValidation
-				where test != null
-				select test
+				new CloudFare(),
+				new WhiteList(),
+				new BlackList(),
+				new BlackHole(),
+				new Protocol(),
+				new Cookies(),
+				new MiscHeaders(),
+				new SearchEngine(),
+				new MovableType(),
+				new Browser(),
+				new Post()
 			);
 		}
 
@@ -30,7 +35,7 @@ namespace BadBehaviour
 			this.Tests = new List<IValidation>();
 		}
 
-		public Validator(IEnumerable<IValidation> tests)
+		public Validator(params IValidation[] tests)
 		{
 			this.Tests = tests.ToList();
 		}
