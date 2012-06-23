@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Web;
 
@@ -26,10 +27,17 @@ namespace BadBehaviour
 
 		public string UserAgentI { get; private set; }
 
+		/// <summary>
+		///  The originating IP address, allowing for reverse proxies if set.
+		/// </summary>
+
+		public IPAddress OriginatingIP { get; private set; }
+
 
 		/* ====== Properties computed by the validators ====== */
 
 		public bool IsBrowser { get; set; }
+
 
 
 		/* ====== Constructor ====== */
@@ -43,8 +51,18 @@ namespace BadBehaviour
 				this.Headers[key] = request.Headers[key];
 			}
 			this.UserAgentI = this.Request.UserAgent.ToLowerInvariant();
+			this.OriginatingIP = FindOriginatingIP();
 
 			this.IsBrowser = false;
+		}
+
+
+		private IPAddress FindOriginatingIP()
+		{
+			string addr = this.Request.UserHostAddress;
+
+			IPAddress ip;
+			return IPAddress.TryParse(addr, out ip) ? ip : null;
 		}
 	}
 }

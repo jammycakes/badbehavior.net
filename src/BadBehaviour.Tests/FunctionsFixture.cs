@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using NUnit.Framework;
 
@@ -21,7 +22,8 @@ namespace BadBehaviour.Tests
 		[TestCase("253.255.255.255", "254.0.0.0/8", false)]
 		public void CanMatchCidr(string addr, string cidr, bool expected)
 		{
-			Assert.AreEqual(expected, Functions.MatchCidr(addr, cidr));
+			var ipAddress = IPAddress.Parse(addr);
+			Assert.AreEqual(expected, ipAddress.MatchCidr(cidr));
 		}
 	}
 }

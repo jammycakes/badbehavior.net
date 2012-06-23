@@ -82,7 +82,7 @@ namespace BadBehaviour.Validators
 			// CafeKelsa is a dev project at Yahoo which indexes job listings for
 			// Yahoo! HotJobs. It identifies as Konqueror so we skip these checks.
 			if (package.UserAgentI.Contains("yahooseeker/cafekelsa")) return;
-			if (Functions.MatchCidr(package.Request.UserHostAddress, "209.73.160.0/19")) return;
+			if (Functions.MatchCidr(package.OriginatingIP, "209.73.160.0/19")) return;
 
 			AssertAccept(package);
 		}
