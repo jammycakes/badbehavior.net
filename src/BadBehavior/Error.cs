@@ -9,7 +9,7 @@ namespace BadBehavior
 	public class Error
 	{
 		/// <summary>
-		///  The Bad Behaviour code returned when this test fails.
+		///  The Bad Behavior code returned when this test fails.
 		/// </summary>
 
 		public string Code { get; private set; }

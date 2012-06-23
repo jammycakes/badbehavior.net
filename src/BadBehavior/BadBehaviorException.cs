@@ -8,7 +8,7 @@ using System.Web;
 namespace BadBehavior
 {
 	/// <summary>
-	///  The exception that is thrown when Bad Behaviour fails to validate a request.
+	///  The exception that is thrown when Bad Behavior fails to validate a request.
 	/// </summary>
 
 	[Serializable]

@@ -1,4 +1,4 @@
-Bad Behaviour .NET
+Bad Behavior .NET
 ==================
 This is a .NET port of the original [Bad Behavior WordPress plugin][1]. It is
 built as an HTTP module, so you can just drop it into any existing website
@@ -15,7 +15,7 @@ yet ready for production.
 Description
 -----------
 Welcome to a whole new way of keeping your blog, forum, guestbook, wiki or
-content management system free of link spam. Bad Behaviour .NET is a port
+content management system free of link spam. Bad Behavior .NET is a port
 of the original PHP-based solution for blocking link spam and the robots
 which deliver it.
 
@@ -53,7 +53,7 @@ Public License, version 3, or at your option, any later version.
 
 Contributing
 ------------
-Bad Behaviour .NET uses Bad Behavior 2.7 as a reference. The source code for
+Bad Behavior .NET uses Bad Behavior 2.7 as a reference. The source code for
 this is available from the Bad Behavior SVN repository at:
 
  * http://plugins.svn.wordpress.org/bad-behavior/
@@ -66,7 +66,7 @@ Before contributing a pull request, please note the following code conventions:
  1. We use tabs for indentation, not spaces. Pull requests that mix tabs and
     spaces in the same file will be rejected with extreme prejudice.
  2. Keep line lengths below 100 characters where possible.
- 3. Bad Behaviour is intended to be deployed to the end user as a single DLL
+ 3. Bad Behavior is intended to be deployed to the end user as a single DLL
     with no dependencies, so don't add extra projects to the solution and
     don't add third-party components, whether through NuGet or otherwise.
  4. An exception means that your method can not do what its name says that it
