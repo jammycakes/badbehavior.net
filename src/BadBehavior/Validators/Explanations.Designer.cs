@@ -86,5 +86,14 @@ namespace BadBehavior.Validators {
                 return ResourceManager.GetString("InvalidMSIEWithTE", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to access this server..
+        /// </summary>
+        internal static string InvalidRangeHeader {
+            get {
+                return ResourceManager.GetString("InvalidRangeHeader", resourceCulture);
+            }
+        }
     }
 }

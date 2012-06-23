@@ -59,6 +59,9 @@ namespace BadBehavior.Validators
 		private static readonly Error EInvalidMSIEWithTE = new Error
 			("2b90f772", 403, Explanations.InvalidMSIEWithTE,
 			"Connection: TE present, not supported by MSIE");
+		private static readonly Error EInvalidRangeHeader = new Error
+			("7d12528e", 403, Explanations.InvalidRangeHeader,
+			"Prohibited header 'Range' or 'Content-Range' in POST request");
 
 
 		/* ====== Assertions ====== */
@@ -156,6 +159,13 @@ namespace BadBehavior.Validators
 
 		private void ValidateMovableType(Package package)
 		{
+			// Is it a trackback?
+			if (package.Request.HttpMethod == "POST") {
+				if (package.Headers.ContainsKey("Range")
+					&& package.Headers["Range"] == "bytes=0-99999") {
+						throw new BadBehaviorException(this, package.Request, EInvalidRangeHeader);
+				}
+			}
 		}
 	}
 }

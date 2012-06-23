@@ -54,7 +54,7 @@ functions.inc.php
 	bb2_load_headers
 
 movabletype.inc.php
-	bb2_movabletype
+	bb2_movabletype		ported
 
 post.inc.php
 	bb2_trackback
