@@ -57,7 +57,8 @@ namespace BadBehaviour
 			foreach (string key in request.Headers.Keys) {
 				this.Headers[key] = request.Headers[key];
 			}
-			this.UserAgentI = this.Request.UserAgent.ToLowerInvariant();
+			this.UserAgentI = this.Request.UserAgent == null
+				? null : this.Request.UserAgent.ToLowerInvariant();
 			this.OriginatingIP = FindOriginatingIP();
 
 			this.IsBrowser = false;
