@@ -11,70 +11,70 @@ bad-behavior-wordpress.php
 /bad-behavior folder (core functionality):
 
 banned.inc.php
-	bb2_housekeeping
-	bb2_display_denial
+    bb2_housekeeping
+    bb2_display_denial
 
 blackhole.inc.php
-	bb2_blackhole
-	bb2_httpbl
+    bb2_blackhole
+    bb2_httpbl
 
 blacklist.inc.php
-	bb2_blacklist
+    bb2_blacklist
 
 browser.inc.php
-	bb2_konqueror	ported
-	bb2_lynx		ported
-	bb2_mozilla		ported
-	bb2_msie		ported, tested
-	bb2_opera		ported
-	bb2_safari		ported
+    bb2_konqueror   ported
+    bb2_lynx        ported
+    bb2_mozilla     ported
+    bb2_msie        ported, tested
+    bb2_opera       ported
+    bb2_safari      ported
 
 cloudfare.inc.php
-	bb2_cloudflare
+    bb2_cloudflare
 
 common_tests.inc.php
-	bb2_protocol
-	bb2_cookies
-	bb2_misc_headers
+    bb2_protocol
+    bb2_cookies
+    bb2_misc_headers
 
 core.inc.php
-	bb2_banned
-	bb2_approved
-	bb2_reverse_proxy	ported, tested
-	bb2_start
-	bb2_screen
+    bb2_banned
+    bb2_approved
+    bb2_reverse_proxy   ported, tested
+    bb2_start
+    bb2_screen
 
 functions.inc.php
-	is_ipv6
-	stripos
-	str_split
-	uc_all
-	match_cidr
-	is_rfc1918
-	bb2_load_headers
+    is_ipv6
+    stripos             n/a
+    str_split           n/a
+    uc_all
+    match_cidr          ported, tested
+    is_rfc1918          ported
+    bb2_load_headers
 
 movabletype.inc.php
-	bb2_movabletype		ported
+    bb2_movabletype     ported
 
 post.inc.php
-	bb2_trackback
-	bb2_post
+    bb2_trackback
+    bb2_post
 
 responses.inc.php
-	bb2_get_response
+    bb2_get_response
 
 roundtripdns.inc.php
-	bb2_roundtripdns
+    bb2_roundtripdns
 
 screener.inc.php
-	bb2_screener_cookie
-	bb2_screener_javascript
-	bb2_screener
+    bb2_screener_cookie
+    bb2_screener_javascript
+    bb2_screener
 
 searchengine.inc.php
-	bb2_google
-	bb2_msnbot
-	bb2_yahoo
+    bb2_google
+    bb2_msnbot
+    bb2_yahoo
 
 whitelist.inc.php
-	bb2_run_whitelist
+    bb2_run_whitelist
