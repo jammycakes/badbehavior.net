@@ -32,6 +32,7 @@ namespace BadBehavior
 
 		public static IPAddress SafeParseIP(string str)
 		{
+			if (str == null) return null;
 			IPAddress ip;
 			return IPAddress.TryParse(str, out ip) ? ip : null;
 		}
