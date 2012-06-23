@@ -72,6 +72,15 @@ namespace BadBehavior.Validators {
         /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this server..
         /// </summary>
+        internal static string Blacklisted {
+            get {
+                return ResourceManager.GetString("Blacklisted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to access this server..
+        /// </summary>
         internal static string InvalidMSIEWindowsVersion {
             get {
                 return ResourceManager.GetString("InvalidMSIEWindowsVersion", resourceCulture);

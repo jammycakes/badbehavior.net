@@ -120,6 +120,9 @@
   <data name="AcceptMissing" xml:space="preserve">
     <value>An invalid request was received from your browser. This may be caused by a malfunctioning proxy server or browser privacy software.</value>
   </data>
+  <data name="Blacklisted" xml:space="preserve">
+    <value>You do not have permission to access this server.</value>
+  </data>
   <data name="InvalidMSIEWindowsVersion" xml:space="preserve">
     <value>You do not have permission to access this server.</value>
   </data>

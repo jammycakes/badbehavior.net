@@ -19,7 +19,7 @@ blackhole.inc.php
     bb2_httpbl
 
 blacklist.inc.php
-    bb2_blacklist
+    bb2_blacklist   ported
 
 browser.inc.php
     bb2_konqueror   ported
