@@ -20,10 +20,20 @@ namespace BadBehaviour
 
 		private static uint? IP2Uint(string str)
 		{
-			// Only match IPv4 addresses here to match PHP Bad Behavior.
-			IPAddress addr;
-			if (!IPAddress.TryParse(str, out addr)) return null;
-			return addr.ToUint();
+			return SafeParseIP(str).ToUint();
+		}
+
+		/// <summary>
+		///  Safe parsing of IP addresses. Returns null rather than throwing an exception
+		///  if an invalid string is given.
+		/// </summary>
+		/// <param name="str"></param>
+		/// <returns></returns>
+
+		public static IPAddress SafeParseIP(string str)
+		{
+			IPAddress ip;
+			return IPAddress.TryParse(str, out ip) ? ip : null;
 		}
 
 		/// <summary>

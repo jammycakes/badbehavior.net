@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace BadBehaviour
@@ -64,13 +65,28 @@ namespace BadBehaviour
 			this.IsBrowser = false;
 		}
 
+		// If this is reverse-proxied or load balanced, obtain the actual client IP
+		// See bb2_reverse_proxy function in core.inc.php
 
 		private IPAddress FindOriginatingIP()
 		{
-			string addr = this.Request.UserHostAddress;
-
-			IPAddress ip;
-			return IPAddress.TryParse(addr, out ip) ? ip : null;
+			if (Configuration.ReverseProxy
+				&& this.Headers.ContainsKey(Configuration.ReverseProxyHeader)) {
+				string[] addresses = Regex.Split
+					(this.Headers[Configuration.ReverseProxyHeader], @"[\s,]+");
+				// Skip our known proxies and private addresses.
+				string[] knownProxies = Configuration.ReverseProxyAddresses.ToArray();
+				foreach (string address in addresses) {
+					IPAddress ip = Functions.SafeParseIP(address);
+					if (ip != null && !ip.MatchCidr(knownProxies) && !ip.IsRfc1918()) {
+						return ip;
+					}
+				}
+				// If we get here, someone is playing a trick on us.
+				// (Specifically: no reverse proxies are reporting the *real* original IP address)
+				// In this case, BB original just uses the remote address. So shall we.
+			}
+			return Functions.SafeParseIP(Request.UserHostAddress);
 		}
 	}
 }

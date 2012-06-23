@@ -8,6 +8,8 @@ namespace BadBehaviour
 {
 	public class Configuration : IConfiguration
 	{
+		public const string DefaultReverseProxyHeader = "X-Forwarded-For";
+
 		public static Configuration Instance { get; set; }
 
 		private static string GetString(string name, string defaultValue)
@@ -43,7 +45,7 @@ namespace BadBehaviour
 		public Configuration()
 		{
 			this.ReverseProxy = GetBool("ReverseProxy", false);
-			this.ReverseProxyHeader = GetString("ReverseProxyHeader", "X-Forwarded-For");
+			this.ReverseProxyHeader = GetString("ReverseProxyHeader", DefaultReverseProxyHeader);
 			var reverseProxyAddresses = GetString("ReverseProxyAddresses", null);
 			if (reverseProxyAddresses == null)
 				this.ReverseProxyAddresses = new List<string>().AsReadOnly();
