@@ -19,28 +19,28 @@ blackhole.inc.php
     bb2_httpbl
 
 blacklist.inc.php
-    bb2_blacklist   ported
+    bb2_blacklist       Validators.BlackList
 
 browser.inc.php
-    bb2_konqueror   ported
-    bb2_lynx        ported
-    bb2_mozilla     ported
-    bb2_msie        ported, tested
-    bb2_opera       ported
-    bb2_safari      ported
+    bb2_konqueror       Validators.Browser.ValidateKonqueror
+    bb2_lynx            Validators.Browser.ValidateLynx
+    bb2_mozilla         Validators.Browser.ValidateMozilla
+    bb2_msie            Validators.Browser.ValidateMSIE
+    bb2_opera           Validators.Browser.ValidateOpera
+    bb2_safari          Validators.Browser.ValidateSafari
 
 cloudfare.inc.php
     bb2_cloudflare
 
 common_tests.inc.php
-    bb2_protocol
+    bb2_protocol        Validators.Protocol
     bb2_cookies
     bb2_misc_headers
 
 core.inc.php
     bb2_banned
     bb2_approved
-    bb2_reverse_proxy   ported, tested
+    bb2_reverse_proxy   Package.FindOriginatingIP
     bb2_start
     bb2_screen
 
@@ -49,12 +49,12 @@ functions.inc.php
     stripos             n/a
     str_split           n/a
     uc_all
-    match_cidr          ported, tested
-    is_rfc1918          ported
+    match_cidr          Functions.MatchCidr
+    is_rfc1918          Functions.IsRfc1918
     bb2_load_headers
 
 movabletype.inc.php
-    bb2_movabletype     ported
+    bb2_movabletype     Validators.Browser.ValidateMovableType
 
 post.inc.php
     bb2_trackback
