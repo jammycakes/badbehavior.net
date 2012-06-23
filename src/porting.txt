@@ -25,7 +25,7 @@ browser.inc.php
 	bb2_konqueror	ported
 	bb2_lynx		ported
 	bb2_mozilla		ported
-	bb2_msie		ported
+	bb2_msie		ported, tested
 	bb2_opera		ported
 	bb2_safari		ported
 
