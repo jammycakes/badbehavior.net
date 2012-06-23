@@ -26,6 +26,9 @@ namespace BadBehaviour.Tests
 
 		[TestCase("1.2.3.4", null, "1.2.3.4")]
 		[TestCase("1.2.3.4", "12.34.56.78", "12.34.56.78")]
+		[TestCase("1.2.3.4", "5.6.7.8 12.34.56.78", "5.6.7.8")]
+		[TestCase("1.2.3.4", "5.6.7.8 12.34.56.78", "12.34.56.78", "5.0.0.0/8")]
+		[TestCase("1.2.3.4", "192.168.3.4,5.6.7.8,12.34.56.78", "12.34.56.78", "5.0.0.0/8")]
 		public void CanFindOriginatingIP(string ipAddress, string forwardedFor, string expected,
 			params string[] knownProxies)
 		{
