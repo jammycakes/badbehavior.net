@@ -8,6 +8,8 @@ namespace BadBehaviour
 {
 	public class Configuration
 	{
+		public static Configuration Instance { get; set; }
+
 		private static string GetString(string name, string defaultValue)
 		{
 			return ConfigurationManager.AppSettings["BadBehaviour." + name]
@@ -47,6 +49,11 @@ namespace BadBehaviour
 				this.ReverseProxyAddresses = new List<string>().AsReadOnly();
 			else
 				this.ReverseProxyAddresses = reverseProxyAddresses.Split(',', ';').ToList().AsReadOnly();
+		}
+
+		static Configuration()
+		{
+			Instance = new Configuration();
 		}
 	}
 }
