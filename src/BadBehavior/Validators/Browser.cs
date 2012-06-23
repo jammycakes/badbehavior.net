@@ -71,7 +71,7 @@ namespace BadBehavior.Validators
         private void AssertAccept(Package package)
         {
             if (!package.Headers.ContainsKey("Accept"))
-                throw new BadBehaviorException(this, package.Request, EAcceptMissing);
+                package.Throw(this, EAcceptMissing);
         }
 
         /* ====== Browser checks ====== */
@@ -122,7 +122,7 @@ namespace BadBehavior.Validators
                 package.Request.UserAgent.Contains("Windows XP") ||
                 package.Request.UserAgent.Contains("Windows 2000") ||
                 package.Request.UserAgent.Contains("Win32"))
-                throw new BadBehaviorException(this, package.Request, EInvalidMSIEWindowsVersion);
+                package.Throw(this, EInvalidMSIEWindowsVersion);
 
             // MSIE does NOT send Connection: TE but Akamai does
             // Bypass this test when Akamai detected
@@ -133,7 +133,7 @@ namespace BadBehavior.Validators
 
             if (package.Headers.ContainsKey("Connection")) {
                 if (Regex.Match(package.Headers["Connection"], @"\bTE\b").Success) {
-                    throw new BadBehaviorException(this, package.Request, EInvalidMSIEWithTE);
+                    package.Throw(this, EInvalidMSIEWithTE);
                 }
             }
         }
@@ -163,7 +163,7 @@ namespace BadBehavior.Validators
             if (package.Request.HttpMethod == "POST") {
                 if (package.Headers.ContainsKey("Range")
                     && package.Headers["Range"] == "bytes=0-99999") {
-                        throw new BadBehaviorException(this, package.Request, EInvalidRangeHeader);
+                        package.Throw(this, EInvalidRangeHeader);
                 }
             }
         }

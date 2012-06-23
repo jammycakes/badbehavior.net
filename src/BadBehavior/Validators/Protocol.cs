@@ -23,7 +23,7 @@ namespace BadBehavior.Validators
             if (package.Headers.ContainsKey("Expect")
                 && package.Headers["Expect"].IndexOf
                     ("100-continue", StringComparison.InvariantCultureIgnoreCase) < 0) {
-                throw new BadBehaviorException(this, package.Request, EHttp10Expect);
+                        package.Throw(this, EHttp10Expect);
             }
         }
 
@@ -35,7 +35,7 @@ namespace BadBehavior.Validators
             if (package.Headers.ContainsKey("Pragma")
                 && package.Headers["Pragma"].Contains("no-cache")
                 && !package.Headers.ContainsKey("Cache-Control")) {
-                throw new BadBehaviorException(this, package.Request, EHttp11Invalid);
+                    package.Throw(this, EHttp11Invalid);
             }
         }
 

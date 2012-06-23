@@ -88,5 +88,10 @@ namespace BadBehavior
             }
             return Functions.SafeParseIP(Request.UserHostAddress);
         }
+
+        public void Throw(IValidation validation, Error error)
+        {
+            throw new BadBehaviorException(validation, this.Request, error);
+        }
     }
 }

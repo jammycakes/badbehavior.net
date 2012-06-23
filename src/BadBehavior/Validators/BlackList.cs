@@ -118,17 +118,17 @@ namespace BadBehavior.Validators
         {
             if (package.Request.UserAgent == null) return ValidationResult.Continue;
 
-            foreach(string spambot in spambots0)
+            foreach (string spambot in spambots0)
                 if (package.Request.UserAgent.StartsWith(spambot))
-                    throw new BadBehaviorException(this, package.Request, EBlacklist);
+                    package.Throw(this, EBlacklist);
 
-            foreach(string spambot in spambots)
+            foreach (string spambot in spambots)
                 if (package.Request.UserAgent.Contains(spambot))
-                    throw new BadBehaviorException(this, package.Request, EBlacklist);
+                    package.Throw(this, EBlacklist);
 
-            foreach(Regex spambot in spambotsRegex)
+            foreach (Regex spambot in spambotsRegex)
                 if (spambot.IsMatch(package.Request.UserAgent))
-                    throw new BadBehaviorException(this, package.Request, EBlacklist);
+                    package.Throw(this, EBlacklist);
 
             return ValidationResult.Continue;
         }
