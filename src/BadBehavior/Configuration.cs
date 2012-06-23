@@ -35,6 +35,7 @@ namespace BadBehavior
             return Int32.TryParse(value, out result) ? result : defaultValue;
         }
 
+        public bool Strict { get; private set; }
 
         public bool ReverseProxy { get; private set; }
 
@@ -44,6 +45,7 @@ namespace BadBehavior
 
         public Configuration()
         {
+            this.Strict = GetBool("Strict", false);
             this.ReverseProxy = GetBool("ReverseProxy", false);
             this.ReverseProxyHeader = GetString("ReverseProxyHeader", DefaultReverseProxyHeader);
             var reverseProxyAddresses = GetString("ReverseProxyAddresses", null);
