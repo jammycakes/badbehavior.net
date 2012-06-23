@@ -6,7 +6,7 @@ using System.Configuration;
 
 namespace BadBehaviour
 {
-	public class Configuration
+	public class Configuration : IConfiguration
 	{
 		public static Configuration Instance { get; set; }
 

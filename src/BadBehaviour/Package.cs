@@ -10,6 +10,12 @@ namespace BadBehaviour
 	public class Package
 	{
 		/// <summary>
+		///  The configuration settings to be used with this package.
+		/// </summary>
+
+		public IConfiguration Configuration { get; private set; }
+
+		/// <summary>
 		///  Gets the HTTP headers case insensitively by key.
 		/// </summary>
 
@@ -42,8 +48,9 @@ namespace BadBehaviour
 
 		/* ====== Constructor ====== */
 
-		public Package(HttpRequestBase request)
+		public Package(HttpRequestBase request, IConfiguration configuration)
 		{
+			this.Configuration = configuration;
 			this.Request = request;
 			this.Headers = new Dictionary<string, string>
 				(this.Request.Headers.Count, StringComparer.InvariantCultureIgnoreCase);

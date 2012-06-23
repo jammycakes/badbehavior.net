@@ -11,6 +11,8 @@ namespace BadBehaviour
 	{
 		public static Validator Instance { get; set; }
 
+		public static Configuration Configuration { get; set; }
+
 		static Validator()
 		{
 			Instance = new Validator(
@@ -26,6 +28,7 @@ namespace BadBehaviour
 				new Browser(),
 				new Post()
 			);
+			Configuration = new Configuration();
 		}
 
 		public IList<IValidation> Tests { get; private set; }
@@ -42,7 +45,7 @@ namespace BadBehaviour
 
 		public void Validate(HttpRequestBase request)
 		{
-			var package = new Package(request);
+			var package = new Package(request, Configuration);
 
 			foreach (var test in this.Tests) {
 				if (test.Validate(package) == ValidationResult.Stop) return;

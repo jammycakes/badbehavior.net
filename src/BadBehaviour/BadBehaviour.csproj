@@ -47,6 +47,7 @@
     <Compile Include="BadBehaviourModule.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="IConfiguration.cs" />
     <Compile Include="ValidationResult.cs" />
     <Compile Include="Functions.cs">
       <SubType>Code</SubType>
