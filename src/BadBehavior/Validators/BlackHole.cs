@@ -5,11 +5,11 @@ using System.Text;
 
 namespace BadBehavior.Validators
 {
-	public class BlackHole : IValidation
-	{
-		public ValidationResult Validate(Package package)
-		{
-			return ValidationResult.Continue;
-		}
-	}
+    public class BlackHole : IValidation
+    {
+        public ValidationResult Validate(Package package)
+        {
+            return ValidationResult.Continue;
+        }
+    }
 }

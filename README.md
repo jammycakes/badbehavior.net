@@ -63,8 +63,8 @@ had more success with this using Mercurial and hgsubversion.
 
 Before contributing a pull request, please note the following code conventions:
 
- 1. We use tabs for indentation, not spaces. Pull requests that mix tabs and
-    spaces in the same file will be rejected with extreme prejudice.
+ 1. We use four spaces for indentation, not tabs. Pull requests that mix tabs
+    and spaces in the same file will be rejected with extreme prejudice.
  2. Keep line lengths below 100 characters where possible.
  3. Bad Behavior is intended to be deployed to the end user as a single DLL
     with no dependencies, so don't add extra projects to the solution and

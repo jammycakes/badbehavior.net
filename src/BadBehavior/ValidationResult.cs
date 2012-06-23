@@ -5,18 +5,18 @@ using System.Text;
 
 namespace BadBehavior
 {
-	public enum ValidationResult
-	{
-		/// <summary>
-		///  Indicates that we should continue with the rest of the checks.
-		/// </summary>
+    public enum ValidationResult
+    {
+        /// <summary>
+        ///  Indicates that we should continue with the rest of the checks.
+        /// </summary>
 
-		Continue,
+        Continue,
 
-		/// <summary>
-		///  Indicates that we should stop checking.
-		/// </summary>
+        /// <summary>
+        ///  Indicates that we should stop checking.
+        /// </summary>
 
-		Stop
-	}
+        Stop
+    }
 }
