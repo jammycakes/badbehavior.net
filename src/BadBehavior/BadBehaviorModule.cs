@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web;
 
-namespace BadBehaviour
+namespace BadBehavior
 {
-	public class BadBehaviourModule : IHttpModule
+	public class BadBehaviorModule : IHttpModule
 	{
 		public void Dispose()
 		{

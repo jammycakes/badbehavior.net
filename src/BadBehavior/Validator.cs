@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using BadBehaviour.Validators;
+using BadBehavior.Validators;
 
-namespace BadBehaviour
+namespace BadBehavior
 {
 	public class Validator
 	{

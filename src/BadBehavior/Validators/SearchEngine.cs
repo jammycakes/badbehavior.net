@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BadBehaviour.Validators
+namespace BadBehavior.Validators
 {
-	public class BlackHole : IValidation
+	public class SearchEngine : IValidation
 	{
 		public ValidationResult Validate(Package package)
 		{

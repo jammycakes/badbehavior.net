@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BadBehaviour.Validators
+namespace BadBehavior.Validators
 {
-	public class SearchEngine : IValidation
+	public class Cookies : IValidation
 	{
 		public ValidationResult Validate(Package package)
 		{

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace BadBehaviour
+namespace BadBehavior
 {
 	public interface IValidation
 	{
@@ -14,7 +14,7 @@ namespace BadBehaviour
 		/// <param name="package">
 		///  The HTTP request to be examined. 
 		/// </param>
-		/// <exception cref="BadBehaviourException">
+		/// <exception cref="BadBehaviorException">
 		///  Thrown when the request fails to validate against this test.
 		/// </exception>
 

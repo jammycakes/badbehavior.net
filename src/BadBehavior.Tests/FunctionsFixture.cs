@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using NUnit.Framework;
 
-namespace BadBehaviour.Tests
+namespace BadBehavior.Tests
 {
 	[TestFixture]
 	public class FunctionsFixture

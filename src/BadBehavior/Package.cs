@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace BadBehaviour
+namespace BadBehavior
 {
 	public class Package
 	{

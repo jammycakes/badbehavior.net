@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 
-namespace BadBehaviour
+namespace BadBehavior
 {
 	public class Configuration : IConfiguration
 	{

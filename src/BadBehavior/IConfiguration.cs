@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BadBehaviour
+namespace BadBehavior
 {
 	public interface IConfiguration
 	{

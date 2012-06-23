@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace BadBehaviour.Validators
+namespace BadBehavior.Validators
 {
 	/* ====== Browser checks ====== */
 
@@ -68,7 +68,7 @@ namespace BadBehaviour.Validators
 		private void AssertAccept(Package package)
 		{
 			if (!package.Headers.ContainsKey("Accept"))
-				throw new BadBehaviourException(this, package.Request, EAcceptMissing);
+				throw new BadBehaviorException(this, package.Request, EAcceptMissing);
 		}
 
 		/* ====== Browser checks ====== */
@@ -119,7 +119,7 @@ namespace BadBehaviour.Validators
 				package.Request.UserAgent.Contains("Windows XP") ||
 				package.Request.UserAgent.Contains("Windows 2000") ||
 				package.Request.UserAgent.Contains("Win32"))
-				throw new BadBehaviourException(this, package.Request, EInvalidMSIEWindowsVersion);
+				throw new BadBehaviorException(this, package.Request, EInvalidMSIEWindowsVersion);
 
 			// MSIE does NOT send Connection: TE but Akamai does
 			// Bypass this test when Akamai detected
@@ -130,7 +130,7 @@ namespace BadBehaviour.Validators
 
 			if (package.Headers.ContainsKey("Connection")) {
 				if (Regex.Match(package.Headers["Connection"], @"\bTE\b").Success) {
-					throw new BadBehaviourException(this, package.Request, EInvalidMSIEWithTE);
+					throw new BadBehaviorException(this, package.Request, EInvalidMSIEWithTE);
 				}
 			}
 		}

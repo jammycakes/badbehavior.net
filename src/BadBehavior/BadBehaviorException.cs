@@ -5,14 +5,14 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Web;
 
-namespace BadBehaviour
+namespace BadBehavior
 {
 	/// <summary>
 	///  The exception that is thrown when Bad Behaviour fails to validate a request.
 	/// </summary>
 
 	[Serializable]
-	public class BadBehaviourException : Exception
+	public class BadBehaviorException : Exception
 	{
 		/// <summary>
 		///  Gets the test which failed validation.
@@ -34,31 +34,31 @@ namespace BadBehaviour
 
 
 		/// <summary>
-		///  Creates a new instance of the <see cref="BadBehaviourException" /> class.
+		///  Creates a new instance of the <see cref="BadBehaviorException" /> class.
 		/// </summary>
 
-		public BadBehaviourException() : base()
+		public BadBehaviorException() : base()
 		{ }
 
 		/// <summary>
-		///  Creates a new instance of the <see cref="BadBehaviourException" /> class
+		///  Creates a new instance of the <see cref="BadBehaviorException" /> class
 		///  with a specific message.
 		/// </summary>
 
-		public BadBehaviourException(string message) : base(message)
+		public BadBehaviorException(string message) : base(message)
 		{ }
 
 		/// <summary>
-		///  Creates a new instance of the <see cref="BadBehaviourException" /> class
+		///  Creates a new instance of the <see cref="BadBehaviorException" /> class
 		///  with a specific message and inner exception.
 		/// </summary>
 
-		public BadBehaviourException(string message, Exception innerException)
+		public BadBehaviorException(string message, Exception innerException)
 			: base(message, innerException)
 		{ }
 
 		/// <summary>
-		///  Creates a new instance of the <see cref="BadBehaviourException" /> class
+		///  Creates a new instance of the <see cref="BadBehaviorException" /> class
 		///  recording the request that failed and the test that triggered the failure.
 		/// </summary>
 		/// <remarks>
@@ -66,7 +66,7 @@ namespace BadBehaviour
 		///  This should not be shown to the user.
 		/// </remarks>
 
-		public BadBehaviourException(IValidation failedTest, HttpRequestBase request, Error error)
+		public BadBehaviorException(IValidation failedTest, HttpRequestBase request, Error error)
 			: base(error.Log)
 		{
 			this.Request = request;
@@ -75,13 +75,13 @@ namespace BadBehaviour
 		}
 
 		/// <summary>
-		///  Creates a new instance of the <see cref="BadBehaviourException"/> class with
+		///  Creates a new instance of the <see cref="BadBehaviorException"/> class with
 		///  serialised data.
 		/// </summary>
 		/// <param name="context"></param>
 		/// <param name="info"></param>
 
-		protected BadBehaviourException(SerializationInfo info, StreamingContext context)
+		protected BadBehaviorException(SerializationInfo info, StreamingContext context)
 			: base(info, context)
 		{ }
 	}

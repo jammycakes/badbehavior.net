@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BadBehaviour.Validators
+namespace BadBehavior.Validators
 {
-	public class MovableType : IValidation
+	public class BlackList : IValidation
 	{
 		public ValidationResult Validate(Package package)
 		{

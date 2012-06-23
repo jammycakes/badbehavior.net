@@ -7,7 +7,7 @@ using System.Web;
 using Moq;
 using NUnit.Framework;
 
-namespace BadBehaviour.Tests
+namespace BadBehavior.Tests
 {
 	[TestFixture]
 	public class PackageFixture

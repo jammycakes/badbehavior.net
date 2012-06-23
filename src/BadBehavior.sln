@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBehaviour", "BadBehaviour\BadBehaviour.csproj", "{1B6905E8-4CB8-40B8-AFA2-9C0D8A133ABC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBehavior", "BadBehavior\BadBehavior.csproj", "{1B6905E8-4CB8-40B8-AFA2-9C0D8A133ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBehaviour.Tests", "BadBehaviour.Tests\BadBehaviour.Tests.csproj", "{456EF74C-B54B-4DFE-B93C-975E99D6A440}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBehavior.Tests", "BadBehavior.Tests\BadBehavior.Tests.csproj", "{456EF74C-B54B-4DFE-B93C-975E99D6A440}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{850756AA-40CD-4A50-96CA-1C7BA3D226A8}"
 	ProjectSection(SolutionItems) = preProject
