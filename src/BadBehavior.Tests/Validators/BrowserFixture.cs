@@ -11,19 +11,8 @@ using NUnit.Framework;
 namespace BadBehavior.Tests.Validators
 {
     [TestFixture]
-    public class BrowserFixture
+    public class BrowserFixture : RequestFixtureBase
     {
-        private Mock<HttpRequestBase> CreateRequest(string userAgent, IDictionary<string, string> headers)
-        {
-            var mock =new Mock<HttpRequestBase>();
-            mock.SetupGet(x => x.UserAgent).Returns(userAgent);
-            var h = new NameValueCollection();
-            foreach (string key in headers.Keys)
-                h.Add(key, headers[key]);
-            mock.SetupGet(x => x.Headers).Returns(h);
-            return mock;
-        }
-
         [Test]
         [ExpectedException(typeof(BadBehaviorException))]
         public void MSIEAcceptRequiredAndMissing()

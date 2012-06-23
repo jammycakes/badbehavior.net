@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using BadBehavior.Validators;
+using Moq;
 using NUnit.Framework;
 
 namespace BadBehavior.Tests
 {
     [TestFixture]
-    public class BadBehaviorModuleFixture
+    public class BadBehaviorModuleFixture : RequestFixtureBase
     {
         [TestCase("127.0.0.1", "deadbeef", "7f00-0001-dead-beef")]
         [TestCase("1.0.0.1", "deadbeef", "0100-0001-dead-beef")]
@@ -17,6 +19,26 @@ namespace BadBehavior.Tests
             var ipAddress = IPAddress.Parse(ip);
             var actual = BadBehaviorModule.BuildSupportKey(ipAddress, code);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void CanBuildResponse()
+        {
+            var mock = CreateRequest(
+                "Mozilla/4.0 (compatible; MSIE 6.0b; Windows NT 5.1)",
+                new Dictionary<string, string> { }
+            );
+            mock.SetupGet(x => x.UserHostAddress).Returns("127.0.0.1");
+            var package = new Package(mock.Object, Configuration.Instance);
+            try {
+                new Browser().Validate(package);
+            }
+            catch (BadBehaviorException ex) {
+                var content = BadBehaviorModule.GetResponseContent(ex);
+                Console.WriteLine(content);
+                return;
+            }
+            Assert.Fail("The request validated incorrectly.");
         }
     }
 }
