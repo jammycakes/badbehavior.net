@@ -41,7 +41,7 @@ namespace BadBehaviour
 				var parts = cidr.Split('/');
 				uint? uCidr = IP2Uint(parts[0]);
 				if (uCidr.HasValue) {
-					if (parts.Length == 1 && uAddr == uCidr) return true;
+					if (parts.Length == 1) return uAddr == uCidr;
 					int bits;
 					if (!Int32.TryParse(parts[1], out bits)) continue;
 					uint mask = ~((1u << (32 - bits)) - 1);

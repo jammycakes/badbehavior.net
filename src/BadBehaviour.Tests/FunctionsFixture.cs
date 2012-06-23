@@ -20,6 +20,10 @@ namespace BadBehaviour.Tests
 		[TestCase("254.255.0.1", "254.0.0.0/8", true)]
 		[TestCase("255.0.0.0", "254.0.0.0/8", false)]
 		[TestCase("253.255.255.255", "254.0.0.0/8", false)]
+		[TestCase("127.0.0.1", "127.0.0.0", false)]
+		[TestCase("127.0.0.1", "127.0.0.1", true)]
+		[TestCase("254.0.0.1", "254.0.0.0", false)]
+		[TestCase("254.0.0.1", "254.0.0.1", true)]
 		public void CanMatchCidr(string addr, string cidr, bool expected)
 		{
 			var ipAddress = IPAddress.Parse(addr);
