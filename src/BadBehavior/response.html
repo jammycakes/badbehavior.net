@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>HTTP Error {{response}}</title>
+    </head>
+    <body>
+        <h1>Error {{response}}</h1>
+        <p>
+            We're sorry, but we could not fulfill your request for {{request_uri}} on this server.
+        </p>
+        <p>
+            {{explanation}}
+        </p>
+        <p>
+            Your technical support key is: <strong>{{support_key}}</strong>
+        </p>
+        <p>
+            You can use this key to
+            <a href="http://www.ioerror.us/bb2-support-key?key=<?php echo $support_key; ?>">
+                fix this problem yourself
+            </a>.
+        </p>
+        {{email?}}
+        <p>
+            If you are unable to fix the problem yourself, please contact
+            <a href="mailto:{{email}}">{{email}}</a> and be sure to provide the technical support key shown above.
+        </p>
+        {{/email?}}
+    </body>
+</html>

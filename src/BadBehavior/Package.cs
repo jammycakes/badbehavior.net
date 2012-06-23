@@ -91,7 +91,7 @@ namespace BadBehavior
 
         public void Throw(IValidation validation, Error error)
         {
-            throw new BadBehaviorException(validation, this.Request, error);
+            throw new BadBehaviorException(validation, this, error);
         }
     }
 }

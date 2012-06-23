@@ -15,6 +15,12 @@ namespace BadBehavior
         bool Strict { get; }
 
         /// <summary>
+        ///  The e-mail address that should be contacted for support.
+        /// </summary>
+
+        string SupportEmail { get; }
+
+        /// <summary>
         ///  Indicates that this site is behind a reverse proxy.
         /// </summary>
 

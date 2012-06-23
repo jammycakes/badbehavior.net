@@ -24,7 +24,7 @@ namespace BadBehavior
         ///  Gets the request which failed to validate.
         /// </summary>
 
-        public HttpRequestBase Request { get; private set; }
+        public Package Package { get; private set; }
 
         /// <summary>
         ///  The <see cref="Error" /> instance indicating which error condition was triggered.
@@ -66,10 +66,10 @@ namespace BadBehavior
         ///  This should not be shown to the user.
         /// </remarks>
 
-        public BadBehaviorException(IValidation failedTest, HttpRequestBase request, Error error)
+        public BadBehaviorException(IValidation failedTest, Package package, Error error)
             : base(error.Log)
         {
-            this.Request = request;
+            this.Package= package;
             this.FailedTest = failedTest;
             this.Error = error;
         }

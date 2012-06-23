@@ -37,6 +37,8 @@ namespace BadBehavior
 
         public bool Strict { get; private set; }
 
+        public string SupportEmail { get; private set; }
+
         public bool ReverseProxy { get; private set; }
 
         public string ReverseProxyHeader { get; private set; }
@@ -46,6 +48,7 @@ namespace BadBehavior
         public Configuration()
         {
             this.Strict = GetBool("Strict", false);
+            this.SupportEmail = GetString("SupportEmail", null);
             this.ReverseProxy = GetBool("ReverseProxy", false);
             this.ReverseProxyHeader = GetString("ReverseProxyHeader", DefaultReverseProxyHeader);
             var reverseProxyAddresses = GetString("ReverseProxyAddresses", null);
