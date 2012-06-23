@@ -61,7 +61,7 @@ this is available from the Bad Behavior SVN repository at:
 Note that cloning this project using git-svn can take a very long time; I've
 had more success with this using Mercurial and hgsubversion.
 
-Before contributing a pull request, please not the following code conventions:
+Before contributing a pull request, please note the following code conventions:
 
  1. We use tabs for indentation, not spaces. Pull requests that mix tabs and
     spaces in the same file will be rejected with extreme prejudice.
@@ -73,6 +73,7 @@ Before contributing a pull request, please not the following code conventions:
     does. Absence of an exception means that your method has done what its
     name says that it does. Do not deviate from these conventions.
  5. Every check-in should:
-    a. make only one change
-    b. have a commit summary that accurately describes that change
-    c. compile without errors or warnings.
+
+    1. make only one change
+    2. have a commit summary that accurately describes that change
+    3. compile without errors or warnings.
