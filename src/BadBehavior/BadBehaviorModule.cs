@@ -18,9 +18,13 @@ namespace BadBehavior
             using (var stream = typeof(BadBehaviorModule).Assembly.GetManifestResourceStream
                 (typeof(BadBehaviorModule).Namespace + ".response.html"))
             using (var reader = new StreamReader(stream)) {
-                template = reader.ReadToEnd();
+                string tpl = reader.ReadToEnd();
+                templateNoEmail =
+                    new Regex(@"\{\{email\?\}\}.*?\{\{/email\?\}\}", RegexOptions.Singleline)
+                    .Replace(tpl, String.Empty);
+                template = new Regex(@"\{\{/?email\?\}\}", RegexOptions.Singleline)
+                    .Replace(tpl, String.Empty);
             }
-            templateNoEmail = Regex.Replace(template, @"\{\{email\?\}\}.*?\{\{/email\?\}\}", "");
         }
 
         public void Dispose()
