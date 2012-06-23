@@ -79,6 +79,24 @@ namespace BadBehavior.Validators {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expectation failed. Please retry your request..
+        /// </summary>
+        internal static string Http10Expect {
+            get {
+                return ResourceManager.GetString("Http10Expect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid request was received. This may be caused by a malfunctioning proxy server. Bypass the proxy server and connect directly, or contact your proxy server administrator..
+        /// </summary>
+        internal static string Http11Invalid {
+            get {
+                return ResourceManager.GetString("Http11Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this server..
         /// </summary>
         internal static string InvalidMSIEWindowsVersion {
