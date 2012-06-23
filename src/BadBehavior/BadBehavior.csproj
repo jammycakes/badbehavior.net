@@ -67,7 +67,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Explanations.resx</DependentUpon>
     </Compile>
-    <Compile Include="Validators\MovableType.cs" />
     <Compile Include="Validators\Post.cs" />
     <Compile Include="Validators\SearchEngine.cs" />
     <Compile Include="Validators\MiscHeaders.cs" />

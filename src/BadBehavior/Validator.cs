@@ -24,7 +24,6 @@ namespace BadBehavior
                 new Cookies(),
                 new MiscHeaders(),
                 new SearchEngine(),
-                new MovableType(),
                 new Browser(),
                 new Post()
             );
