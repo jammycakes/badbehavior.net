@@ -50,5 +50,17 @@ namespace BadBehaviour
 			}
 			return false;
 		}
+
+
+		/// <summary>
+		///  Determines if this is an IP address reserved by RFC 1918.
+		/// </summary>
+		/// <param name="addr">The IP address.</param>
+		/// <returns>true if the address is reserved, otherwise false.</returns>
+
+		public static bool IsRfc1918(this IPAddress addr)
+		{
+			return addr.MatchCidr("10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16");
+		}
 	}
 }
