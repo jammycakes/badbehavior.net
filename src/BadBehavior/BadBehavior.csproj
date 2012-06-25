@@ -61,7 +61,7 @@
     <Compile Include="Validators\BlackHole.cs" />
     <Compile Include="Validators\BlackList.cs" />
     <Compile Include="Validators\Browser.cs" />
-    <Compile Include="Validators\CloudFare.cs" />
+    <Compile Include="Validators\CloudFlare.cs" />
     <Compile Include="Validators\Cookies.cs" />
     <Compile Include="Validators\Explanations.Designer.cs">
       <AutoGen>True</AutoGen>

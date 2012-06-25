@@ -35,7 +35,7 @@ namespace BadBehavior
 
         /// <summary>
         ///  The HTTP header which gives the reverse proxy indirections.
-        ///  Default: "X-Forwarded-For". If you use CloudFare, this should be
+        ///  Default: "X-Forwarded-For". If you use CloudFlare, this should be
         ///  set to "CF-Connecting-IP".
         /// </summary>
 

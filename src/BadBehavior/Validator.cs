@@ -16,7 +16,7 @@ namespace BadBehavior
         static Validator()
         {
             Instance = new Validator(
-                new CloudFare(),
+                new CloudFlare(),
                 new WhiteList(),
                 new BlackList(),
                 new BlackHole(),

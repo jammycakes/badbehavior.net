@@ -29,7 +29,7 @@ browser.inc.php
     bb2_opera           Validators.Browser.ValidateOpera
     bb2_safari          Validators.Browser.ValidateSafari
 
-cloudfare.inc.php
+cloudflare.inc.php
     bb2_cloudflare
 
 common_tests.inc.php

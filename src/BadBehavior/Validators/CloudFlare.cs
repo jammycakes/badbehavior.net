@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BadBehavior.Validators
 {
-    public class CloudFare : IValidation
+    public class CloudFlare : IValidation
     {
         public ValidationResult Validate(Package package)
         {
