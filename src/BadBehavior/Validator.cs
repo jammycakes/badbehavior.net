@@ -9,24 +9,10 @@ namespace BadBehavior
 {
     public class Validator
     {
-        public static Validator Instance { get; set; }
-
         public static Configuration Configuration { get; set; }
 
         static Validator()
         {
-            Instance = new Validator(
-                new CloudFlare(),
-                new WhiteList(),
-                new BlackList(),
-                new BlackHole(),
-                new Protocol(),
-                new Cookies(),
-                new MiscHeaders(),
-                new SearchEngine(),
-                new Browser(),
-                new Post()
-            );
             Configuration = new Configuration();
         }
 

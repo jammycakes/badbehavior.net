@@ -6,11 +6,14 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using BadBehavior.Validators;
 
 namespace BadBehavior
 {
     public class BBEngine
     {
+        public static BBEngine Instance { get; set; }
+
         private static readonly string template;
         private static readonly string templateNoEmail;
 
@@ -26,14 +29,39 @@ namespace BadBehavior
                 template = new Regex(@"\{\{/?email\?\}\}", RegexOptions.Singleline)
                     .Replace(tpl, String.Empty);
             }
+
+            BBEngine.Instance = new BBEngine(
+                new Validator(
+                    new CloudFlare(),
+                    new WhiteList(),
+                    new BlackList(),
+                    new BlackHole(),
+                    new Protocol(),
+                    new Cookies(),
+                    new MiscHeaders(),
+                    new SearchEngine(),
+                    new Browser(),
+                    new Post()
+                ),
+                new Configuration()
+            );
         }
 
 
-        public static BBEngine Instance { get; set; }
+        public Validator Validator { get; private set; }
+
+        public IConfiguration Configuration { get; private set; }
+
+        public BBEngine(Validator validator, Configuration configuration)
+        {
+            this.Validator = validator;
+            this.Configuration = configuration;
+        }
+
 
         public void ValidateRequest(HttpRequestBase request)
         {
-            Validator.Instance.Validate(request);
+            this.Validator.Validate(request);
         }
 
         public void HandleError(HttpApplication context, BadBehaviorException ex)
