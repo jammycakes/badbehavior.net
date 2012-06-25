@@ -61,7 +61,7 @@ namespace BadBehavior
 
         public void ValidateRequest(HttpRequestBase request)
         {
-            this.Validator.Validate(request);
+            this.Validator.Validate(request, this.Configuration);
         }
 
         public void HandleError(HttpApplication context, BadBehaviorException ex)
