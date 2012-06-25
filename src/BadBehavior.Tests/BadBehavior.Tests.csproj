@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BadBehaviorModuleFixture.cs" />
+    <Compile Include="BBEngineFixture.cs" />
     <Compile Include="FunctionsFixture.cs" />
     <Compile Include="PackageFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

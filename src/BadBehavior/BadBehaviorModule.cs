@@ -10,23 +10,6 @@ namespace BadBehavior
 {
     public class BadBehaviorModule : IHttpModule
     {
-        private static readonly string template;
-        private static readonly string templateNoEmail;
-
-        static BadBehaviorModule()
-        {
-            using (var stream = typeof(BadBehaviorModule).Assembly.GetManifestResourceStream
-                (typeof(BadBehaviorModule).Namespace + ".response.html"))
-            using (var reader = new StreamReader(stream)) {
-                string tpl = reader.ReadToEnd();
-                templateNoEmail =
-                    new Regex(@"\{\{email\?\}\}.*?\{\{/email\?\}\}", RegexOptions.Singleline)
-                    .Replace(tpl, String.Empty);
-                template = new Regex(@"\{\{/?email\?\}\}", RegexOptions.Singleline)
-                    .Replace(tpl, String.Empty);
-            }
-        }
-
         public void Dispose()
         {
         }
@@ -34,57 +17,15 @@ namespace BadBehavior
         public void Init(HttpApplication context)
         {
             context.BeginRequest += (sender, e) => {
-                var request = new HttpRequestWrapper(context.Request);
-                Validator.Instance.Validate(request);
+                BBEngine.Instance.ValidateRequest(new HttpRequestWrapper(context.Request));
             };
 
             context.Error += (sender, e) => {
                 var ex = context.Server.GetLastError() as BadBehaviorException;
                 if (ex != null) {
-                    HandleError(context, ex);
+                    BBEngine.Instance.HandleError(context, ex);
                 }
             };
-        }
-
-        public static void HandleError(HttpApplication context, BadBehaviorException ex)
-        {
-            string content = GetResponseContent(ex);
-            context.Response.StatusCode = ex.Error.HttpCode;
-            context.Response.StatusDescription = "Bad Behavior";
-            context.Response.AddHeader("Status", "Bad Behavior");
-            context.Response.ContentType = "text/html";
-            context.Response.Write(content);
-            context.Server.ClearError();
-            context.CompleteRequest();
-        }
-
-        public static string GetResponseContent(BadBehaviorException ex)
-        {
-            string email = ex.Package.Configuration.SupportEmail;
-            string tpl = email != null ? template : templateNoEmail;
-            var dict = new Dictionary<string, string>();
-            dict["response"] = ex.Error.HttpCode.ToString();
-            dict["request_uri"] = ex.Package.Request.RawUrl;
-            dict["explanation"] = ex.Error.Explanation;
-            dict["support_key"] = BuildSupportKey(ex.Package.OriginatingIP, ex.Error.Code);
-            if (email != null) dict["email"] = email;
-            string content = Regex.Replace(tpl, @"\{\{(.*?)\}\}", m => {
-                string key = m.Groups[1].Value;
-                if (dict.ContainsKey(key))
-                    return HttpUtility.HtmlEncode(dict[key]);
-                else
-                    return m.Value;
-            });
-            return content;
-        }
-
-        public static string BuildSupportKey(IPAddress ipAddress, string errorCode)
-        {
-            string s = String.Concat
-                (ipAddress.GetAddressBytes().Select(x => x.ToString("x2")).ToArray());
-            s = s.Substring(0, 4) + "-" + s.Substring(4) + "-" +
-                errorCode.Substring(0, 4) + "-" + errorCode.Substring(4);
-            return s.ToLowerInvariant();
         }
     }
 }

@@ -10,14 +10,14 @@ using NUnit.Framework;
 namespace BadBehavior.Tests
 {
     [TestFixture]
-    public class BadBehaviorModuleFixture : RequestFixtureBase
+    public class BBEngineFixture : RequestFixtureBase
     {
         [TestCase("127.0.0.1", "deadbeef", "7f00-0001-dead-beef")]
         [TestCase("1.0.0.1", "deadbeef", "0100-0001-dead-beef")]
         public void CanBuildSupportKey(string ip, string code, string expected)
         {
             var ipAddress = IPAddress.Parse(ip);
-            var actual = BadBehaviorModule.BuildSupportKey(ipAddress, code);
+            var actual = BBEngine.BuildSupportKey(ipAddress, code);
             Assert.AreEqual(expected, actual);
         }
 
@@ -39,7 +39,7 @@ namespace BadBehavior.Tests
                 new Browser().Validate(package);
             }
             catch (BadBehaviorException ex) {
-                var content = BadBehaviorModule.GetResponseContent(ex);
+                var content = BBEngine.GetResponseContent(ex);
                 Console.WriteLine(content);
                 Assert.IsFalse(content.Contains("{{email?}}"), "Email only block was not removed.");
                 return;
