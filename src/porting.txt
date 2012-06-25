@@ -12,7 +12,7 @@ bad-behavior-wordpress.php
 
 banned.inc.php
     bb2_housekeeping
-    bb2_display_denial  BadBehaviorModule; response.html
+    bb2_display_denial  BBEngine; response.html
 
 blackhole.inc.php
     bb2_blackhole

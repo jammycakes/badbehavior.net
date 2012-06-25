@@ -58,7 +58,6 @@
     <Compile Include="IValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Package.cs" />
-    <Compile Include="Validator.cs" />
     <Compile Include="Validators\BlackHole.cs" />
     <Compile Include="Validators\BlackList.cs" />
     <Compile Include="Validators\Browser.cs" />

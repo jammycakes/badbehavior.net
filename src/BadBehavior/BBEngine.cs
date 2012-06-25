@@ -31,37 +31,39 @@ namespace BadBehavior
             }
 
             BBEngine.Instance = new BBEngine(
-                new Validator(
-                    new CloudFlare(),
-                    new WhiteList(),
-                    new BlackList(),
-                    new BlackHole(),
-                    new Protocol(),
-                    new Cookies(),
-                    new MiscHeaders(),
-                    new SearchEngine(),
-                    new Browser(),
-                    new Post()
-                ),
-                new Configuration()
+                new Configuration(),
+                new CloudFlare(),
+                new WhiteList(),
+                new BlackList(),
+                new BlackHole(),
+                new Protocol(),
+                new Cookies(),
+                new MiscHeaders(),
+                new SearchEngine(),
+                new Browser(),
+                new Post()
             );
         }
 
 
-        public Validator Validator { get; private set; }
+        public IList<IValidation> Rules { get; private set; }
 
         public IConfiguration Configuration { get; private set; }
 
-        public BBEngine(Validator validator, Configuration configuration)
+        public BBEngine(Configuration configuration, params IValidation[] rules)
         {
-            this.Validator = validator;
             this.Configuration = configuration;
+            this.Rules = rules.ToList();
         }
 
 
         public void ValidateRequest(HttpRequestBase request)
         {
-            this.Validator.Validate(request, this.Configuration);
+            var package = new Package(request, this.Configuration);
+
+            foreach (var rule in this.Rules) {
+                if (rule.Validate(package) == ValidationResult.Stop) return;
+            }
         }
 
         public void HandleError(HttpApplication context, BadBehaviorException ex)
