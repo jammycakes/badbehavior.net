@@ -93,7 +93,7 @@ namespace BadBehavior
 
         public void Throw(IValidation validation, Error error)
         {
-            throw new BadBehaviorException(validation, this, error);
+            this.Engine.Throw(validation, this, error);
         }
     }
 }

@@ -19,6 +19,13 @@ namespace BadBehavior
             this.Package = ex.Package;
             this.FailedTest = ex.FailedTest;
         }
+
+        public BadBehaviorEventArgs(IValidation failedTest, Package package, Error error)
+        {
+            this.FailedTest = failedTest;
+            this.Package = package;
+            this.Error = error;
+        }
     }
 
     public delegate void BadBehaviorEventHandler(object sender, BadBehaviorEventArgs e);

@@ -112,5 +112,19 @@ namespace BadBehavior
             return s.ToLowerInvariant();
         }
 
+        public void Throw(IValidation validation, Package package, Error error)
+        {
+            var args = new BadBehaviorEventArgs(validation, package, error);
+            OnBadBehavior(args);
+            throw new BadBehaviorException(validation, package, error);
+        }
+
+        public event BadBehaviorEventHandler BadBehavior;
+
+        private void OnBadBehavior(BadBehaviorEventArgs args)
+        {
+            if (this.BadBehavior != null)
+                this.BadBehavior(this, args);
+        }
     }
 }
