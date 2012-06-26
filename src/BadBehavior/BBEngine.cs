@@ -30,8 +30,18 @@ namespace BadBehavior
                     .Replace(tpl, String.Empty);
             }
 
-            BBEngine.Instance = new BBEngine(
-                new Configuration(),
+            BBEngine.Instance = new BBEngine();
+        }
+
+
+        public IList<IValidation> Rules { get; private set; }
+
+        public IConfiguration Configuration { get; private set; }
+
+        public BBEngine()
+        {
+            this.Configuration = new Configuration();
+            this.Rules = new IValidation[] {
                 new CloudFlare(),
                 new WhiteList(),
                 new BlackList(),
@@ -42,13 +52,8 @@ namespace BadBehavior
                 new SearchEngine(),
                 new Browser(),
                 new Post()
-            );
+            }.ToList();
         }
-
-
-        public IList<IValidation> Rules { get; private set; }
-
-        public IConfiguration Configuration { get; private set; }
 
         public BBEngine(Configuration configuration, params IValidation[] rules)
         {
