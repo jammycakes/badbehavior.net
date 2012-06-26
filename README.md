@@ -7,9 +7,6 @@ and enable it with a simple change to your web.config file.
 Bad Behavior prevents spammers from ever delivering their junk, and in many
 cases, from ever reading your site in the first place.
 
-This project is currently in the very early stages of development and is not
-yet ready for production.
-
  [1]: http://bad-behavior.ioerror.us/
 
 Description
@@ -50,6 +47,15 @@ turn it on and stop worrying about spam!
 
 The core of Bad Behavior is free software released under the GNU Lesser General
 Public License, version 3, or at your option, any later version.
+
+Status
+------
+This project is currently in the early stages of development and is not yet
+ready for production. Some notes on its progress can be found in the
+porting.txt file in the solution.
+
+In particular, the API should be considered unstable and liable to change
+without notice.
 
 Contributing
 ------------
