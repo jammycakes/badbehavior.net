@@ -112,7 +112,7 @@ namespace BadBehavior
             return s.ToLowerInvariant();
         }
 
-        public void Throw(IRule validation, Package package, Error error)
+        public void Raise(IRule validation, Package package, Error error)
         {
             var args = new BadBehaviorEventArgs(validation, package, error);
             OnBadBehavior(args);

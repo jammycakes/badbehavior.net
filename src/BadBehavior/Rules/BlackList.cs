@@ -120,15 +120,15 @@ namespace BadBehavior.Rules
 
             foreach (string spambot in spambots0)
                 if (package.Request.UserAgent.StartsWith(spambot))
-                    package.Throw(this, EBlacklist);
+                    package.Raise(this, EBlacklist);
 
             foreach (string spambot in spambots)
                 if (package.Request.UserAgent.Contains(spambot))
-                    package.Throw(this, EBlacklist);
+                    package.Raise(this, EBlacklist);
 
             foreach (Regex spambot in spambotsRegex)
                 if (spambot.IsMatch(package.Request.UserAgent))
-                    package.Throw(this, EBlacklist);
+                    package.Raise(this, EBlacklist);
 
             return RuleProcessing.Continue;
         }

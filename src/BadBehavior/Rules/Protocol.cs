@@ -23,7 +23,7 @@ namespace BadBehavior.Rules
             if (package.Headers.ContainsKey("Expect")
                 && package.Headers["Expect"].IndexOf
                     ("100-continue", StringComparison.InvariantCultureIgnoreCase) < 0) {
-                        package.Throw(this, EHttp10Expect);
+                        package.Raise(this, EHttp10Expect);
             }
         }
 
@@ -35,7 +35,7 @@ namespace BadBehavior.Rules
             if (package.Headers.ContainsKey("Pragma")
                 && package.Headers["Pragma"].Contains("no-cache")
                 && !package.Headers.ContainsKey("Cache-Control")) {
-                    package.Throw(this, EHttp11Invalid);
+                    package.Raise(this, EHttp11Invalid);
             }
         }
 

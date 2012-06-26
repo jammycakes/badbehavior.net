@@ -91,9 +91,9 @@ namespace BadBehavior
             return Functions.SafeParseIP(Request.UserHostAddress);
         }
 
-        public void Throw(IRule validation, Error error)
+        public void Raise(IRule validation, Error error)
         {
-            this.Engine.Throw(validation, this, error);
+            this.Engine.Raise(validation, this, error);
         }
     }
 }
