@@ -11,10 +11,13 @@ namespace BadBehavior
 
         public Package Package { get; private set; }
 
+        public IValidation FailedTest { get; private set; }
+
         public BadBehaviorEventArgs(BadBehaviorException ex)
         {
             this.Error = ex.Error;
             this.Package = ex.Package;
+            this.FailedTest = ex.FailedTest;
         }
     }
 
