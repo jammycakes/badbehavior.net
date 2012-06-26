@@ -19,21 +19,21 @@ blackhole.inc.php
     bb2_httpbl
 
 blacklist.inc.php
-    bb2_blacklist       Validators.BlackList
+    bb2_blacklist       Rules.BlackList
 
 browser.inc.php
-    bb2_konqueror       Validators.Browser.ValidateKonqueror
-    bb2_lynx            Validators.Browser.ValidateLynx
-    bb2_mozilla         Validators.Browser.ValidateMozilla
-    bb2_msie            Validators.Browser.ValidateMSIE
-    bb2_opera           Validators.Browser.ValidateOpera
-    bb2_safari          Validators.Browser.ValidateSafari
+    bb2_konqueror       Rules.Browser.ValidateKonqueror
+    bb2_lynx            Rules.Browser.ValidateLynx
+    bb2_mozilla         Rules.Browser.ValidateMozilla
+    bb2_msie            Rules.Browser.ValidateMSIE
+    bb2_opera           Rules.Browser.ValidateOpera
+    bb2_safari          Rules.Browser.ValidateSafari
 
 cloudflare.inc.php
     bb2_cloudflare
 
 common_tests.inc.php
-    bb2_protocol        Validators.Protocol
+    bb2_protocol        Rules.Protocol
     bb2_cookies
     bb2_misc_headers
 
@@ -54,7 +54,7 @@ functions.inc.php
     bb2_load_headers
 
 movabletype.inc.php
-    bb2_movabletype     Validators.Browser.ValidateMovableType
+    bb2_movabletype     Rules.Browser.ValidateMovableType
 
 post.inc.php
     bb2_trackback
