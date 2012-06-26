@@ -72,9 +72,9 @@ screener.inc.php
     bb2_screener
 
 searchengine.inc.php
-    bb2_google
-    bb2_msnbot
-    bb2_yahoo
+    bb2_google          Rules.SearchEngine
+    bb2_msnbot          Rules.SearchEngine
+    bb2_yahoo           Rules.SearchEngine
 
 whitelist.inc.php
     bb2_run_whitelist

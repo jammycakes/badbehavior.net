@@ -123,6 +123,15 @@
   <data name="Blacklisted" xml:space="preserve">
     <value>You do not have permission to access this server.</value>
   </data>
+  <data name="FakeGooglebot" xml:space="preserve">
+    <value>An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine.</value>
+  </data>
+  <data name="FakeMSNbot" xml:space="preserve">
+    <value>An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine.</value>
+  </data>
+  <data name="FakeYahoo" xml:space="preserve">
+    <value>An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine.</value>
+  </data>
   <data name="Http10Expect" xml:space="preserve">
     <value>Expectation failed. Please retry your request.</value>
   </data>

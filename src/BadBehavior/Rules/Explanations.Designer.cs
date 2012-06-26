@@ -79,6 +79,33 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine..
+        /// </summary>
+        internal static string FakeGooglebot {
+            get {
+                return ResourceManager.GetString("FakeGooglebot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine..
+        /// </summary>
+        internal static string FakeMSNbot {
+            get {
+                return ResourceManager.GetString("FakeMSNbot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine..
+        /// </summary>
+        internal static string FakeYahoo {
+            get {
+                return ResourceManager.GetString("FakeYahoo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expectation failed. Please retry your request..
         /// </summary>
         internal static string Http10Expect {
