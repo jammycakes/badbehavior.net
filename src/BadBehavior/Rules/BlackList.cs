@@ -114,9 +114,9 @@ namespace BadBehavior.Rules
         );
 
 
-        public RuleResult Validate(Package package)
+        public RuleProcessing Validate(Package package)
         {
-            if (package.Request.UserAgent == null) return RuleResult.Continue;
+            if (package.Request.UserAgent == null) return RuleProcessing.Continue;
 
             foreach (string spambot in spambots0)
                 if (package.Request.UserAgent.StartsWith(spambot))
@@ -130,7 +130,7 @@ namespace BadBehavior.Rules
                 if (spambot.IsMatch(package.Request.UserAgent))
                     package.Throw(this, EBlacklist);
 
-            return RuleResult.Continue;
+            return RuleProcessing.Continue;
         }
     }
 }

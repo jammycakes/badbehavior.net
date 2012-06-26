@@ -7,9 +7,9 @@ namespace BadBehavior.Rules
 {
     public class BlackHole : IRule
     {
-        public RuleResult Validate(Package package)
+        public RuleProcessing Validate(Package package)
         {
-            return RuleResult.Continue;
+            return RuleProcessing.Continue;
         }
     }
 }

@@ -18,6 +18,6 @@ namespace BadBehavior
         ///  Thrown when the request fails to validate against this test.
         /// </exception>
 
-        RuleResult Validate(Package package);
+        RuleProcessing Validate(Package package);
     }
 }

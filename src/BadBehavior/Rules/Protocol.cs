@@ -39,7 +39,7 @@ namespace BadBehavior.Rules
             }
         }
 
-        public RuleResult Validate(Package package)
+        public RuleProcessing Validate(Package package)
         {
             switch (package.Request.ServerVariables["HTTP_PROTOCOL"]) {
                 case "HTTP/1.0":
@@ -52,7 +52,7 @@ namespace BadBehavior.Rules
                     break;
             }
 
-            return RuleResult.Continue;
+            return RuleProcessing.Continue;
         }
     }
 }

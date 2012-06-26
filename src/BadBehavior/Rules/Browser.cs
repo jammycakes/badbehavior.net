@@ -10,7 +10,7 @@ namespace BadBehavior.Rules
 
     public class Browser : IRule
     {
-        public RuleResult Validate(Package package)
+        public RuleProcessing Validate(Package package)
         {
             // See core.inc.php in BB original.
 
@@ -46,7 +46,7 @@ namespace BadBehavior.Rules
                 ValidateMozilla(package);
             }
 
-            return RuleResult.Continue;
+            return RuleProcessing.Continue;
         }
 
         /* ====== Error objects ====== */

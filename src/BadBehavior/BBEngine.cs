@@ -67,7 +67,7 @@ namespace BadBehavior
             var package = new Package(request, this);
 
             foreach (var rule in this.Rules) {
-                if (rule.Validate(package) == RuleResult.Stop) return;
+                if (rule.Validate(package) == RuleProcessing.Stop) return;
             }
         }
 
