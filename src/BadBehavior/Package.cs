@@ -10,7 +10,7 @@ namespace BadBehavior
 {
     public class Package
     {
-        public BBEngine Engine { get; private set; }
+        public IBBEngine Engine { get; private set; }
 
         /// <summary>
         ///  The configuration settings to be used with this package.
@@ -51,7 +51,7 @@ namespace BadBehavior
 
         /* ====== Constructor ====== */
 
-        public Package(HttpRequestBase request, BBEngine engine)
+        public Package(HttpRequestBase request, IBBEngine engine)
         {
             this.Engine = engine;
             this.Request = request;

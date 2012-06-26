@@ -10,9 +10,9 @@ using BadBehavior.Rules;
 
 namespace BadBehavior
 {
-    public class BBEngine
+    public class BBEngine : BadBehavior.IBBEngine
     {
-        public static BBEngine Instance { get; set; }
+        public static IBBEngine Instance { get; set; }
 
         private static readonly string template;
         private static readonly string templateNoEmail;
