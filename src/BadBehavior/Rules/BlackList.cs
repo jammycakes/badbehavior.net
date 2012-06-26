@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace BadBehavior.Validators
+namespace BadBehavior.Rules
 {
-    public class BlackList : IValidation
+    public class BlackList : IRule
     {
         // Blacklisted user agents
         // These user agent strings occur at the beginning of the line.
@@ -114,9 +114,9 @@ namespace BadBehavior.Validators
         );
 
 
-        public ValidationResult Validate(Package package)
+        public RuleResult Validate(Package package)
         {
-            if (package.Request.UserAgent == null) return ValidationResult.Continue;
+            if (package.Request.UserAgent == null) return RuleResult.Continue;
 
             foreach (string spambot in spambots0)
                 if (package.Request.UserAgent.StartsWith(spambot))
@@ -130,7 +130,7 @@ namespace BadBehavior.Validators
                 if (spambot.IsMatch(package.Request.UserAgent))
                     package.Throw(this, EBlacklist);
 
-            return ValidationResult.Continue;
+            return RuleResult.Continue;
         }
     }
 }

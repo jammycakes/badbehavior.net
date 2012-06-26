@@ -18,7 +18,7 @@ namespace BadBehavior
         ///  Gets the test which failed validation.
         /// </summary>
 
-        public IValidation FailedTest { get; private set; }
+        public IRule Rule { get; private set; }
 
         /// <summary>
         ///  Gets the request which failed to validate.
@@ -62,15 +62,15 @@ namespace BadBehavior
         ///  recording the request that failed and the test that triggered the failure.
         /// </summary>
         /// <remarks>
-        ///  The exception message uses the Log property in the <see cref="IValidation"/> instance.
+        ///  The exception message uses the Log property in the <see cref="IRule"/> instance.
         ///  This should not be shown to the user.
         /// </remarks>
 
-        public BadBehaviorException(IValidation failedTest, Package package, Error error)
+        public BadBehaviorException(IRule rule, Package package, Error error)
             : base(error.Log)
         {
             this.Package= package;
-            this.FailedTest = failedTest;
+            this.Rule = rule;
             this.Error = error;
         }
 

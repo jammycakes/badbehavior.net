@@ -54,7 +54,7 @@
     <Compile Include="PackageFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestFixtureBase.cs" />
-    <Compile Include="Validators\BrowserFixture.cs" />
+    <Compile Include="Rules\BrowserFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BadBehavior\BadBehavior.csproj">

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BadBehavior.Validators
+namespace BadBehavior.Rules
 {
-    public class Protocol : IValidation
+    public class Protocol : IRule
     {
         private static readonly Error EHttp10Expect = new Error(
             "a0105122", 417, Explanations.Http10Expect,
@@ -39,7 +39,7 @@ namespace BadBehavior.Validators
             }
         }
 
-        public ValidationResult Validate(Package package)
+        public RuleResult Validate(Package package)
         {
             switch (package.Request.ServerVariables["HTTP_PROTOCOL"]) {
                 case "HTTP/1.0":
@@ -52,7 +52,7 @@ namespace BadBehavior.Validators
                     break;
             }
 
-            return ValidationResult.Continue;
+            return RuleResult.Continue;
         }
     }
 }

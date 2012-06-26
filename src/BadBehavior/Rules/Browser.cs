@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace BadBehavior.Validators
+namespace BadBehavior.Rules
 {
     /* ====== Browser checks ====== */
 
-    public class Browser : IValidation
+    public class Browser : IRule
     {
-        public ValidationResult Validate(Package package)
+        public RuleResult Validate(Package package)
         {
             // See core.inc.php in BB original.
 
@@ -46,7 +46,7 @@ namespace BadBehavior.Validators
                 ValidateMozilla(package);
             }
 
-            return ValidationResult.Continue;
+            return RuleResult.Continue;
         }
 
         /* ====== Error objects ====== */

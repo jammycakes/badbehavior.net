@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using BadBehavior.Validators;
+using BadBehavior.Rules;
 
 namespace BadBehavior
 {
@@ -34,14 +34,14 @@ namespace BadBehavior
         }
 
 
-        public IList<IValidation> Rules { get; private set; }
+        public IList<IRule> Rules { get; private set; }
 
         public IConfiguration Configuration { get; private set; }
 
         public BBEngine()
         {
             this.Configuration = new Configuration();
-            this.Rules = new IValidation[] {
+            this.Rules = new IRule[] {
                 new CloudFlare(),
                 new WhiteList(),
                 new BlackList(),
@@ -55,7 +55,7 @@ namespace BadBehavior
             }.ToList();
         }
 
-        public BBEngine(IConfiguration configuration, params IValidation[] rules)
+        public BBEngine(IConfiguration configuration, params IRule[] rules)
         {
             this.Configuration = configuration;
             this.Rules = rules.ToList();
@@ -67,7 +67,7 @@ namespace BadBehavior
             var package = new Package(request, this);
 
             foreach (var rule in this.Rules) {
-                if (rule.Validate(package) == ValidationResult.Stop) return;
+                if (rule.Validate(package) == RuleResult.Stop) return;
             }
         }
 
@@ -112,7 +112,7 @@ namespace BadBehavior
             return s.ToLowerInvariant();
         }
 
-        public void Throw(IValidation validation, Package package, Error error)
+        public void Throw(IRule validation, Package package, Error error)
         {
             var args = new BadBehaviorEventArgs(validation, package, error);
             OnBadBehavior(args);

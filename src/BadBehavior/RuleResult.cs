@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BadBehavior
 {
-    public enum ValidationResult
+    public enum RuleResult
     {
         /// <summary>
         ///  Indicates that we should continue with the rest of the checks.

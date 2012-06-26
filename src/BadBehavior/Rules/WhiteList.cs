@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BadBehavior.Validators
+namespace BadBehavior.Rules
 {
-    public class WhiteList : IValidation
+    public class WhiteList : IRule
     {
-        public ValidationResult Validate(Package package)
+        public RuleResult Validate(Package package)
         {
             // NB: return ValidationResult.Stop if this request is whitelisted.
             // Don't throw from this method.
-            return ValidationResult.Continue;
+            return RuleResult.Continue;
         }
     }
 }
