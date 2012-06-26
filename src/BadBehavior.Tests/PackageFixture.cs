@@ -37,7 +37,7 @@ namespace BadBehavior.Tests
             configuration.SetupGet(x => x.ReverseProxy).Returns(forwardedFor != null);
             configuration.SetupGet(x => x.ReverseProxyHeader).Returns(Configuration.DefaultReverseProxyHeader);
             configuration.SetupGet(x => x.ReverseProxyAddresses).Returns(new List<string>(knownProxies));
-            var package = new Package(request, configuration.Object);
+            var package = new Package(request, new BBEngine(configuration.Object));
             Assert.AreEqual(expected, package.OriginatingIP.ToString());
         }
     }

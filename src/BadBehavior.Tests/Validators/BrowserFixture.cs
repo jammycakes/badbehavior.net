@@ -21,7 +21,7 @@ namespace BadBehavior.Tests.Validators
                 "Mozilla/4.0 (compatible; MSIE 6.0b; Windows NT 5.1)",
                 new Dictionary<string, string> { }
             );
-            var package = new Package(request.Object, Configuration.Instance);
+            var package = new Package(request.Object, new BBEngine(new Configuration()));
             new Browser().Validate(package);
         }
 
@@ -34,7 +34,7 @@ namespace BadBehavior.Tests.Validators
                     { "Accept", "text/html" }
                 }
             );
-            var package = new Package(request.Object, Configuration.Instance);
+            var package = new Package(request.Object, new BBEngine());
             new Browser().Validate(package);
         }
 
@@ -49,7 +49,7 @@ namespace BadBehavior.Tests.Validators
                     { "Connection", "TE" }
                 }
             );
-            var package = new Package(request.Object, Configuration.Instance);
+            var package = new Package(request.Object, new BBEngine());
             new Browser().Validate(package);
         }
 
@@ -64,7 +64,7 @@ namespace BadBehavior.Tests.Validators
                     { "Akamai-Origin-Hop", "1" },
                 }
             );
-            var package = new Package(request.Object, Configuration.Instance);
+            var package = new Package(request.Object, new BBEngine());
             new Browser().Validate(package);
         }
 
@@ -78,7 +78,7 @@ namespace BadBehavior.Tests.Validators
                     { "Connection", "TE" },
                 }
             );
-            var package = new Package(request.Object, Configuration.Instance);
+            var package = new Package(request.Object, new BBEngine());
             new Browser().Validate(package);
         }
     }

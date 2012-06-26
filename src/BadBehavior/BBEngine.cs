@@ -55,7 +55,7 @@ namespace BadBehavior
             }.ToList();
         }
 
-        public BBEngine(Configuration configuration, params IValidation[] rules)
+        public BBEngine(IConfiguration configuration, params IValidation[] rules)
         {
             this.Configuration = configuration;
             this.Rules = rules.ToList();
@@ -64,7 +64,7 @@ namespace BadBehavior
 
         public void ValidateRequest(HttpRequestBase request)
         {
-            var package = new Package(request, this.Configuration);
+            var package = new Package(request, this);
 
             foreach (var rule in this.Rules) {
                 if (rule.Validate(package) == ValidationResult.Stop) return;

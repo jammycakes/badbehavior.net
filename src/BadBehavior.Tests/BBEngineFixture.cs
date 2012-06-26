@@ -34,7 +34,7 @@ namespace BadBehavior.Tests
             mockConfig.SetupGet(x => x.ReverseProxy).Returns(false);
             mockConfig.SetupGet(x => x.SupportEmail).Returns(email);
 
-            var package = new Package(mock.Object, mockConfig.Object);
+            var package = new Package(mock.Object, new BBEngine(mockConfig.Object));
             try {
                 new Browser().Validate(package);
             }

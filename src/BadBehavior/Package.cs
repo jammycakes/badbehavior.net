@@ -10,11 +10,13 @@ namespace BadBehavior
 {
     public class Package
     {
+        public BBEngine Engine { get; private set; }
+
         /// <summary>
         ///  The configuration settings to be used with this package.
         /// </summary>
 
-        public IConfiguration Configuration { get; private set; }
+        public IConfiguration Configuration { get { return Engine.Configuration; } }
 
         /// <summary>
         ///  Gets the HTTP headers case insensitively by key.
@@ -49,9 +51,9 @@ namespace BadBehavior
 
         /* ====== Constructor ====== */
 
-        public Package(HttpRequestBase request, IConfiguration configuration)
+        public Package(HttpRequestBase request, BBEngine engine)
         {
-            this.Configuration = configuration;
+            this.Engine = engine;
             this.Request = request;
             this.Headers = new Dictionary<string, string>
                 (this.Request.Headers.Count, StringComparer.InvariantCultureIgnoreCase);
