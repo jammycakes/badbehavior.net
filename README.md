@@ -1,5 +1,5 @@
 Bad Behavior .NET
-==================
+=================
 This is a .NET port of the original [Bad Behavior WordPress plugin][1]. It is
 built as an HTTP module, so you can just drop it into any existing website
 and enable it with a simple change to your web.config file.
@@ -57,9 +57,6 @@ Bad Behavior .NET uses Bad Behavior 2.7 as a reference. The source code for
 this is available from the Bad Behavior SVN repository at:
 
  * http://plugins.svn.wordpress.org/bad-behavior/
- 
-Note that cloning this project using git-svn can take a very long time; I've
-had more success with this using Mercurial and hgsubversion.
 
 Before contributing a pull request, please note the following code conventions:
 
