@@ -2,79 +2,83 @@ Porting progress from PHP:
 
 Root folder (platform specific):
 
-bad-behavior-generic.php
-bad-behavior-mediawiki.php
-bad-behavior-mysql.php
-bad-behavior-wordpress-admin.php
-bad-behavior-wordpress.php
+    bad-behavior-generic.php
+    bad-behavior-mediawiki.php
+    bad-behavior-mysql.php
+    bad-behavior-wordpress-admin.php
+    bad-behavior-wordpress.php
 
 /bad-behavior folder (core functionality):
 
-banned.inc.php
-    bb2_housekeeping
-    bb2_display_denial  BBEngine; response.html
+Tests:
 
-blackhole.inc.php
-    bb2_blackhole
-    bb2_httpbl
+    blackhole.inc.php
+        bb2_blackhole
+        bb2_httpbl
 
-blacklist.inc.php
-    bb2_blacklist       Rules.BlackList
+    blacklist.inc.php
+        bb2_blacklist       Rules.BlackList
 
-browser.inc.php
-    bb2_konqueror       Rules.Browser.ValidateKonqueror
-    bb2_lynx            Rules.Browser.ValidateLynx
-    bb2_mozilla         Rules.Browser.ValidateMozilla
-    bb2_msie            Rules.Browser.ValidateMSIE
-    bb2_opera           Rules.Browser.ValidateOpera
-    bb2_safari          Rules.Browser.ValidateSafari
+    browser.inc.php
+        bb2_konqueror       Rules.Browser.ValidateKonqueror
+        bb2_lynx            Rules.Browser.ValidateLynx
+        bb2_mozilla         Rules.Browser.ValidateMozilla
+        bb2_msie            Rules.Browser.ValidateMSIE
+        bb2_opera           Rules.Browser.ValidateOpera
+        bb2_safari          Rules.Browser.ValidateSafari
 
-cloudflare.inc.php
-    bb2_cloudflare
+    cloudflare.inc.php
+        bb2_cloudflare
 
-common_tests.inc.php
-    bb2_protocol        Rules.Protocol
-    bb2_cookies
-    bb2_misc_headers
+    common_tests.inc.php
+        bb2_protocol        Rules.Protocol
+        bb2_cookies
+        bb2_misc_headers
 
-core.inc.php
-    bb2_banned
-    bb2_approved
-    bb2_reverse_proxy   Package.FindOriginatingIP
-    bb2_start
-    bb2_screen
+    movabletype.inc.php
+        bb2_movabletype     Rules.Browser.ValidateMovableType
 
-functions.inc.php
-    is_ipv6
-    stripos             n/a
-    str_split           n/a
-    uc_all
-    match_cidr          Functions.MatchCidr
-    is_rfc1918          Functions.IsRfc1918
-    bb2_load_headers
+    post.inc.php
+        bb2_trackback
+        bb2_post
 
-movabletype.inc.php
-    bb2_movabletype     Rules.Browser.ValidateMovableType
+    searchengine.inc.php
+        bb2_google          Rules.SearchEngine
+        bb2_msnbot          Rules.SearchEngine
+        bb2_yahoo           Rules.SearchEngine
 
-post.inc.php
-    bb2_trackback
-    bb2_post
+    whitelist.inc.php
+        bb2_run_whitelist
 
-responses.inc.php
-    bb2_get_response
+Other:
 
-roundtripdns.inc.php
-    bb2_roundtripdns
+    banned.inc.php
+        bb2_housekeeping
+        bb2_display_denial  BBEngine; response.html
 
-screener.inc.php
-    bb2_screener_cookie
-    bb2_screener_javascript
-    bb2_screener
+    core.inc.php
+        bb2_banned
+        bb2_approved
+        bb2_reverse_proxy   Package.FindOriginatingIP
+        bb2_start
+        bb2_screen
 
-searchengine.inc.php
-    bb2_google          Rules.SearchEngine
-    bb2_msnbot          Rules.SearchEngine
-    bb2_yahoo           Rules.SearchEngine
+    functions.inc.php
+        is_ipv6
+        stripos             n/a
+        str_split           n/a
+        uc_all
+        match_cidr          Functions.MatchCidr
+        is_rfc1918          Functions.IsRfc1918
+        bb2_load_headers
 
-whitelist.inc.php
-    bb2_run_whitelist
+    responses.inc.php
+        bb2_get_response
+
+    roundtripdns.inc.php
+        bb2_roundtripdns
+
+    screener.inc.php
+        bb2_screener_cookie
+        bb2_screener_javascript
+        bb2_screener
