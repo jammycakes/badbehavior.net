@@ -32,6 +32,11 @@ namespace BadBehavior.Rules
             "Bot not fully compliant with RFC 2965"
         );
 
+        public static readonly Error EFakeYahoobot = new Error(
+            "71436a15", 403, Explanations.FakeYahoo,
+            "User-Agent claimed to be Yahoo, claim appears to be false"
+        );
+
         public static readonly Error ERangeHeaderZero = new Error(
             "7ad04a8a", 400, Explanations.RangeHeaderZero,
             "Prohibited header \'Range\' present"
@@ -55,6 +60,16 @@ namespace BadBehavior.Rules
         public static readonly Error EMalicious = new Error(
             "dfd9b1ad", 403, Explanations.Malicious,
             "Request contained a malicious JavaScript or SQL injection attack."
+        );
+
+        public static readonly Error EFakeMSNbot = new Error(
+            "e4de0453", 403, Explanations.FakeMSNbot,
+            "User-Agent claimed to be msnbot, claim appears to be false"
+        );
+
+        public static readonly Error EFakeGooglebot = new Error(
+            "f1182195", 403, Explanations.FakeGooglebot,
+            "User-Agent claimed to be Googlebot, claim appears to be false."
         );
 
         public static readonly Error EUserAgentMissing = new Error(
