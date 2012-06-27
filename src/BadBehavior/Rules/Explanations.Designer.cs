@@ -126,6 +126,15 @@ namespace BadBehavior.Rules {
         /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this server..
         /// </summary>
+        internal static string InvalidCookies {
+            get {
+                return ResourceManager.GetString("InvalidCookies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to access this server..
+        /// </summary>
         internal static string InvalidMSIEWindowsVersion {
             get {
                 return ResourceManager.GetString("InvalidMSIEWindowsVersion", resourceCulture);

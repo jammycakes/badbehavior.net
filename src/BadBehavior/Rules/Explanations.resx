@@ -138,6 +138,9 @@
   <data name="Http11Invalid" xml:space="preserve">
     <value>An invalid request was received. This may be caused by a malfunctioning proxy server. Bypass the proxy server and connect directly, or contact your proxy server administrator.</value>
   </data>
+  <data name="InvalidCookies" xml:space="preserve">
+    <value>You do not have permission to access this server.</value>
+  </data>
   <data name="InvalidMSIEWindowsVersion" xml:space="preserve">
     <value>You do not have permission to access this server.</value>
   </data>

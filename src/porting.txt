@@ -32,7 +32,7 @@ Tests:
 
     common_tests.inc.php
         bb2_protocol        Rules.Protocol
-        bb2_cookies
+        bb2_cookies         Rules.Cookies (2)
         bb2_misc_headers
 
     movabletype.inc.php
@@ -88,3 +88,4 @@ Notes
 
 (1) These tests are either unimplemented or incomplete in BB original
     due to a bug in PHP with reverse DNS lookup.
+(2) Unit tests needed: refer to relevant Internet RFCs.
