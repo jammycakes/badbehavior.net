@@ -40,5 +40,19 @@ namespace BadBehavior.Tests
             var package = new Package(request, new BBEngine(configuration.Object));
             Assert.AreEqual(expected, package.OriginatingIP.ToString());
         }
+
+        [Test]
+        public void CanSetHeadersMixed()
+        {
+            var headers = new NameValueCollection();
+            headers.Add("Test-Hyphen", "alpha");
+            headers.Add("test-hyphen", "bravo");
+
+            var mock = new Mock<HttpRequestBase>();
+            mock.SetupGet(x => x.Headers).Returns(headers);
+            var package = new Package(mock.Object, new BBEngine());
+
+            CollectionAssert.AreEqual(new string[] { "alpha", "bravo" }, package.Headers.GetValues("Test-Hyphen"));
+        }
     }
 }
