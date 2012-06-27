@@ -46,6 +46,14 @@ namespace BadBehavior.Rules
             if (package.Headers.ContainsKey("Content-Range"))
                 package.Raise(this, Errors.InvalidRangeHeader);
 
+            // Lowercase via is used by open proxies/referrer spammers
+            // Exceptions: Clearswift uses lowercase via (refuses to fix;
+            // may be blocked again in the future)
+            if (package.Request.Headers["via"] != null &&
+                !package.Request.Headers["via"].Contains("Clearswift") &&
+                !package.Request.UserAgent.Contains("CoralWebPrx"))
+                package.Raise(this, Errors.InvalidVia);
+
             return RuleProcessing.Continue;
         }
     }

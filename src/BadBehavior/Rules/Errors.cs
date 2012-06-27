@@ -47,6 +47,11 @@ namespace BadBehavior.Rules
             "Prohibited header 'Range' or 'Content-Range' in POST request"
         );
 
+        public static readonly Error InvalidVia = new Error(
+            "9c9e4979", 403, Explanations.InvalidProxyServer,
+            "Prohibited header 'via' present"
+        );
+
         public static readonly Error Http10Expect = new Error(
             "a0105122", 417, Explanations.ExpectationFailed,
             "Header 'Expect' prohibited; resend without Expect"

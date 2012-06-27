@@ -132,6 +132,9 @@
   <data name="InvalidMSIEWithTE" xml:space="preserve">
     <value>You do not have permission to access this server. If you are using the Opera browser, then Opera must appear in your user agent.</value>
   </data>
+  <data name="InvalidProxyServer" xml:space="preserve">
+    <value>The proxy server you are using is not permitted to access this server. Please bypass the proxy server, or contact your proxy server administrator.</value>
+  </data>
   <data name="PermissionDenied" xml:space="preserve">
     <value>You do not have permission to access this server.</value>
   </data>

@@ -106,6 +106,15 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The proxy server you are using is not permitted to access this server. Please bypass the proxy server, or contact your proxy server administrator..
+        /// </summary>
+        internal static string InvalidProxyServer {
+            get {
+                return ResourceManager.GetString("InvalidProxyServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this server..
         /// </summary>
         internal static string PermissionDenied {
