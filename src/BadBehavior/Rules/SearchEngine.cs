@@ -40,9 +40,9 @@ namespace BadBehavior.Rules
 
         public RuleProcessing Validate(Package package)
         {
-            this.Validate(package, uaMSNbot, cidrMSNbot, Errors.EFakeMSNbot);
-            this.Validate(package, uaGooglebot, cidrGooglebot, Errors.EFakeGooglebot);
-            this.Validate(package, uaYahoobot, cidrYahoobot, Errors.EFakeYahoobot);
+            this.Validate(package, uaMSNbot, cidrMSNbot, Errors.FakeMSNbot);
+            this.Validate(package, uaGooglebot, cidrGooglebot, Errors.FakeGooglebot);
+            this.Validate(package, uaYahoobot, cidrYahoobot, Errors.FakeYahoobot);
             return RuleProcessing.Continue;
         }
     }

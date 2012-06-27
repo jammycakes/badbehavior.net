@@ -10,7 +10,7 @@ namespace BadBehavior.Rules
         public RuleProcessing Validate(Package package)
         {
             if (package.Request.HttpMethod != "POST" && String.IsNullOrEmpty(package.Request.UserAgent))
-                package.Raise(this, Errors.EUserAgentMissing);
+                package.Raise(this, Errors.UserAgentMissing);
 
             // Broken spambots send URLs with various invalid characters
             // Some broken browsers send the #vector in the referer field :(
@@ -19,11 +19,11 @@ namespace BadBehavior.Rules
             // if (strpos($package['request_uri'], "#") !== FALSE || strpos($package['headers_mixed']['Referer'], "#") !== FALSE) {
 
             if (package.Configuration.Strict && package.Request.RawUrl.Contains('#'))
-                package.Raise(this, Errors.EMalicious);
+                package.Raise(this, Errors.Malicious);
 
             // A pretty nasty SQL injection attack on IIS servers
             if (package.Request.RawUrl.Contains(";DECLARE%20@"))
-                package.Raise(this, Errors.EMalicious);
+                package.Raise(this, Errors.Malicious);
 
             // Range: field exists and begins with 0
             // Real user-agents do not start ranges at 0
@@ -38,7 +38,7 @@ namespace BadBehavior.Rules
                     package.Request.UserAgent.StartsWith("php-openid/") ||
                     package.Request.UserAgent.StartsWith("facebookexternalhit")
                 )) {
-                    package.Raise(this, Errors.ERangeHeaderZero);
+                    package.Raise(this, Errors.RangeHeaderZero);
                 }
 
             }

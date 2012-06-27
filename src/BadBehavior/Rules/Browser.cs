@@ -56,7 +56,7 @@ namespace BadBehavior.Rules
         private void AssertAccept(Package package)
         {
             if (!package.Headers.ContainsKey("Accept"))
-                package.Raise(this, Errors.EAcceptMissing);
+                package.Raise(this, Errors.AcceptMissing);
         }
 
         /* ====== Browser checks ====== */
@@ -107,7 +107,7 @@ namespace BadBehavior.Rules
                 package.Request.UserAgent.Contains("Windows XP") ||
                 package.Request.UserAgent.Contains("Windows 2000") ||
                 package.Request.UserAgent.Contains("Win32"))
-                package.Raise(this, Errors.EInvalidMSIEWindowsVersion);
+                package.Raise(this, Errors.InvalidMSIEWindowsVersion);
 
             // MSIE does NOT send Connection: TE but Akamai does
             // Bypass this test when Akamai detected
@@ -118,7 +118,7 @@ namespace BadBehavior.Rules
 
             if (package.Headers.ContainsKey("Connection")) {
                 if (Regex.Match(package.Headers["Connection"], @"\bTE\b").Success) {
-                    package.Raise(this, Errors.EInvalidMSIEWithTE);
+                    package.Raise(this, Errors.InvalidMSIEWithTE);
                 }
             }
         }
@@ -148,7 +148,7 @@ namespace BadBehavior.Rules
             if (package.Request.HttpMethod == "POST") {
                 if (package.Headers.ContainsKey("Range")
                     && package.Headers["Range"] == "bytes=0-99999") {
-                        package.Raise(this, Errors.EInvalidRangeHeader);
+                        package.Raise(this, Errors.InvalidRangeHeader);
                 }
             }
         }
