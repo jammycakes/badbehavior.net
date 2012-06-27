@@ -9,7 +9,7 @@ namespace BadBehavior.Rules
     {
         public RuleProcessing Validate(Package package)
         {
-            if (package.Headers.ContainsKey("Cf-Connecting-Ip")) {
+            if (package.HeadersMixed.ContainsKey("Cf-Connecting-Ip")) {
                 // Not implemented in BB reference.
             }
 

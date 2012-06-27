@@ -12,9 +12,9 @@ namespace BadBehavior.Rules
             // Enforce RFC 2965 sec 3.3.5 and 9.1
             // Bots wanting new-style cookies should send Cookie2
             // FIXME: Amazon Kindle is broken; Amazon has been notified 9/24/08
-            if (package.Headers.ContainsKey("Cookie") &&
-                package.Headers["Cookie"].Contains("$Version=0") &&
-                !package.Headers.ContainsKey("Cookie2") &&
+            if (package.HeadersMixed.ContainsKey("Cookie") &&
+                package.HeadersMixed["Cookie"].Contains("$Version=0") &&
+                !package.HeadersMixed.ContainsKey("Cookie2") &&
                 !package.Request.UserAgent.Contains("Kindle/")) {
                 package.Raise(this, Errors.InvalidCookies);
             }

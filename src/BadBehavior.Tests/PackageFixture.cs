@@ -52,7 +52,7 @@ namespace BadBehavior.Tests
             mock.SetupGet(x => x.Headers).Returns(headers);
             var package = new Package(mock.Object, new BBEngine());
 
-            CollectionAssert.AreEqual(new string[] { "alpha", "bravo" }, package.Headers.GetValues("Test-Hyphen"));
+            CollectionAssert.AreEqual(new string[] { "alpha", "bravo" }, package.HeadersMixed.GetValues("Test-Hyphen"));
         }
     }
 }

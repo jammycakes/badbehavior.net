@@ -55,7 +55,7 @@ namespace BadBehavior.Rules
 
         private void AssertAccept(Package package)
         {
-            if (!package.Headers.ContainsKey("Accept"))
+            if (!package.HeadersMixed.ContainsKey("Accept"))
                 package.Raise(this, Errors.AcceptMissing);
         }
 
@@ -111,13 +111,13 @@ namespace BadBehavior.Rules
 
             // MSIE does NOT send Connection: TE but Akamai does
             // Bypass this test when Akamai detected
-            if (package.Headers.ContainsKey("Akamai-Origin-Hop")) return;
+            if (package.HeadersMixed.ContainsKey("Akamai-Origin-Hop")) return;
 
             // The latest version of IE for Windows CE also uses Connection: TE
             if (package.Request.UserAgent.Contains("IEMobile")) return;
 
-            if (package.Headers.ContainsKey("Connection")) {
-                if (Regex.Match(package.Headers["Connection"], @"\bTE\b").Success) {
+            if (package.HeadersMixed.ContainsKey("Connection")) {
+                if (Regex.Match(package.HeadersMixed["Connection"], @"\bTE\b").Success) {
                     package.Raise(this, Errors.InvalidMSIEWithTE);
                 }
             }
@@ -146,8 +146,8 @@ namespace BadBehavior.Rules
         {
             // Is it a trackback?
             if (package.Request.HttpMethod == "POST") {
-                if (package.Headers.ContainsKey("Range")
-                    && package.Headers["Range"] == "bytes=0-99999") {
+                if (package.HeadersMixed.ContainsKey("Range")
+                    && package.HeadersMixed["Range"] == "bytes=0-99999") {
                         package.Raise(this, Errors.InvalidRangeHeader);
                 }
             }

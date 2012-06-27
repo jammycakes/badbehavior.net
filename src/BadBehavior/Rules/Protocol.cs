@@ -10,8 +10,8 @@ namespace BadBehavior.Rules
         private void ValidateHttp10(Package package)
         {
             // We should never see Expect: for HTTP/1.0 requests
-            if (package.Headers.ContainsKey("Expect")
-                && package.Headers["Expect"].IndexOf
+            if (package.HeadersMixed.ContainsKey("Expect")
+                && package.HeadersMixed["Expect"].IndexOf
                     ("100-continue", StringComparison.InvariantCultureIgnoreCase) < 0) {
                         package.Raise(this, Errors.Http10Expect);
             }
@@ -22,9 +22,9 @@ namespace BadBehavior.Rules
             // Is it claiming to be HTTP/1.1?  Then it shouldn't do HTTP/1.0 things
             // Blocks some common corporate proxy servers in strict mode
 
-            if (package.Headers.ContainsKey("Pragma")
-                && package.Headers["Pragma"].Contains("no-cache")
-                && !package.Headers.ContainsKey("Cache-Control")) {
+            if (package.HeadersMixed.ContainsKey("Pragma")
+                && package.HeadersMixed["Pragma"].Contains("no-cache")
+                && !package.HeadersMixed.ContainsKey("Cache-Control")) {
                     package.Raise(this, Errors.Http11Invalid);
             }
         }

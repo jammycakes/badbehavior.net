@@ -30,8 +30,8 @@ namespace BadBehavior.Rules
             // NOTE: this blocks the whois.sc bot. No big loss.
             // Exceptions: MT (not fixable); LJ (refuses to fix; may be
             // blocked again in the future); Facebook
-            if (package.Configuration.Strict && package.Headers.ContainsKey("Range")
-                && package.Headers["Range"].Contains("=0-")) {
+            if (package.Configuration.Strict && package.HeadersMixed.ContainsKey("Range")
+                && package.HeadersMixed["Range"].Contains("=0-")) {
                 if (!(
                     package.Request.UserAgent.StartsWith("MovableType") ||
                     package.Request.UserAgent.StartsWith("URI::Fetch") ||
@@ -43,7 +43,7 @@ namespace BadBehavior.Rules
             }
 
             // Content-Range is a response header, not a request header
-            if (package.Headers.ContainsKey("Content-Range"))
+            if (package.HeadersMixed.ContainsKey("Content-Range"))
                 package.Raise(this, Errors.InvalidRangeHeader);
 
             // Lowercase via is used by open proxies/referrer spammers
@@ -55,8 +55,8 @@ namespace BadBehavior.Rules
                 package.Raise(this, Errors.InvalidVia);
 
             // pinappleproxy is used by referrer spammers
-            if (package.Headers.ContainsKey("Via")) {
-                string via = package.Headers["Via"].ToLowerInvariant();
+            if (package.HeadersMixed.ContainsKey("Via")) {
+                string via = package.HeadersMixed["Via"].ToLowerInvariant();
                 if (via.Contains("pinappleproxy") || via.Contains("pcnetserver") || via.Contains("invisiware"))
                     package.Raise(this, Errors.BannedProxy);
             }

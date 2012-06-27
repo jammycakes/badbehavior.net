@@ -23,7 +23,7 @@ namespace BadBehavior
         ///  Gets the HTTP headers case insensitively by key.
         /// </summary>
 
-        public NameValueCollection Headers { get; private set; }
+        public NameValueCollection HeadersMixed { get; private set; }
 
         /// <summary>
         ///  Gets the <see cref="HttpRequestBase"/> instance being validated.
@@ -56,9 +56,9 @@ namespace BadBehavior
         {
             this.Engine = engine;
             this.Request = request;
-            this.Headers = new NameValueCollection
+            this.HeadersMixed = new NameValueCollection
                 (this.Request.Headers.Count, StringComparer.InvariantCultureIgnoreCase);
-            this.Headers.Add(request.Headers);
+            this.HeadersMixed.Add(request.Headers);
             this.UserAgentI = this.Request.UserAgent == null
                 ? null : this.Request.UserAgent.ToLowerInvariant();
             this.OriginatingIP = FindOriginatingIP();
@@ -72,9 +72,9 @@ namespace BadBehavior
         private IPAddress FindOriginatingIP()
         {
             if (Configuration.ReverseProxy
-                && this.Headers.ContainsKey(Configuration.ReverseProxyHeader)) {
+                && this.HeadersMixed.ContainsKey(Configuration.ReverseProxyHeader)) {
                 string[] addresses = Regex.Split
-                    (this.Headers[Configuration.ReverseProxyHeader], @"[\s,]+");
+                    (this.HeadersMixed[Configuration.ReverseProxyHeader], @"[\s,]+");
                 // Skip our known proxies and private addresses.
                 string[] knownProxies = Configuration.ReverseProxyAddresses.ToArray();
                 foreach (string address in addresses) {
