@@ -169,6 +169,15 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The automated program you are using is not permitted to access this server. Please use a different program or a standard Web browser..
+        /// </summary>
+        internal static string RangeHeaderZero {
+            get {
+                return ResourceManager.GetString("RangeHeaderZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this server. This may be caused by a malfunctioning proxy server or browser privacy software..
         /// </summary>
         internal static string UserAgentMissing {

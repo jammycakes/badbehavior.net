@@ -17,6 +17,11 @@ namespace BadBehavior.Rules
             "Request contained a malicious JavaScript or SQL injection attack."
         );
 
+        private static readonly Error ERangeHeaderZero = new Error(
+            "7ad04a8a", 400, Explanations.RangeHeaderZero,
+            "Prohibited header \'Range\' present"
+        );
+
         public RuleProcessing Validate(Package package)
         {
             if (package.Request.HttpMethod != "POST" && String.IsNullOrEmpty(package.Request.UserAgent))
@@ -34,6 +39,24 @@ namespace BadBehavior.Rules
             // A pretty nasty SQL injection attack on IIS servers
             if (package.Request.RawUrl.Contains(";DECLARE%20@"))
                 package.Raise(this, EMalicious);
+
+            // Range: field exists and begins with 0
+            // Real user-agents do not start ranges at 0
+            // NOTE: this blocks the whois.sc bot. No big loss.
+            // Exceptions: MT (not fixable); LJ (refuses to fix; may be
+            // blocked again in the future); Facebook
+            if (package.Configuration.Strict && package.Headers.ContainsKey("Range")
+                && package.Headers["Range"].Contains("=0-")) {
+                if (!(
+                    package.Request.UserAgent.StartsWith("MovableType") ||
+                    package.Request.UserAgent.StartsWith("URI::Fetch") ||
+                    package.Request.UserAgent.StartsWith("php-openid/") ||
+                    package.Request.UserAgent.StartsWith("facebookexternalhit")
+                )) {
+                    package.Raise(this, ERangeHeaderZero);
+                }
+
+            }
 
             return RuleProcessing.Continue;
         }

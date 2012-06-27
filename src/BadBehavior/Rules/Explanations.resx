@@ -153,6 +153,9 @@
   <data name="Malicious" xml:space="preserve">
     <value>You do not have permission to access this server.</value>
   </data>
+  <data name="RangeHeaderZero" xml:space="preserve">
+    <value>The automated program you are using is not permitted to access this server. Please use a different program or a standard Web browser.</value>
+  </data>
   <data name="UserAgentMissing" xml:space="preserve">
     <value>You do not have permission to access this server. This may be caused by a malfunctioning proxy server or browser privacy software.</value>
   </data>
