@@ -73,7 +73,7 @@ Other:
         bb2_load_headers
 
     responses.inc.php
-        bb2_get_response
+        bb2_get_response    Rules.Errors
 
     roundtripdns.inc.php
         bb2_roundtripdns

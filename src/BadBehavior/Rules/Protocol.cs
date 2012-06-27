@@ -7,23 +7,13 @@ namespace BadBehavior.Rules
 {
     public class Protocol : IRule
     {
-        private static readonly Error EHttp10Expect = new Error(
-            "a0105122", 417, Explanations.Http10Expect,
-            "Header 'Expect' prohibited; resend without Expect"
-        );
-
-        private static readonly Error EHttp11Invalid = new Error(
-            "41feed15", 400, Explanations.Http11Invalid,
-            "Header 'Pragma' without 'Cache-Control' prohibited for HTTP/1.1 requests"
-        );
-
         private void ValidateHttp10(Package package)
         {
             // We should never see Expect: for HTTP/1.0 requests
             if (package.Headers.ContainsKey("Expect")
                 && package.Headers["Expect"].IndexOf
                     ("100-continue", StringComparison.InvariantCultureIgnoreCase) < 0) {
-                        package.Raise(this, EHttp10Expect);
+                        package.Raise(this, Errors.EHttp10Expect);
             }
         }
 
@@ -35,7 +25,7 @@ namespace BadBehavior.Rules
             if (package.Headers.ContainsKey("Pragma")
                 && package.Headers["Pragma"].Contains("no-cache")
                 && !package.Headers.ContainsKey("Cache-Control")) {
-                    package.Raise(this, EHttp11Invalid);
+                    package.Raise(this, Errors.EHttp11Invalid);
             }
         }
 

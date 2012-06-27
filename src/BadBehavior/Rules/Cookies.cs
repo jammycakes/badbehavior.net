@@ -7,11 +7,6 @@ namespace BadBehavior.Rules
 {
     public class Cookies : IRule
     {
-        private static readonly Error EInvalidCookies = new Error(
-            "6c502ff1", 403, Explanations.InvalidCookies,
-            "Bot not fully compliant with RFC 2965"
-        );
-
         public RuleProcessing Validate(Package package)
         {
             // Enforce RFC 2965 sec 3.3.5 and 9.1
@@ -21,7 +16,7 @@ namespace BadBehavior.Rules
                 package.Headers["Cookie"].Contains("$Version=0") &&
                 !package.Headers.ContainsKey("Cookie2") &&
                 !package.Request.UserAgent.Contains("Kindle/")) {
-                package.Raise(this, EInvalidCookies);
+                package.Raise(this, Errors.EInvalidCookies);
             }
 
             return RuleProcessing.Continue;

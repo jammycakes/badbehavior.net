@@ -70,6 +70,7 @@
       <DependentUpon>Explanations.resx</DependentUpon>
     </Compile>
     <Compile Include="Rules\Post.cs" />
+    <Compile Include="Rules\Errors.cs" />
     <Compile Include="Rules\SearchEngine.cs" />
     <Compile Include="Rules\MiscHeaders.cs" />
     <Compile Include="Rules\Protocol.cs" />

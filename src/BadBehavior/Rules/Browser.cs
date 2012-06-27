@@ -49,21 +49,6 @@ namespace BadBehavior.Rules
             return RuleProcessing.Continue;
         }
 
-        /* ====== Error objects ====== */
-
-        private static readonly Error EAcceptMissing = new Error
-            ("17566707", 403, Explanations.AcceptMissing, "Required header 'Accept' missing");
-        private static readonly Error EInvalidMSIEWindowsVersion = new Error
-            ("a1084bad", 403, Explanations.InvalidMSIEWindowsVersion,
-            "User-Agent claimed to be MSIE, with invalid Windows version");
-        private static readonly Error EInvalidMSIEWithTE = new Error
-            ("2b90f772", 403, Explanations.InvalidMSIEWithTE,
-            "Connection: TE present, not supported by MSIE");
-        private static readonly Error EInvalidRangeHeader = new Error
-            ("7d12528e", 403, Explanations.InvalidRangeHeader,
-            "Prohibited header 'Range' or 'Content-Range' in POST request");
-
-
         /* ====== Assertions ====== */
 
         // Assert that the "Accept" HTTP header is present. Bona fide browsers all send this.
@@ -71,7 +56,7 @@ namespace BadBehavior.Rules
         private void AssertAccept(Package package)
         {
             if (!package.Headers.ContainsKey("Accept"))
-                package.Raise(this, EAcceptMissing);
+                package.Raise(this, Errors.EAcceptMissing);
         }
 
         /* ====== Browser checks ====== */
@@ -122,7 +107,7 @@ namespace BadBehavior.Rules
                 package.Request.UserAgent.Contains("Windows XP") ||
                 package.Request.UserAgent.Contains("Windows 2000") ||
                 package.Request.UserAgent.Contains("Win32"))
-                package.Raise(this, EInvalidMSIEWindowsVersion);
+                package.Raise(this, Errors.EInvalidMSIEWindowsVersion);
 
             // MSIE does NOT send Connection: TE but Akamai does
             // Bypass this test when Akamai detected
@@ -133,7 +118,7 @@ namespace BadBehavior.Rules
 
             if (package.Headers.ContainsKey("Connection")) {
                 if (Regex.Match(package.Headers["Connection"], @"\bTE\b").Success) {
-                    package.Raise(this, EInvalidMSIEWithTE);
+                    package.Raise(this, Errors.EInvalidMSIEWithTE);
                 }
             }
         }
@@ -163,7 +148,7 @@ namespace BadBehavior.Rules
             if (package.Request.HttpMethod == "POST") {
                 if (package.Headers.ContainsKey("Range")
                     && package.Headers["Range"] == "bytes=0-99999") {
-                        package.Raise(this, EInvalidRangeHeader);
+                        package.Raise(this, Errors.EInvalidRangeHeader);
                 }
             }
         }

@@ -108,27 +108,21 @@ namespace BadBehavior.Rules
             // new Regex("/MSIE.*Windows XP/"),    // misc comment spam
         };
 
-        private static readonly Error EBlacklist = new Error(
-            "17f4e8c8", 403, Explanations.Blacklisted,
-            "User-Agent was found on blacklist"
-        );
-
-
         public RuleProcessing Validate(Package package)
         {
             if (package.Request.UserAgent == null) return RuleProcessing.Continue;
 
             foreach (string spambot in spambots0)
                 if (package.Request.UserAgent.StartsWith(spambot))
-                    package.Raise(this, EBlacklist);
+                    package.Raise(this, Errors.EBlacklist);
 
             foreach (string spambot in spambots)
                 if (package.Request.UserAgent.Contains(spambot))
-                    package.Raise(this, EBlacklist);
+                    package.Raise(this, Errors.EBlacklist);
 
             foreach (Regex spambot in spambotsRegex)
                 if (spambot.IsMatch(package.Request.UserAgent))
-                    package.Raise(this, EBlacklist);
+                    package.Raise(this, Errors.EBlacklist);
 
             return RuleProcessing.Continue;
         }
