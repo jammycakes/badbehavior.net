@@ -31,6 +31,9 @@ namespace BadBehavior.Rules
             if (package.Configuration.Strict && package.Request.RawUrl.Contains('#'))
                 package.Raise(this, EMalicious);
 
+            // A pretty nasty SQL injection attack on IIS servers
+            if (package.Request.RawUrl.Contains(";DECLARE%20@"))
+                package.Raise(this, EMalicious);
 
             return RuleProcessing.Continue;
         }
