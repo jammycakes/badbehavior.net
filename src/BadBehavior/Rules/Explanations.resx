@@ -120,37 +120,19 @@
   <data name="AcceptMissing" xml:space="preserve">
     <value>An invalid request was received from your browser. This may be caused by a malfunctioning proxy server or browser privacy software.</value>
   </data>
-  <data name="Blacklisted" xml:space="preserve">
-    <value>You do not have permission to access this server.</value>
-  </data>
-  <data name="FakeGooglebot" xml:space="preserve">
-    <value>An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine.</value>
-  </data>
-  <data name="FakeMSNbot" xml:space="preserve">
-    <value>An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine.</value>
-  </data>
-  <data name="FakeYahoo" xml:space="preserve">
-    <value>An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine.</value>
-  </data>
-  <data name="Http10Expect" xml:space="preserve">
+  <data name="ExpectationFailed" xml:space="preserve">
     <value>Expectation failed. Please retry your request.</value>
+  </data>
+  <data name="FakeSearchEngine" xml:space="preserve">
+    <value>An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine.</value>
   </data>
   <data name="Http11Invalid" xml:space="preserve">
     <value>An invalid request was received. This may be caused by a malfunctioning proxy server. Bypass the proxy server and connect directly, or contact your proxy server administrator.</value>
   </data>
-  <data name="InvalidCookies" xml:space="preserve">
-    <value>You do not have permission to access this server.</value>
-  </data>
-  <data name="InvalidMSIEWindowsVersion" xml:space="preserve">
-    <value>You do not have permission to access this server.</value>
-  </data>
   <data name="InvalidMSIEWithTE" xml:space="preserve">
     <value>You do not have permission to access this server. If you are using the Opera browser, then Opera must appear in your user agent.</value>
   </data>
-  <data name="InvalidRangeHeader" xml:space="preserve">
-    <value>You do not have permission to access this server.</value>
-  </data>
-  <data name="Malicious" xml:space="preserve">
+  <data name="PermissionDenied" xml:space="preserve">
     <value>You do not have permission to access this server.</value>
   </data>
   <data name="RangeHeaderZero" xml:space="preserve">

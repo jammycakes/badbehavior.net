@@ -70,47 +70,20 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You do not have permission to access this server..
-        /// </summary>
-        internal static string Blacklisted {
-            get {
-                return ResourceManager.GetString("Blacklisted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine..
-        /// </summary>
-        internal static string FakeGooglebot {
-            get {
-                return ResourceManager.GetString("FakeGooglebot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine..
-        /// </summary>
-        internal static string FakeMSNbot {
-            get {
-                return ResourceManager.GetString("FakeMSNbot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine..
-        /// </summary>
-        internal static string FakeYahoo {
-            get {
-                return ResourceManager.GetString("FakeYahoo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Expectation failed. Please retry your request..
         /// </summary>
-        internal static string Http10Expect {
+        internal static string ExpectationFailed {
             get {
-                return ResourceManager.GetString("Http10Expect", resourceCulture);
+                return ResourceManager.GetString("ExpectationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid request was received. You claimed to be a major search engine, but you do not appear to actually be a major search engine..
+        /// </summary>
+        internal static string FakeSearchEngine {
+            get {
+                return ResourceManager.GetString("FakeSearchEngine", resourceCulture);
             }
         }
         
@@ -120,24 +93,6 @@ namespace BadBehavior.Rules {
         internal static string Http11Invalid {
             get {
                 return ResourceManager.GetString("Http11Invalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You do not have permission to access this server..
-        /// </summary>
-        internal static string InvalidCookies {
-            get {
-                return ResourceManager.GetString("InvalidCookies", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You do not have permission to access this server..
-        /// </summary>
-        internal static string InvalidMSIEWindowsVersion {
-            get {
-                return ResourceManager.GetString("InvalidMSIEWindowsVersion", resourceCulture);
             }
         }
         
@@ -153,18 +108,9 @@ namespace BadBehavior.Rules {
         /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this server..
         /// </summary>
-        internal static string InvalidRangeHeader {
+        internal static string PermissionDenied {
             get {
-                return ResourceManager.GetString("InvalidRangeHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You do not have permission to access this server..
-        /// </summary>
-        internal static string Malicious {
-            get {
-                return ResourceManager.GetString("Malicious", resourceCulture);
+                return ResourceManager.GetString("PermissionDenied", resourceCulture);
             }
         }
         

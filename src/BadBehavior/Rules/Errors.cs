@@ -13,7 +13,7 @@ namespace BadBehavior.Rules
         );
 
         public static readonly Error Blacklist = new Error(
-            "17f4e8c8", 403, Explanations.Blacklisted,
+            "17f4e8c8", 403, Explanations.PermissionDenied,
             "User-Agent was found on blacklist"
         );
 
@@ -28,12 +28,12 @@ namespace BadBehavior.Rules
         );
 
         public static readonly Error InvalidCookies = new Error(
-            "6c502ff1", 403, Explanations.InvalidCookies,
+            "6c502ff1", 403, Explanations.PermissionDenied,
             "Bot not fully compliant with RFC 2965"
         );
 
         public static readonly Error FakeYahoobot = new Error(
-            "71436a15", 403, Explanations.FakeYahoo,
+            "71436a15", 403, Explanations.FakeSearchEngine,
             "User-Agent claimed to be Yahoo, claim appears to be false"
         );
 
@@ -43,32 +43,32 @@ namespace BadBehavior.Rules
         );
 
         public static readonly Error InvalidRangeHeader = new Error(
-            "7d12528e", 403, Explanations.InvalidRangeHeader,
+            "7d12528e", 403, Explanations.PermissionDenied,
             "Prohibited header 'Range' or 'Content-Range' in POST request"
         );
 
         public static readonly Error Http10Expect = new Error(
-            "a0105122", 417, Explanations.Http10Expect,
+            "a0105122", 417, Explanations.ExpectationFailed,
             "Header 'Expect' prohibited; resend without Expect"
         );
 
         public static readonly Error InvalidMSIEWindowsVersion = new Error(
-            "a1084bad", 403, Explanations.InvalidMSIEWindowsVersion,
+            "a1084bad", 403, Explanations.PermissionDenied,
             "User-Agent claimed to be MSIE, with invalid Windows version"
         );
 
         public static readonly Error Malicious = new Error(
-            "dfd9b1ad", 403, Explanations.Malicious,
+            "dfd9b1ad", 403, Explanations.PermissionDenied,
             "Request contained a malicious JavaScript or SQL injection attack."
         );
 
         public static readonly Error FakeMSNbot = new Error(
-            "e4de0453", 403, Explanations.FakeMSNbot,
+            "e4de0453", 403, Explanations.FakeSearchEngine,
             "User-Agent claimed to be msnbot, claim appears to be false"
         );
 
         public static readonly Error FakeGooglebot = new Error(
-            "f1182195", 403, Explanations.FakeGooglebot,
+            "f1182195", 403, Explanations.FakeSearchEngine,
             "User-Agent claimed to be Googlebot, claim appears to be false."
         );
 
