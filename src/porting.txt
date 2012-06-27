@@ -28,7 +28,7 @@ Tests:
         bb2_safari          Rules.Browser.ValidateSafari
 
     cloudflare.inc.php
-        bb2_cloudflare
+        bb2_cloudflare      Rules.CloudFlare (1)
 
     common_tests.inc.php
         bb2_protocol        Rules.Protocol
@@ -43,9 +43,9 @@ Tests:
         bb2_post
 
     searchengine.inc.php
-        bb2_google          Rules.SearchEngine
-        bb2_msnbot          Rules.SearchEngine
-        bb2_yahoo           Rules.SearchEngine
+        bb2_google          Rules.SearchEngine (1)
+        bb2_msnbot          Rules.SearchEngine (1)
+        bb2_yahoo           Rules.SearchEngine (1)
 
     whitelist.inc.php
         bb2_run_whitelist
@@ -82,3 +82,9 @@ Other:
         bb2_screener_cookie
         bb2_screener_javascript
         bb2_screener
+
+Notes
+-----
+
+(1) These tests are either unimplemented or incomplete in BB original
+    due to a bug in PHP with reverse DNS lookup.
