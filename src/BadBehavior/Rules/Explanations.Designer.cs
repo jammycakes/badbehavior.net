@@ -158,5 +158,23 @@ namespace BadBehavior.Rules {
                 return ResourceManager.GetString("InvalidRangeHeader", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to access this server..
+        /// </summary>
+        internal static string Malicious {
+            get {
+                return ResourceManager.GetString("Malicious", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to access this server. This may be caused by a malfunctioning proxy server or browser privacy software..
+        /// </summary>
+        internal static string UserAgentMissing {
+            get {
+                return ResourceManager.GetString("UserAgentMissing", resourceCulture);
+            }
+        }
     }
 }

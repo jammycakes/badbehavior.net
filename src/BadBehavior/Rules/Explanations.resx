@@ -150,4 +150,10 @@
   <data name="InvalidRangeHeader" xml:space="preserve">
     <value>You do not have permission to access this server.</value>
   </data>
+  <data name="Malicious" xml:space="preserve">
+    <value>You do not have permission to access this server.</value>
+  </data>
+  <data name="UserAgentMissing" xml:space="preserve">
+    <value>You do not have permission to access this server. This may be caused by a malfunctioning proxy server or browser privacy software.</value>
+  </data>
 </root>
