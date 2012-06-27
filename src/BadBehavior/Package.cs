@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -22,7 +23,7 @@ namespace BadBehavior
         ///  Gets the HTTP headers case insensitively by key.
         /// </summary>
 
-        public IDictionary<string, string> Headers { get; private set; }
+        public NameValueCollection Headers { get; private set; }
 
         /// <summary>
         ///  Gets the <see cref="HttpRequestBase"/> instance being validated.
@@ -55,11 +56,9 @@ namespace BadBehavior
         {
             this.Engine = engine;
             this.Request = request;
-            this.Headers = new Dictionary<string, string>
+            this.Headers = new NameValueCollection
                 (this.Request.Headers.Count, StringComparer.InvariantCultureIgnoreCase);
-            foreach (string key in request.Headers.Keys) {
-                this.Headers[key] = request.Headers[key];
-            }
+            this.Headers.Add(request.Headers);
             this.UserAgentI = this.Request.UserAgent == null
                 ? null : this.Request.UserAgent.ToLowerInvariant();
             this.OriginatingIP = FindOriginatingIP();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -72,6 +73,21 @@ namespace BadBehavior
         public static bool IsRfc1918(this IPAddress addr)
         {
             return addr.MatchCidr("10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16");
+        }
+
+
+        /// <summary>
+        ///  Checks to see whether a <see cref="NameValueCollection"/> instance contains
+        ///  any items with the given key.
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+
+        public static bool ContainsKey(this NameValueCollection collection, string key)
+        {
+            var values = collection.GetValues(key);
+            return values != null && values.Any();
         }
     }
 }
