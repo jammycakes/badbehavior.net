@@ -40,8 +40,11 @@ namespace BadBehavior.Rules
                 )) {
                     package.Raise(this, Errors.RangeHeaderZero);
                 }
-
             }
+
+            // Content-Range is a response header, not a request header
+            if (package.Headers.ContainsKey("Content-Range"))
+                package.Raise(this, Errors.InvalidRangeHeader);
 
             return RuleProcessing.Continue;
         }
