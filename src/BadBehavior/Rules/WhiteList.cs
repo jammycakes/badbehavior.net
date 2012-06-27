@@ -9,7 +9,7 @@ namespace BadBehavior.Rules
     {
         public RuleProcessing Validate(Package package)
         {
-            // NB: return ValidationResult.Stop if this request is whitelisted.
+            // NB: return RuleProcessing.Stop if this request is whitelisted.
             // Don't throw from this method.
             return RuleProcessing.Continue;
         }
