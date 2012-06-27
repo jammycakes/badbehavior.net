@@ -47,6 +47,11 @@ namespace BadBehavior.Rules
             "Prohibited header 'Range' or 'Content-Range' in POST request"
         );
 
+        public static readonly Error BannedProxy = new Error(
+            "939a6fbb", 403, Explanations.InvalidProxyServer,
+            "Banned proxy server in use"
+        );
+
         public static readonly Error InvalidVia = new Error(
             "9c9e4979", 403, Explanations.InvalidProxyServer,
             "Prohibited header 'via' present"

@@ -54,6 +54,13 @@ namespace BadBehavior.Rules
                 !package.Request.UserAgent.Contains("CoralWebPrx"))
                 package.Raise(this, Errors.InvalidVia);
 
+            // pinappleproxy is used by referrer spammers
+            if (package.Headers.ContainsKey("Via")) {
+                string via = package.Headers["Via"].ToLowerInvariant();
+                if (via.Contains("pinappleproxy") || via.Contains("pcnetserver") || via.Contains("invisiware"))
+                    package.Raise(this, Errors.BannedProxy);
+            }
+
             return RuleProcessing.Continue;
         }
     }
