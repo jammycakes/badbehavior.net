@@ -57,7 +57,7 @@ namespace BadBehavior
             this.Engine = engine;
             this.Request = request;
             this.HeadersMixed = new NameValueCollection
-                (this.Request.Headers.Count, StringComparer.InvariantCultureIgnoreCase);
+                (this.Request.Headers.Count, HeadersMixedComparer.Instance);
             this.HeadersMixed.Add(request.Headers);
             this.UserAgentI = this.Request.UserAgent == null
                 ? null : this.Request.UserAgent.ToLowerInvariant();

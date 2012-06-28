@@ -50,6 +50,7 @@
     <Compile Include="BBEngine.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="HeadersMixedComparer.cs" />
     <Compile Include="IBBEngine.cs" />
     <Compile Include="IConfiguration.cs" />
     <Compile Include="RuleProcessing.cs" />
