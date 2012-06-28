@@ -33,7 +33,7 @@ Tests:
     common_tests.inc.php
         bb2_protocol        Rules.Protocol
         bb2_cookies         Rules.Cookies (2)
-        bb2_misc_headers
+        bb2_misc_headers    Rules.MiscHeaders (2)
 
     movabletype.inc.php
         bb2_movabletype     Rules.Browser.ValidateMovableType
