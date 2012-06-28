@@ -1,7 +1,9 @@
 ﻿<NUnitProject>
-  <Settings activeconfig="Debug" />
+  <Settings activeconfig="Debug" processModel="Default" domainUsage="Default" />
   <Config name="Debug" binpathtype="Auto">
     <assembly path="bin\Debug\BadBehavior.Tests.dll" />
   </Config>
-  <Config name="Release" binpathtype="Auto" />
+  <Config name="Debug" binpathtype="Auto">
+    <assembly path="bin\Release\BadBehavior.Tests.dll" />
+  </Config>
 </NUnitProject>
