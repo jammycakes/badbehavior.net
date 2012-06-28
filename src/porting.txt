@@ -39,7 +39,7 @@ Tests:
         bb2_movabletype     Rules.Browser.ValidateMovableType
 
     post.inc.php
-        bb2_trackback
+        bb2_trackback       Rules.Post.ValidateTrackbacks (2)
         bb2_post
 
     searchengine.inc.php
