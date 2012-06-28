@@ -82,6 +82,11 @@ namespace BadBehavior.Rules
             "Incorrect form of HTTP/1.0 Keep-Alive"
         );
 
+        public static readonly Error ProxyConnectionHeaderPresent = new Error(
+            "b7830251", 400, Explanations.InvalidProxyRequest,
+            "Prohibited header 'Proxy-Connection' present"
+        );
+
         public static readonly Error ProhibitedHeader = new Error(
             "b9cc1d86", 403, Explanations.InvalidProxyServer,
             "Prohibited header 'X-Aaaaaaaaaa' or 'X-Aaaaaaaaaaaa' present"

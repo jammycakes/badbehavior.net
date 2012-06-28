@@ -93,6 +93,12 @@ namespace BadBehavior.Rules
                 package.HeadersMixed.ContainsKey("X-Aaaaaaaaaa"))
                 package.Raise(this, Errors.ProhibitedHeader);
 
+            // Proxy-Connection does not exist and should never be seen in the wild
+            // http://lists.w3.org/Archives/Public/ietf-http-wg-old/1999JanApr/0032.html
+            // http://lists.w3.org/Archives/Public/ietf-http-wg-old/1999JanApr/0040.html
+            if (package.Configuration.Strict && package.HeadersMixed.ContainsKey("Proxy-Connection"))
+                package.Raise(this, Errors.ProxyConnectionHeaderPresent);
+
             return RuleProcessing.Continue;
         }
     }

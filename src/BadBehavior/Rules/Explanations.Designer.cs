@@ -106,6 +106,15 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your proxy server sent an invalid request. Please contact the proxy server administrator to have this problem fixed..
+        /// </summary>
+        internal static string InvalidProxyRequest {
+            get {
+                return ResourceManager.GetString("InvalidProxyRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The proxy server you are using is not permitted to access this server. Please bypass the proxy server, or contact your proxy server administrator..
         /// </summary>
         internal static string InvalidProxyServer {
