@@ -88,6 +88,11 @@ namespace BadBehavior.Rules
                     package.Raise(this, Errors.MaliciousConnectionHeader);
             }
 
+            // Headers which are not seen from normal user agents; only malicious bots
+            if (package.HeadersMixed.ContainsKey("X-Aaaaaaaaaaaa") ||
+                package.HeadersMixed.ContainsKey("X-Aaaaaaaaaa"))
+                package.Raise(this, Errors.ProhibitedHeader);
+
             return RuleProcessing.Continue;
         }
     }

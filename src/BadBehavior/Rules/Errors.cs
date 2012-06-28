@@ -82,6 +82,11 @@ namespace BadBehavior.Rules
             "Incorrect form of HTTP/1.0 Keep-Alive"
         );
 
+        public static readonly Error ProhibitedHeader = new Error(
+            "b9cc1d86", 403, Explanations.InvalidProxyServer,
+            "Prohibited header 'X-Aaaaaaaaaa' or 'X-Aaaaaaaaaaaa' present"
+        );
+
         public static readonly Error Malicious = new Error(
             "dfd9b1ad", 403, Explanations.PermissionDenied,
             "Request contained a malicious JavaScript or SQL injection attack."
