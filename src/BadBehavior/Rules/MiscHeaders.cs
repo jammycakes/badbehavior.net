@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BadBehavior.Rules
 {
@@ -59,6 +60,15 @@ namespace BadBehavior.Rules
                 string via = package.HeadersMixed["Via"].ToLowerInvariant();
                 if (via.Contains("pinappleproxy") || via.Contains("pcnetserver") || via.Contains("invisiware"))
                     package.Raise(this, Errors.BannedProxy);
+            }
+
+            // TE: if present must have Connection: TE
+            // RFC 2616 14.39
+            // Blocks Microsoft ISA Server 2004 in strict mode. Contact Microsoft
+            // to obtain a hotfix.
+            if (package.Configuration.Strict && package.HeadersMixed.ContainsKey("Te")) {
+                if (Regex.Match(package.HeadersMixed["Connection"], @"\bTE\b").Success)
+                    package.Raise(this, Errors.TeWithoutConnectionTe);
             }
 
             return RuleProcessing.Continue;

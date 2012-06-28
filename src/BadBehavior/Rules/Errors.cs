@@ -27,6 +27,11 @@ namespace BadBehavior.Rules
             "Header 'Pragma' without 'Cache-Control' prohibited for HTTP/1.1 requests"
         );
 
+        public static readonly Error TeWithoutConnectionTe = new Error(
+            "582ec5e4", 400, Explanations.InvalidProxyServerRequest,
+            "Header 'TE' present but TE not specified in 'Connection' header"
+        );
+
         public static readonly Error InvalidCookies = new Error(
             "6c502ff1", 403, Explanations.PermissionDenied,
             "Bot not fully compliant with RFC 2965"

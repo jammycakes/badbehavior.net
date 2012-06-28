@@ -115,6 +115,15 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An invalid request was received. If you are using a proxy server, bypass the proxy server or contact your proxy server administrator. This may also be caused by a bug in the Opera web browser..
+        /// </summary>
+        internal static string InvalidProxyServerRequest {
+            get {
+                return ResourceManager.GetString("InvalidProxyServerRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this server..
         /// </summary>
         internal static string PermissionDenied {
