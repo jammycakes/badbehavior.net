@@ -124,11 +124,29 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An invalid request was received.  This may be caused by a malfunctioning proxy server or browser privacy software. If you are using a proxy server, bypass the proxy server or contact your proxy server administrator..
+        /// </summary>
+        internal static string MalfunctioningProxyServer {
+            get {
+                return ResourceManager.GetString("MalfunctioningProxyServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this server..
         /// </summary>
         internal static string PermissionDenied {
             get {
                 return ResourceManager.GetString("PermissionDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid request was received. This may be caused by malicious software on your computer..
+        /// </summary>
+        internal static string PossibleMalware {
+            get {
+                return ResourceManager.GetString("PossibleMalware", resourceCulture);
             }
         }
         

@@ -138,8 +138,14 @@
   <data name="InvalidProxyServerRequest" xml:space="preserve">
     <value>An invalid request was received. If you are using a proxy server, bypass the proxy server or contact your proxy server administrator. This may also be caused by a bug in the Opera web browser.</value>
   </data>
+  <data name="MalfunctioningProxyServer" xml:space="preserve">
+    <value>An invalid request was received.  This may be caused by a malfunctioning proxy server or browser privacy software. If you are using a proxy server, bypass the proxy server or contact your proxy server administrator.</value>
+  </data>
   <data name="PermissionDenied" xml:space="preserve">
     <value>You do not have permission to access this server.</value>
+  </data>
+  <data name="PossibleMalware" xml:space="preserve">
+    <value>An invalid request was received. This may be caused by malicious software on your computer.</value>
   </data>
   <data name="RangeHeaderZero" xml:space="preserve">
     <value>The automated program you are using is not permitted to access this server. Please use a different program or a standard Web browser.</value>

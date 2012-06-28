@@ -72,6 +72,16 @@ namespace BadBehavior.Rules
             "User-Agent claimed to be MSIE, with invalid Windows version"
         );
 
+        public static readonly Error InvalidConnectionHeader = new Error(
+            "a52f0448", 400, Explanations.MalfunctioningProxyServer,
+            "Header 'Connection' contains invalid values"
+        );
+
+        public static readonly Error MaliciousConnectionHeader = new Error(
+            "b0924802", 400, Explanations.PossibleMalware,
+            "Incorrect form of HTTP/1.0 Keep-Alive"
+        );
+
         public static readonly Error Malicious = new Error(
             "dfd9b1ad", 403, Explanations.PermissionDenied,
             "Request contained a malicious JavaScript or SQL injection attack."

@@ -71,6 +71,23 @@ namespace BadBehavior.Rules
                     package.Raise(this, Errors.TeWithoutConnectionTe);
             }
 
+            if (package.HeadersMixed.ContainsKey("Connection")) {
+                // Connection: keep-alive and close are mutually exclusive.
+                // Keep-Alive shouldn't appear twice, neither should Close.
+                var connection = package.HeadersMixed.GetValues("Connection");
+                var keepAlives = connection.Sum
+                    (x => Regex.Matches(x, @"\bKeep-Alive\b", RegexOptions.IgnoreCase).Count);
+                var closes = connection.Sum
+                    (x => Regex.Matches(x, @"\bClose\b", RegexOptions.IgnoreCase).Count);
+                if (keepAlives + closes > 1)
+                    package.Raise(this, Errors.InvalidConnectionHeader);
+
+                // Keep-Alive format in RFC 2068; some bots mangle these headers
+                if (connection.Any(x => x.IndexOf
+                    ("Keep-Alive: ", StringComparison.InvariantCultureIgnoreCase) >= 0))
+                    package.Raise(this, Errors.MaliciousConnectionHeader);
+            }
+
             return RuleProcessing.Continue;
         }
     }
