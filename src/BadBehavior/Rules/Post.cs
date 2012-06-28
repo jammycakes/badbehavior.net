@@ -18,6 +18,24 @@ namespace BadBehavior.Rules
 
         private void VerifyTrackbacks(Package package)
         {
+            // Web browsers don't send trackbacks
+            if (package.IsBrowser)
+                package.Raise(this, Errors.TrackbackFromWebBrowser);
+
+            // Proxy servers don't send trackbacks either
+            if (package.HeadersMixed.ContainsKey("Via") ||
+                package.HeadersMixed.ContainsKey("Max-Forwards") ||
+                package.HeadersMixed.ContainsKey("X-Forwarded-For") ||
+                package.HeadersMixed.ContainsKey("Client-Ip"))
+                package.Raise(this, Errors.TrackbackFromProxyServer);
+
+            // Fake WordPress trackbacks
+            // Real ones do not contain Accept:, and have a charset defined
+            // Real WP trackbacks may contain Accept: depending on the HTTP
+            // transport being used by the sending host
+            if (package.Request.UserAgent.Contains("WordPress/"))
+                if (!package.Request.ContentType.Contains("charset="))
+                    package.Raise(this, Errors.FakeWordPress);
         }
 
         private void VerifyPost(Package package)

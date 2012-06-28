@@ -160,6 +160,15 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to access this server. Before trying again, run anti-virus and anti-spyware software and remove any viruses and spyware from your computer..
+        /// </summary>
+        internal static string PossibleVirus {
+            get {
+                return ResourceManager.GetString("PossibleVirus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The automated program you are using is not permitted to access this server. Please use a different program or a standard Web browser..
         /// </summary>
         internal static string RangeHeaderZero {

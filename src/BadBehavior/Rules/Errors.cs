@@ -102,14 +102,29 @@ namespace BadBehavior.Rules
             "Prohibited header 'X-Aaaaaaaaaa' or 'X-Aaaaaaaaaaaa' present"
         );
 
+        public static readonly Error TrackbackFromProxyServer = new Error(
+            "d60b87c7", 403, Explanations.PossibleVirus,
+            "Trackback received via proxy server"
+        );
+
         public static readonly Error Malicious = new Error(
             "dfd9b1ad", 403, Explanations.PermissionDenied,
             "Request contained a malicious JavaScript or SQL injection attack."
         );
 
+        public static readonly Error FakeWordPress = new Error(
+            "e3990b47", 403, Explanations.PossibleVirus,
+            "Obviously fake trackback received"
+        );
+
         public static readonly Error FakeMSNbot = new Error(
             "e4de0453", 403, Explanations.FakeSearchEngine,
             "User-Agent claimed to be msnbot, claim appears to be false"
+        );
+
+        public static readonly Error TrackbackFromWebBrowser = new Error(
+            "f0dcb3fd", 403, Explanations.PossibleVirus,
+            "Web browser attempted to send a trackback"
         );
 
         public static readonly Error FakeGooglebot = new Error(

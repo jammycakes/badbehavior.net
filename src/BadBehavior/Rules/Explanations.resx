@@ -150,6 +150,9 @@
   <data name="PossibleMalware" xml:space="preserve">
     <value>An invalid request was received. This may be caused by malicious software on your computer.</value>
   </data>
+  <data name="PossibleVirus" xml:space="preserve">
+    <value>You do not have permission to access this server. Before trying again, run anti-virus and anti-spyware software and remove any viruses and spyware from your computer.</value>
+  </data>
   <data name="RangeHeaderZero" xml:space="preserve">
     <value>The automated program you are using is not permitted to access this server. Please use a different program or a standard Web browser.</value>
   </data>
