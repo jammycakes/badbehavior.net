@@ -61,15 +61,6 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An invalid request was received from your browser. This may be caused by a malfunctioning proxy server or browser privacy software..
-        /// </summary>
-        internal static string AcceptMissing {
-            get {
-                return ResourceManager.GetString("AcceptMissing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Expectation failed. Please retry your request..
         /// </summary>
         internal static string ExpectationFailed {
@@ -93,6 +84,15 @@ namespace BadBehavior.Rules {
         internal static string Http11Invalid {
             get {
                 return ResourceManager.GetString("Http11Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid request was received from your browser. This may be caused by a malfunctioning proxy server or browser privacy software..
+        /// </summary>
+        internal static string InvalidBrowserRequest {
+            get {
+                return ResourceManager.GetString("InvalidBrowserRequest", resourceCulture);
             }
         }
         

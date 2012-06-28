@@ -99,6 +99,19 @@ namespace BadBehavior.Rules
             if (package.Configuration.Strict && package.HeadersMixed.ContainsKey("Proxy-Connection"))
                 package.Raise(this, Errors.ProxyConnectionHeaderPresent);
 
+            if (package.HeadersMixed.ContainsKey("Referer")) {
+                string referer = package.HeadersMixed["Referer"];
+                // Referer, if it exists, must not be blank
+                if (referer == String.Empty)
+                    package.Raise(this, Errors.BlankReferer);
+
+                // Referer, if it exists, must contain a :
+                // While a relative URL is technically valid in Referer, all known
+                // legitimate user-agents send an absolute URL
+                if (!referer.Contains(":"))
+                    package.Raise(this, Errors.CorruptReferer);
+            }
+
             return RuleProcessing.Continue;
         }
     }

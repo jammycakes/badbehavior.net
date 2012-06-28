@@ -8,7 +8,7 @@ namespace BadBehavior.Rules
     internal static class Errors
     {
         public static readonly Error AcceptMissing = new Error(
-            "17566707", 403, Explanations.AcceptMissing,
+            "17566707", 403, Explanations.InvalidBrowserRequest,
             "Required header 'Accept' missing"
         );
 
@@ -27,9 +27,19 @@ namespace BadBehavior.Rules
             "Header 'Pragma' without 'Cache-Control' prohibited for HTTP/1.1 requests"
         );
 
+        public static readonly Error CorruptReferer = new Error(
+            "45b35e30", 400, Explanations.InvalidBrowserRequest,
+            "Header 'Referer' is corrupt"
+        );
+
         public static readonly Error TeWithoutConnectionTe = new Error(
             "582ec5e4", 400, Explanations.InvalidProxyServerRequest,
             "Header 'TE' present but TE not specified in 'Connection' header"
+        );
+
+        public static readonly Error BlankReferer = new Error(
+            "69920ee5", 400, Explanations.InvalidBrowserRequest,
+            "Header 'Referer' present but blank"
         );
 
         public static readonly Error InvalidCookies = new Error(
