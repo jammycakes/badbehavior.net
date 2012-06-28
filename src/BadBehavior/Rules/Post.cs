@@ -10,13 +10,13 @@ namespace BadBehavior.Rules
         public RuleProcessing Validate(Package package)
         {
             if (package.Request.RequestType.Equals("POST", StringComparison.InvariantCultureIgnoreCase)) {
-                VerifyPost(package);
+                ValidatePost(package);
             }
 
             return RuleProcessing.Continue;
         }
 
-        private void VerifyTrackbacks(Package package)
+        private void ValidateTrackbacks(Package package)
         {
             // Web browsers don't send trackbacks
             if (package.IsBrowser)
@@ -38,7 +38,7 @@ namespace BadBehavior.Rules
                     package.Raise(this, Errors.FakeWordPress);
         }
 
-        private void VerifyPost(Package package)
+        private void ValidatePost(Package package)
         {
             // MovableType needs specialized screening
             if (package.UserAgentI.Contains("movabletype")) {
@@ -50,7 +50,7 @@ namespace BadBehavior.Rules
             if (package.Request.Form.ContainsKey("title") &&
                 package.Request.Form.ContainsKey("url") &&
                 package.Request.Form.ContainsKey("blog_name")) {
-                VerifyTrackbacks(package);
+                ValidateTrackbacks(package);
             }
 
             // Catch a few completely broken spambots
