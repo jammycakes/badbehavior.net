@@ -4,7 +4,9 @@ import shutil
 import sys
 from subprocess import check_call
 
-VERSION = '0.0.0.0'
+VERSION = '0.1.0'
+BUILD = 0
+VERSION_INFO = 'alpha'
 CONFIG = 'Release'
 
 def join(abs, rel):
@@ -29,6 +31,27 @@ if os.path.isdir(OUTPUT_DIR):
     shutil.rmtree(OUTPUT_DIR)
 os.makedirs(OUTPUT_DIR)
 
+# Re-create the version number
+
+if VERSION_INFO:
+    INFORMATIONAL_VERSION = VERSION + '-' + VERSION_INFO
+else:
+    INFORMATIONAL_VERSION = VERSION
+
+versionfile = '''
+using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+[assembly: AssemblyVersion("%(version)s")]
+[assembly: AssemblyFileVersion("%(version)s")]
+[assembly: AssemblyInformationalVersion("%(versioninfo)s")]
+''' % { 'version' : VERSION + '.' + str(BUILD), 'versioninfo' : INFORMATIONAL_VERSION }
+
+with open(join(ROOT_DIR, 'src/VersionInfo.cs'), 'w') as vf:
+    vf.write(versionfile)
+
 # Build the solution
 
 run(MSBUILD, SOLUTION_FILE, '/p:Configuration=' + CONFIG, '/p:Platform=Any CPU', '/target:Clean,Build')
@@ -50,6 +73,6 @@ shutil.copy(join(PROJECT_ROOT, 'web.config.transform'), NUGET_CONTENT)
 run(NUGET, 'pack',
     join(NUGET_BASE, 'BadBehavior.nuspec'),
     '-OutputDirectory', OUTPUT_DIR,
-    '-Version', VERSION
+    '-Version', INFORMATIONAL_VERSION
 )
 shutil.rmtree(NUGET_BASE)
