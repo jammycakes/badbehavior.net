@@ -57,6 +57,13 @@ porting.txt file in the solution.
 In particular, the API should be considered unstable and liable to change
 without notice.
 
+Building
+--------
+You will need the following software installed on your computer:
+
+ * The .NET framework SDK version 4.0 or later
+ * Python 3.2 or later to run the build scripts
+
 Contributing
 ------------
 Bad Behavior .NET uses Bad Behavior 2.7 as a reference. The source code for
