@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>BadBehavior.net</id>
+    <version>0.1.0.0</version>
+    <title>Bad Behavior .NET</title>
+    <authors>James McKay</authors>
+    <owners>James McKay</owners>
+    <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+    <projectUrl>https://github.com/jammycakes/badbehavior.net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Blah blah</description>
+    <copyright>Copyright 2012</copyright>
+    <tags>web antispam spam</tags>
+  </metadata>
+</package>
