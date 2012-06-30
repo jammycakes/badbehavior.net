@@ -14,6 +14,14 @@ namespace BadBehavior.Tests
     {
         [TestCase("127.0.0.1", "deadbeef", "7f00-0001-dead-beef")]
         [TestCase("1.0.0.1", "deadbeef", "0100-0001-dead-beef")]
+        [TestCase("::1", "deadbeef", "dead-beef")]
+        [TestCase("::1", "deadbee", "dead-bee")]
+        [TestCase("::1", "deadbe", "dead-be")]
+        [TestCase("::1", "deadb", "dead-b")]
+        [TestCase("::1", "dead", "dead")]
+        [TestCase("::1", "dea", "dea")]
+        [TestCase("::1", "d", "d")]
+        [TestCase("::1", "", "")]
         public void CanBuildSupportKey(string ip, string code, string expected)
         {
             var ipAddress = IPAddress.Parse(ip);

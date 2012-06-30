@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -105,11 +106,14 @@ namespace BadBehavior
 
         public static string BuildSupportKey(IPAddress ipAddress, string errorCode)
         {
-            string s = String.Concat
-                (ipAddress.GetAddressBytes().Select(x => x.ToString("x2")).ToArray());
-            s = s.Substring(0, 4) + "-" + s.Substring(4) + "-" +
-                errorCode.Substring(0, 4) + "-" + errorCode.Substring(4);
-            return s.ToLowerInvariant();
+            string s = ipAddress.AddressFamily == AddressFamily.InterNetwork
+                ? String.Concat(ipAddress.GetAddressBytes().Select(x => x.ToString("x2")).ToArray())
+                : String.Empty;
+            s += errorCode;
+            var sb = new StringBuilder(s);
+            for (int i = ((sb.Length - 1) / 4) * 4; i > 0; i -= 4)
+                sb.Insert(i, '-');
+            return sb.ToString().ToLowerInvariant();
         }
 
         public void Raise(IRule validation, Package package, Error error)
