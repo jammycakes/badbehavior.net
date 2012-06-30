@@ -9,5 +9,7 @@ namespace BadBehavior
         void Raise(Package package, Error error);
         void ValidateRequest(System.Web.HttpRequestBase request);
         ISettings Settings { get; }
+
+        void RaiseStrict(Package package, Error error);
     }
 }

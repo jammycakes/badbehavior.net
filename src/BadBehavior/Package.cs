@@ -94,5 +94,10 @@ namespace BadBehavior
         {
             this.Engine.Raise(this, error);
         }
+
+        public void RaiseStrict(Error error)
+        {
+            this.Engine.RaiseStrict(this, error);
+        }
     }
 }
