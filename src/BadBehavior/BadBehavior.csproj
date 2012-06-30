@@ -51,7 +51,6 @@
     <Compile Include="BadBehaviorException.cs" />
     <Compile Include="BadBehaviorModule.cs" />
     <Compile Include="BBEngine.cs" />
-    <Compile Include="Configuration.cs" />
     <Compile Include="Config\BadBehaviorConfigurationSection.cs" />
     <Compile Include="Config\ValueCollection.cs" />
     <Compile Include="Config\ValueElement.cs" />

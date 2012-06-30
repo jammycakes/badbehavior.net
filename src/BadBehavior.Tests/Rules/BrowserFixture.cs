@@ -21,7 +21,7 @@ namespace BadBehavior.Tests.Validators
                 "Mozilla/4.0 (compatible; MSIE 6.0b; Windows NT 5.1)",
                 new Dictionary<string, string> { }
             );
-            var package = new Package(request.Object, new BBEngine(new Configuration()));
+            var package = new Package(request.Object, new BBEngine());
             new Browser().Validate(package);
         }
 

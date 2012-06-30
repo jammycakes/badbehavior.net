@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Web;
+using BadBehavior.Config;
 using Moq;
 using NUnit.Framework;
 
@@ -17,7 +18,7 @@ namespace BadBehavior.Tests
             var request = new Mock<HttpRequestBase>();
             var headers = new NameValueCollection();
             if (forwardedFor != null) {
-                headers.Add(Configuration.DefaultReverseProxyHeader, forwardedFor);
+                headers.Add(BadBehaviorConfigurationSection.DefaultReverseProxyHeader, forwardedFor);
             }
             request.SetupGet(x => x.UserHostAddress).Returns(ipAddress);
             request.SetupGet(x => x.Headers).Returns(headers);
@@ -35,7 +36,8 @@ namespace BadBehavior.Tests
             var request = CreateRequest(ipAddress, forwardedFor);
             var configuration = new Mock<IConfiguration>(MockBehavior.Loose);
             configuration.SetupGet(x => x.ReverseProxy).Returns(forwardedFor != null);
-            configuration.SetupGet(x => x.ReverseProxyHeader).Returns(Configuration.DefaultReverseProxyHeader);
+            configuration.SetupGet(x => x.ReverseProxyHeader)
+                .Returns(BadBehaviorConfigurationSection.DefaultReverseProxyHeader);
             configuration.SetupGet(x => x.ReverseProxyAddresses).Returns(new List<string>(knownProxies));
             var package = new Package(request, new BBEngine(configuration.Object));
             Assert.AreEqual(expected, package.OriginatingIP.ToString());

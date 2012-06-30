@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -41,7 +42,7 @@ namespace BadBehavior
 
         public BBEngine()
         {
-            this.Configuration = new Configuration();
+            this.Configuration = ConfigurationManager.GetSection("badBehavior") as IConfiguration;
             this.Rules = new IRule[] {
                 new CloudFlare(),
                 new WhiteList(),
