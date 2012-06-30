@@ -11,11 +11,8 @@ namespace BadBehavior.Tests.Logging.SqlServer
     [TestFixture]
     public class DatabaseInstallerFixture : Repository
     {
-        public static readonly string connectionString =
-            ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString;
-
         public DatabaseInstallerFixture()
-            : base(connectionString)
+            : base(ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString)
         { }
 
         [TestFixtureSetUp]

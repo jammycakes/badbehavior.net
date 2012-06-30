@@ -10,7 +10,7 @@ namespace BadBehavior.Logging.SqlServer
 {
     public class Repository
     {
-        private string connectionString;
+        protected string connectionString { get; private set; }
 
         public Repository(string connectionString)
         {

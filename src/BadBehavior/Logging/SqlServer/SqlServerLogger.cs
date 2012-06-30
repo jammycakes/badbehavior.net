@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BadBehavior.Logging.SqlServer
@@ -13,8 +14,19 @@ namespace BadBehavior.Logging.SqlServer
             : base(connectionString)
         { }
 
+        private bool initialised = false;
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void Init()
+        {
+            if (initialised) return;
+            new DatabaseInstaller(connectionString).InstallObjects();
+            initialised = true;
+        }
+
         public void Log(LogEntry entry)
         {
+            Init();
             using (var cn = Connect())
             using (var cmd = GetCommand(cn, "AddEntry",
                 new SqlParameter("@IP", entry.IP),
