@@ -31,7 +31,7 @@ namespace BadBehavior.Rules
 
         public RuleProcessing Validate(Package package)
         {
-            switch (package.Request.ServerVariables["HTTP_PROTOCOL"]) {
+            switch (package.Request.ServerVariables["SERVER_PROTOCOL"]) {
                 case "HTTP/1.0":
                     ValidateHttp10(package);
                     break;

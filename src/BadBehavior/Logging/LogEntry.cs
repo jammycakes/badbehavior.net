@@ -36,7 +36,7 @@ namespace BadBehavior.Logging
             this.RequestMethod = ex.Package.Request.HttpMethod;
             this.RequestUri = ex.Package.Request.RawUrl;
             if (ex.Package.Request.ServerVariables != null)
-                this.ServerProtocol = ex.Package.Request.ServerVariables["HTTP_PROTOCOL"];
+                this.ServerProtocol = ex.Package.Request.ServerVariables["SERVER_PROTOCOL"];
             this.HttpHeaders = PackageDict(ex.Package.Request.Headers);
             this.UserAgent = ex.Package.Request.UserAgent;
             this.RequestEntity = PackageDict(ex.Package.Request.Form);
