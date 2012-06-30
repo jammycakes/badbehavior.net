@@ -57,6 +57,20 @@ namespace BadBehavior.Rules
             foreach (string key in package.Request.Form.Keys)
                 if (key.Contains("	document.write"))
                     package.Raise(this, Errors.Malicious);
+
+            // If Referer exists, it should refer to a page on our site
+            if (package.Configuration.OffsiteForms && package.Request.UrlReferrer != null) {
+                string host = package.Request.Url.Host;
+                string referrer = package.Request.UrlReferrer.Host;
+                if(referrer.StartsWith("www.", StringComparison.InvariantCultureIgnoreCase))
+                    referrer = referrer.Substring(4);
+                if(host.StartsWith("www.", StringComparison.InvariantCultureIgnoreCase))
+                    host = host.Substring(4);
+                host = "." + host;
+                referrer = "." + referrer;
+                if (!referrer.Equals(host, StringComparison.InvariantCultureIgnoreCase))
+                    package.Raise(this, Errors.NotSameOrigin);
+            }
         }
     }
 }

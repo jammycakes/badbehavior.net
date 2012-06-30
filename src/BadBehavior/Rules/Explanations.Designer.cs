@@ -142,6 +142,15 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to access this server. Data may not be posted from offsite forms..
+        /// </summary>
+        internal static string NotSameOrigin {
+            get {
+                return ResourceManager.GetString("NotSameOrigin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this server..
         /// </summary>
         internal static string PermissionDenied {

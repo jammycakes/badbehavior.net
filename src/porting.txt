@@ -40,7 +40,7 @@ Tests:
 
     post.inc.php
         bb2_trackback       Rules.Post.ValidateTrackbacks (2)
-        bb2_post
+        bb2_post            Rules.Post.ValidatePost (2)(3)
 
     searchengine.inc.php
         bb2_google          Rules.SearchEngine (1)
@@ -79,7 +79,7 @@ Other:
         bb2_roundtripdns
 
     screener.inc.php
-        bb2_screener_cookie
+        bb2_screener_cookie     (3)
         bb2_screener_javascript
         bb2_screener
 
@@ -89,3 +89,7 @@ Notes
 (1) These tests are either unimplemented or incomplete in BB original
     due to a bug in PHP with reverse DNS lookup.
 (2) Unit tests needed: refer to relevant Internet RFCs.
+(3) BB2 screener cookie checks are not implemented. They are all commented out
+    in BB2 original, noting that there are too many ways for them to give false
+    positives. The only exception here is that it blocks postbacks with a delay
+    of more than 48 hours. This one isn't worth implementing.

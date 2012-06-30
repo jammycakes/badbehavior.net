@@ -9,6 +9,13 @@ namespace BadBehavior
     public interface IConfiguration
     {
         /// <summary>
+        ///  Indicates that we allow postbacks from other sites.
+        ///  Otherwise we'll enforce a same domain policy.
+        /// </summary>
+
+        bool OffsiteForms { get; }
+
+        /// <summary>
         ///  Indicates that we are operating in strict mode.
         /// </summary>
 
