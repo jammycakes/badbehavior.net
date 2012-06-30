@@ -35,7 +35,8 @@ namespace BadBehavior.Logging
             this.Date = DateTime.UtcNow;
             this.RequestMethod = ex.Package.Request.HttpMethod;
             this.RequestUri = ex.Package.Request.RawUrl;
-            this.ServerProtocol = ex.Package.Request.ServerVariables["HTTP_PROTOCOL"];
+            if (ex.Package.Request.ServerVariables != null)
+                this.ServerProtocol = ex.Package.Request.ServerVariables["HTTP_PROTOCOL"];
             this.HttpHeaders = PackageDict(ex.Package.Request.Headers);
             this.UserAgent = ex.Package.Request.UserAgent;
             this.RequestEntity = PackageDict(ex.Package.Request.Form);
@@ -44,6 +45,8 @@ namespace BadBehavior.Logging
 
         private string PackageDict(System.Collections.Specialized.NameValueCollection dict)
         {
+            if (dict == null) return null;
+
             var sb = new StringBuilder();
             foreach (string str in dict.Keys) {
                 sb.AppendLine(str + ": " + dict[str]);
