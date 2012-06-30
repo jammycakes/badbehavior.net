@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using BadBehavior.Configuration;
 using BadBehavior.Logging;
 using BadBehavior.Rules;
 
@@ -47,7 +48,8 @@ namespace BadBehavior
         public BBEngine()
         {
             this.Logger = new NullLogWriter();
-            this.Settings = ConfigurationManager.GetSection("badBehavior") as ISettings;
+            this.Settings = ConfigurationManager.GetSection("badBehavior") as ISettings
+                ?? new BadBehaviorConfigurationSection();
             this.Rules = new IRule[] {
                 new CloudFlare(),
                 new WhiteList(),
