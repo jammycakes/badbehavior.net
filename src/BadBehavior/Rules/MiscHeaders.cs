@@ -19,8 +19,8 @@ namespace BadBehavior.Rules
             // blatant violation of the protocol and good sense.
             // if (strpos($package['request_uri'], "#") !== FALSE || strpos($package['headers_mixed']['Referer'], "#") !== FALSE) {
 
-            if (package.Settings.Strict && package.Request.RawUrl.Contains('#'))
-                package.Raise(Errors.Malicious);
+            if (package.Request.RawUrl.Contains('#'))
+                package.RaiseStrict(Errors.Malicious);
 
             // A pretty nasty SQL injection attack on IIS servers
             if (package.Request.RawUrl.Contains(";DECLARE%20@"))
@@ -31,7 +31,7 @@ namespace BadBehavior.Rules
             // NOTE: this blocks the whois.sc bot. No big loss.
             // Exceptions: MT (not fixable); LJ (refuses to fix; may be
             // blocked again in the future); Facebook
-            if (package.Settings.Strict && package.HeadersMixed.ContainsKey("Range")
+            if (package.HeadersMixed.ContainsKey("Range")
                 && package.HeadersMixed["Range"].Contains("=0-")) {
                 if (!(
                     package.Request.UserAgent.StartsWith("MovableType") ||
@@ -39,7 +39,7 @@ namespace BadBehavior.Rules
                     package.Request.UserAgent.StartsWith("php-openid/") ||
                     package.Request.UserAgent.StartsWith("facebookexternalhit")
                 )) {
-                    package.Raise(Errors.RangeHeaderZero);
+                    package.RaiseStrict(Errors.RangeHeaderZero);
                 }
             }
 
@@ -66,9 +66,9 @@ namespace BadBehavior.Rules
             // RFC 2616 14.39
             // Blocks Microsoft ISA Server 2004 in strict mode. Contact Microsoft
             // to obtain a hotfix.
-            if (package.Settings.Strict && package.HeadersMixed.ContainsKey("Te")) {
+            if (package.HeadersMixed.ContainsKey("Te")) {
                 if (Regex.Match(package.HeadersMixed["Connection"], @"\bTE\b").Success)
-                    package.Raise(Errors.TeWithoutConnectionTe);
+                    package.RaiseStrict(Errors.TeWithoutConnectionTe);
             }
 
             if (package.HeadersMixed.ContainsKey("Connection")) {
@@ -96,8 +96,8 @@ namespace BadBehavior.Rules
             // Proxy-Connection does not exist and should never be seen in the wild
             // http://lists.w3.org/Archives/Public/ietf-http-wg-old/1999JanApr/0032.html
             // http://lists.w3.org/Archives/Public/ietf-http-wg-old/1999JanApr/0040.html
-            if (package.Settings.Strict && package.HeadersMixed.ContainsKey("Proxy-Connection"))
-                package.Raise(Errors.ProxyConnectionHeaderPresent);
+            if (package.HeadersMixed.ContainsKey("Proxy-Connection"))
+                package.RaiseStrict(Errors.ProxyConnectionHeaderPresent);
 
             if (package.HeadersMixed.ContainsKey("Referer")) {
                 string referer = package.HeadersMixed["Referer"];

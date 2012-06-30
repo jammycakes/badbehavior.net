@@ -25,7 +25,7 @@ namespace BadBehavior.Rules
             if (package.HeadersMixed.ContainsKey("Pragma")
                 && package.HeadersMixed["Pragma"].Contains("no-cache")
                 && !package.HeadersMixed.ContainsKey("Cache-Control")) {
-                    package.Raise(Errors.Http11Invalid);
+                    package.RaiseStrict(Errors.Http11Invalid);
             }
         }
 
@@ -36,9 +36,7 @@ namespace BadBehavior.Rules
                     ValidateHttp10(package);
                     break;
                 case "HTTP/1.1":
-                    if (package.Settings.Strict) {
-                        ValidateHttp11(package);
-                    }
+                    ValidateHttp11(package);
                     break;
             }
 
