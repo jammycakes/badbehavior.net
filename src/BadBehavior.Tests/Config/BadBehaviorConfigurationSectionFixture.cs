@@ -11,7 +11,7 @@ namespace BadBehavior.Tests.Config
     [TestFixture]
     public class BadBehaviorConfigurationSectionFixture
     {
-        private BadBehaviorConfigurationSection config;
+        private IConfiguration config;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
@@ -29,6 +29,13 @@ namespace BadBehavior.Tests.Config
             Assert.AreEqual("no-reply@jamesmckay.net", config.SupportEmail);
             Assert.AreEqual(BadBehaviorConfigurationSection.DefaultReverseProxyHeader,
                 config.ReverseProxyHeader);
+        }
+
+        [Test]
+        public void CanLoadReverseProxyAddresses()
+        {
+            var addresses = config.ReverseProxyAddresses;
+            CollectionAssert.AreEqual(new string[] { "test.one", "test.two" }, addresses);
         }
     }
 }

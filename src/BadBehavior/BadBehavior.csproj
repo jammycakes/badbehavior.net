@@ -53,6 +53,8 @@
     <Compile Include="BBEngine.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Config\BadBehaviorConfigurationSection.cs" />
+    <Compile Include="Config\ValueCollection.cs" />
+    <Compile Include="Config\ValueElement.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="HeadersMixedComparer.cs" />
     <Compile Include="IBBEngine.cs" />

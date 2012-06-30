@@ -38,10 +38,22 @@ namespace BadBehavior.Config
             set { this["reverseProxy"] = value; }
         }
 
-        public IList<string> ReverseProxyAddresses
+        [ConfigurationProperty("reverseProxyAddresses", IsDefaultCollection = false)]
+        public ValueCollection ReverseProxyAddresses
         {
-            get { throw new NotImplementedException(); }
+            get { return (ValueCollection)this["reverseProxyAddresses"]; }
+            set { this["reverseProxyAddresses"] = value; }
         }
+
+        IList<string> IConfiguration.ReverseProxyAddresses
+        {
+            get {
+                return
+                    this.ReverseProxyAddresses.OfType<ValueElement>()
+                        .Select(x => x.Value).ToList();
+            }
+        }
+
 
         [ConfigurationProperty("reverseProxyHeader", DefaultValue = DefaultReverseProxyHeader, IsRequired = false)]
         public string ReverseProxyHeader
