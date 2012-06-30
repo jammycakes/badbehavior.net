@@ -35,6 +35,8 @@ namespace BadBehavior
             return Int32.TryParse(value, out result) ? result : defaultValue;
         }
 
+        public bool OffsiteForms { get; private set; }
+
         public bool Strict { get; private set; }
 
         public string SupportEmail { get; private set; }
@@ -47,6 +49,7 @@ namespace BadBehavior
 
         public Configuration()
         {
+            this.OffsiteForms = GetBool("OffsiteForms", false);
             this.Strict = GetBool("Strict", false);
             this.SupportEmail = GetString("SupportEmail", null);
             this.ReverseProxy = GetBool("ReverseProxy", false);

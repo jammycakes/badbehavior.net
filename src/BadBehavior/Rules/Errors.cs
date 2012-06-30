@@ -102,6 +102,11 @@ namespace BadBehavior.Rules
             "Prohibited header 'X-Aaaaaaaaaa' or 'X-Aaaaaaaaaaaa' present"
         );
 
+        public static readonly Error NotSameOrigin = new Error(
+            "cd361abb", 403, Explanations.NotSameOrigin,
+            "Referer did not point to a form on this site"
+        );
+
         public static readonly Error TrackbackFromProxyServer = new Error(
             "d60b87c7", 403, Explanations.PossibleVirus,
             "Trackback received via proxy server"
