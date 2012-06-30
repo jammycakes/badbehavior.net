@@ -29,7 +29,7 @@ namespace BadBehavior.Logging.SqlServer
             Init();
             using (var cn = Connect())
             using (var cmd = GetCommand(cn, "AddEntry",
-                new SqlParameter("@IP", entry.IP),
+                new SqlParameter("@IP", entry.IP.ToString()),
                 new SqlParameter("@Date", entry.Date),
                 new SqlParameter("@RequestMethod", entry.RequestMethod),
                 new SqlParameter("@RequestUri", entry.RequestUri),

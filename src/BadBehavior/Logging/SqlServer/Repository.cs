@@ -31,6 +31,7 @@ namespace BadBehavior.Logging.SqlServer
             cmd.CommandText = "BadBehavior_" + commandName;
             cmd.CommandType = CommandType.StoredProcedure;
             foreach (SqlParameter param in parameters) {
+                param.Value = param.Value ?? DBNull.Value;
                 cmd.Parameters.Add(param);
             }
             return cmd;
