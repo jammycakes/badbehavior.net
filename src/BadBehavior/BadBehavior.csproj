@@ -63,6 +63,8 @@
     <Compile Include="Logging\ILogWriter.cs" />
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\NullLogWriter.cs" />
+    <Compile Include="Logging\SqlServer\Repository.cs" />
+    <Compile Include="Logging\SqlServer\SqlServerLogger.cs" />
     <Compile Include="RuleProcessing.cs" />
     <Compile Include="Functions.cs">
       <SubType>Code</SubType>
@@ -95,6 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="response.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logging\SqlServer\CreateTable.sql" />
+    <Content Include="Logging\SqlServer\Sproc.AddEntry.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
