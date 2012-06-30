@@ -16,7 +16,7 @@ namespace BadBehavior.Rules
                 package.HeadersMixed["Cookie"].Contains("$Version=0") &&
                 !package.HeadersMixed.ContainsKey("Cookie2") &&
                 !package.Request.UserAgent.Contains("Kindle/")) {
-                package.Raise(this, Errors.InvalidCookies);
+                package.Raise(Errors.InvalidCookies);
             }
 
             return RuleProcessing.Continue;

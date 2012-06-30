@@ -20,14 +20,14 @@ namespace BadBehavior.Rules
         {
             // Web browsers don't send trackbacks
             if (package.IsBrowser)
-                package.Raise(this, Errors.TrackbackFromWebBrowser);
+                package.Raise(Errors.TrackbackFromWebBrowser);
 
             // Proxy servers don't send trackbacks either
             if (package.HeadersMixed.ContainsKey("Via") ||
                 package.HeadersMixed.ContainsKey("Max-Forwards") ||
                 package.HeadersMixed.ContainsKey("X-Forwarded-For") ||
                 package.HeadersMixed.ContainsKey("Client-Ip"))
-                package.Raise(this, Errors.TrackbackFromProxyServer);
+                package.Raise(Errors.TrackbackFromProxyServer);
 
             // Fake WordPress trackbacks
             // Real ones do not contain Accept:, and have a charset defined
@@ -35,7 +35,7 @@ namespace BadBehavior.Rules
             // transport being used by the sending host
             if (package.Request.UserAgent.Contains("WordPress/"))
                 if (!package.Request.ContentType.Contains("charset="))
-                    package.Raise(this, Errors.FakeWordPress);
+                    package.Raise(Errors.FakeWordPress);
         }
 
         private void ValidatePost(Package package)
@@ -43,7 +43,7 @@ namespace BadBehavior.Rules
             // MovableType needs specialized screening
             if (package.UserAgentI.Contains("movabletype")) {
                 if ("bytes=0-99999".Equals(package.HeadersMixed["Range"]))
-                    package.Raise(this, Errors.InvalidRangeHeader);
+                    package.Raise(Errors.InvalidRangeHeader);
             }
 
             // Trackbacks need special screening
@@ -56,7 +56,7 @@ namespace BadBehavior.Rules
             // Catch a few completely broken spambots
             foreach (string key in package.Request.Form.Keys)
                 if (key.Contains("	document.write"))
-                    package.Raise(this, Errors.Malicious);
+                    package.Raise(Errors.Malicious);
 
             // If Referer exists, it should refer to a page on our site
             if (package.Settings.OffsiteForms && package.Request.UrlReferrer != null) {
@@ -69,7 +69,7 @@ namespace BadBehavior.Rules
                 host = "." + host;
                 referrer = "." + referrer;
                 if (!referrer.Equals(host, StringComparison.InvariantCultureIgnoreCase))
-                    package.Raise(this, Errors.NotSameOrigin);
+                    package.Raise(Errors.NotSameOrigin);
             }
         }
     }

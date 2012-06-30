@@ -11,18 +11,14 @@ namespace BadBehavior
 
         public Package Package { get; private set; }
 
-        public IRule Rule { get; private set; }
-
         public BadBehaviorEventArgs(BadBehaviorException ex)
         {
             this.Error = ex.Error;
             this.Package = ex.Package;
-            this.Rule = ex.Rule;
         }
 
-        public BadBehaviorEventArgs(IRule rule, Package package, Error error)
+        public BadBehaviorEventArgs(Package package, Error error)
         {
-            this.Rule = rule;
             this.Package = package;
             this.Error = error;
         }

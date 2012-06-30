@@ -11,7 +11,7 @@ namespace BadBehavior.Rules
         public RuleProcessing Validate(Package package)
         {
             if (package.Request.HttpMethod != "POST" && String.IsNullOrEmpty(package.Request.UserAgent))
-                package.Raise(this, Errors.UserAgentMissing);
+                package.Raise(Errors.UserAgentMissing);
 
             // Broken spambots send URLs with various invalid characters
             // Some broken browsers send the #vector in the referer field :(
@@ -20,11 +20,11 @@ namespace BadBehavior.Rules
             // if (strpos($package['request_uri'], "#") !== FALSE || strpos($package['headers_mixed']['Referer'], "#") !== FALSE) {
 
             if (package.Settings.Strict && package.Request.RawUrl.Contains('#'))
-                package.Raise(this, Errors.Malicious);
+                package.Raise(Errors.Malicious);
 
             // A pretty nasty SQL injection attack on IIS servers
             if (package.Request.RawUrl.Contains(";DECLARE%20@"))
-                package.Raise(this, Errors.Malicious);
+                package.Raise(Errors.Malicious);
 
             // Range: field exists and begins with 0
             // Real user-agents do not start ranges at 0
@@ -39,13 +39,13 @@ namespace BadBehavior.Rules
                     package.Request.UserAgent.StartsWith("php-openid/") ||
                     package.Request.UserAgent.StartsWith("facebookexternalhit")
                 )) {
-                    package.Raise(this, Errors.RangeHeaderZero);
+                    package.Raise(Errors.RangeHeaderZero);
                 }
             }
 
             // Content-Range is a response header, not a request header
             if (package.HeadersMixed.ContainsKey("Content-Range"))
-                package.Raise(this, Errors.InvalidRangeHeader);
+                package.Raise(Errors.InvalidRangeHeader);
 
             // Lowercase via is used by open proxies/referrer spammers
             // Exceptions: Clearswift uses lowercase via (refuses to fix;
@@ -53,13 +53,13 @@ namespace BadBehavior.Rules
             if (package.Request.Headers["via"] != null &&
                 !package.Request.Headers["via"].Contains("Clearswift") &&
                 !package.Request.UserAgent.Contains("CoralWebPrx"))
-                package.Raise(this, Errors.InvalidVia);
+                package.Raise(Errors.InvalidVia);
 
             // pinappleproxy is used by referrer spammers
             if (package.HeadersMixed.ContainsKey("Via")) {
                 string via = package.HeadersMixed["Via"].ToLowerInvariant();
                 if (via.Contains("pinappleproxy") || via.Contains("pcnetserver") || via.Contains("invisiware"))
-                    package.Raise(this, Errors.BannedProxy);
+                    package.Raise(Errors.BannedProxy);
             }
 
             // TE: if present must have Connection: TE
@@ -68,7 +68,7 @@ namespace BadBehavior.Rules
             // to obtain a hotfix.
             if (package.Settings.Strict && package.HeadersMixed.ContainsKey("Te")) {
                 if (Regex.Match(package.HeadersMixed["Connection"], @"\bTE\b").Success)
-                    package.Raise(this, Errors.TeWithoutConnectionTe);
+                    package.Raise(Errors.TeWithoutConnectionTe);
             }
 
             if (package.HeadersMixed.ContainsKey("Connection")) {
@@ -80,36 +80,36 @@ namespace BadBehavior.Rules
                 var closes = connection.Sum
                     (x => Regex.Matches(x, @"\bClose\b", RegexOptions.IgnoreCase).Count);
                 if (keepAlives + closes > 1)
-                    package.Raise(this, Errors.InvalidConnectionHeader);
+                    package.Raise(Errors.InvalidConnectionHeader);
 
                 // Keep-Alive format in RFC 2068; some bots mangle these headers
                 if (connection.Any(x => x.IndexOf
                     ("Keep-Alive: ", StringComparison.InvariantCultureIgnoreCase) >= 0))
-                    package.Raise(this, Errors.MaliciousConnectionHeader);
+                    package.Raise(Errors.MaliciousConnectionHeader);
             }
 
             // Headers which are not seen from normal user agents; only malicious bots
             if (package.HeadersMixed.ContainsKey("X-Aaaaaaaaaaaa") ||
                 package.HeadersMixed.ContainsKey("X-Aaaaaaaaaa"))
-                package.Raise(this, Errors.ProhibitedHeader);
+                package.Raise(Errors.ProhibitedHeader);
 
             // Proxy-Connection does not exist and should never be seen in the wild
             // http://lists.w3.org/Archives/Public/ietf-http-wg-old/1999JanApr/0032.html
             // http://lists.w3.org/Archives/Public/ietf-http-wg-old/1999JanApr/0040.html
             if (package.Settings.Strict && package.HeadersMixed.ContainsKey("Proxy-Connection"))
-                package.Raise(this, Errors.ProxyConnectionHeaderPresent);
+                package.Raise(Errors.ProxyConnectionHeaderPresent);
 
             if (package.HeadersMixed.ContainsKey("Referer")) {
                 string referer = package.HeadersMixed["Referer"];
                 // Referer, if it exists, must not be blank
                 if (referer == String.Empty)
-                    package.Raise(this, Errors.BlankReferer);
+                    package.Raise(Errors.BlankReferer);
 
                 // Referer, if it exists, must contain a :
                 // While a relative URL is technically valid in Referer, all known
                 // legitimate user-agents send an absolute URL
                 if (!referer.Contains(":"))
-                    package.Raise(this, Errors.CorruptReferer);
+                    package.Raise(Errors.CorruptReferer);
             }
 
             return RuleProcessing.Continue;

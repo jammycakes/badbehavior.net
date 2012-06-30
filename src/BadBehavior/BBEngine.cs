@@ -123,11 +123,11 @@ namespace BadBehavior
             return sb.ToString().ToLowerInvariant();
         }
 
-        public void Raise(IRule validation, Package package, Error error)
+        public void Raise(Package package, Error error)
         {
-            var ex = new BadBehaviorException(validation, package, error);
+            var ex = new BadBehaviorException(package, error);
             Logger.Log(new LogEntry(ex));
-            var args = new BadBehaviorEventArgs(validation, package, error);
+            var args = new BadBehaviorEventArgs(package, error);
             OnBadBehavior(args);
             throw ex;
         }

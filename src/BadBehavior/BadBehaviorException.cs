@@ -15,12 +15,6 @@ namespace BadBehavior
     public class BadBehaviorException : Exception
     {
         /// <summary>
-        ///  Gets the test which failed validation.
-        /// </summary>
-
-        public IRule Rule { get; private set; }
-
-        /// <summary>
         ///  Gets the request which failed to validate.
         /// </summary>
 
@@ -66,11 +60,10 @@ namespace BadBehavior
         ///  This should not be shown to the user.
         /// </remarks>
 
-        public BadBehaviorException(IRule rule, Package package, Error error)
+        public BadBehaviorException(Package package, Error error)
             : base(error.Log)
         {
             this.Package= package;
-            this.Rule = rule;
             this.Error = error;
         }
 

@@ -35,7 +35,7 @@ namespace BadBehavior.Rules
         {
             if (ua.Any(x => package.UserAgentI.Contains(x)))
                 if (!package.OriginatingIP.MatchCidr(cidr))
-                    package.Raise(this, error);
+                    package.Raise(error);
         }
 
         public RuleProcessing Validate(Package package)
