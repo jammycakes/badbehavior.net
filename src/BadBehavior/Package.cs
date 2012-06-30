@@ -17,7 +17,7 @@ namespace BadBehavior
         ///  The configuration settings to be used with this package.
         /// </summary>
 
-        public IConfiguration Configuration { get { return Engine.Configuration; } }
+        public ISettings Settings { get { return Engine.Settings; } }
 
         /// <summary>
         ///  Gets the HTTP headers case insensitively by key.
@@ -71,12 +71,12 @@ namespace BadBehavior
 
         private IPAddress FindOriginatingIP()
         {
-            if (Configuration.ReverseProxy
-                && this.HeadersMixed.ContainsKey(Configuration.ReverseProxyHeader)) {
+            if (Settings.ReverseProxy
+                && this.HeadersMixed.ContainsKey(Settings.ReverseProxyHeader)) {
                 string[] addresses = Regex.Split
-                    (this.HeadersMixed[Configuration.ReverseProxyHeader], @"[\s,]+");
+                    (this.HeadersMixed[Settings.ReverseProxyHeader], @"[\s,]+");
                 // Skip our known proxies and private addresses.
-                string[] knownProxies = Configuration.ReverseProxyAddresses.ToArray();
+                string[] knownProxies = Settings.ReverseProxyAddresses.ToArray();
                 foreach (string address in addresses) {
                     IPAddress ip = Functions.SafeParseIP(address);
                     if (ip != null && !ip.MatchCidr(knownProxies) && !ip.IsRfc1918()) {

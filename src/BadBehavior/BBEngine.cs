@@ -38,11 +38,11 @@ namespace BadBehavior
 
         public IList<IRule> Rules { get; private set; }
 
-        public IConfiguration Configuration { get; private set; }
+        public ISettings Settings { get; private set; }
 
         public BBEngine()
         {
-            this.Configuration = ConfigurationManager.GetSection("badBehavior") as IConfiguration;
+            this.Settings = ConfigurationManager.GetSection("badBehavior") as ISettings;
             this.Rules = new IRule[] {
                 new CloudFlare(),
                 new WhiteList(),
@@ -57,9 +57,9 @@ namespace BadBehavior
             }.ToList();
         }
 
-        public BBEngine(IConfiguration configuration, params IRule[] rules)
+        public BBEngine(ISettings settings, params IRule[] rules)
         {
-            this.Configuration = configuration;
+            this.Settings = settings;
             this.Rules = rules.ToList();
         }
 
@@ -87,7 +87,7 @@ namespace BadBehavior
 
         public static string GetResponseContent(BadBehaviorException ex)
         {
-            string email = ex.Package.Configuration.SupportEmail;
+            string email = ex.Package.Settings.SupportEmail;
             string tpl = email != null ? template : templateNoEmail;
             var dict = new Dictionary<string, string>();
             dict["response"] = ex.Error.HttpCode.ToString();

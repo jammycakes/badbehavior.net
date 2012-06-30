@@ -11,7 +11,7 @@ namespace BadBehavior.Tests.Config
     [TestFixture]
     public class BadBehaviorConfigurationSectionFixture
     {
-        private IConfiguration config;
+        private ISettings config;
 
         [TestFixtureSetUp]
         public void FixtureSetup()

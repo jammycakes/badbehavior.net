@@ -59,7 +59,7 @@ namespace BadBehavior.Rules
                     package.Raise(this, Errors.Malicious);
 
             // If Referer exists, it should refer to a page on our site
-            if (package.Configuration.OffsiteForms && package.Request.UrlReferrer != null) {
+            if (package.Settings.OffsiteForms && package.Request.UrlReferrer != null) {
                 string host = package.Request.Url.Host;
                 string referrer = package.Request.UrlReferrer.Host;
                 if(referrer.StartsWith("www.", StringComparison.InvariantCultureIgnoreCase))

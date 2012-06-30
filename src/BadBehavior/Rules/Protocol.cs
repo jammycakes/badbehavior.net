@@ -36,7 +36,7 @@ namespace BadBehavior.Rules
                     ValidateHttp10(package);
                     break;
                 case "HTTP/1.1":
-                    if (package.Configuration.Strict) {
+                    if (package.Settings.Strict) {
                         ValidateHttp11(package);
                     }
                     break;

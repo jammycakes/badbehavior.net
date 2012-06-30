@@ -34,12 +34,12 @@ namespace BadBehavior.Tests
             params string[] knownProxies)
         {
             var request = CreateRequest(ipAddress, forwardedFor);
-            var configuration = new Mock<IConfiguration>(MockBehavior.Loose);
-            configuration.SetupGet(x => x.ReverseProxy).Returns(forwardedFor != null);
-            configuration.SetupGet(x => x.ReverseProxyHeader)
+            var settings = new Mock<ISettings>(MockBehavior.Loose);
+            settings.SetupGet(x => x.ReverseProxy).Returns(forwardedFor != null);
+            settings.SetupGet(x => x.ReverseProxyHeader)
                 .Returns(BadBehaviorConfigurationSection.DefaultReverseProxyHeader);
-            configuration.SetupGet(x => x.ReverseProxyAddresses).Returns(new List<string>(knownProxies));
-            var package = new Package(request, new BBEngine(configuration.Object));
+            settings.SetupGet(x => x.ReverseProxyAddresses).Returns(new List<string>(knownProxies));
+            var package = new Package(request, new BBEngine(settings.Object));
             Assert.AreEqual(expected, package.OriginatingIP.ToString());
         }
 

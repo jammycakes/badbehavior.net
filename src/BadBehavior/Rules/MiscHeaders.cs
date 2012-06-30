@@ -19,7 +19,7 @@ namespace BadBehavior.Rules
             // blatant violation of the protocol and good sense.
             // if (strpos($package['request_uri'], "#") !== FALSE || strpos($package['headers_mixed']['Referer'], "#") !== FALSE) {
 
-            if (package.Configuration.Strict && package.Request.RawUrl.Contains('#'))
+            if (package.Settings.Strict && package.Request.RawUrl.Contains('#'))
                 package.Raise(this, Errors.Malicious);
 
             // A pretty nasty SQL injection attack on IIS servers
@@ -31,7 +31,7 @@ namespace BadBehavior.Rules
             // NOTE: this blocks the whois.sc bot. No big loss.
             // Exceptions: MT (not fixable); LJ (refuses to fix; may be
             // blocked again in the future); Facebook
-            if (package.Configuration.Strict && package.HeadersMixed.ContainsKey("Range")
+            if (package.Settings.Strict && package.HeadersMixed.ContainsKey("Range")
                 && package.HeadersMixed["Range"].Contains("=0-")) {
                 if (!(
                     package.Request.UserAgent.StartsWith("MovableType") ||
@@ -66,7 +66,7 @@ namespace BadBehavior.Rules
             // RFC 2616 14.39
             // Blocks Microsoft ISA Server 2004 in strict mode. Contact Microsoft
             // to obtain a hotfix.
-            if (package.Configuration.Strict && package.HeadersMixed.ContainsKey("Te")) {
+            if (package.Settings.Strict && package.HeadersMixed.ContainsKey("Te")) {
                 if (Regex.Match(package.HeadersMixed["Connection"], @"\bTE\b").Success)
                     package.Raise(this, Errors.TeWithoutConnectionTe);
             }
@@ -96,7 +96,7 @@ namespace BadBehavior.Rules
             // Proxy-Connection does not exist and should never be seen in the wild
             // http://lists.w3.org/Archives/Public/ietf-http-wg-old/1999JanApr/0032.html
             // http://lists.w3.org/Archives/Public/ietf-http-wg-old/1999JanApr/0040.html
-            if (package.Configuration.Strict && package.HeadersMixed.ContainsKey("Proxy-Connection"))
+            if (package.Settings.Strict && package.HeadersMixed.ContainsKey("Proxy-Connection"))
                 package.Raise(this, Errors.ProxyConnectionHeaderPresent);
 
             if (package.HeadersMixed.ContainsKey("Referer")) {

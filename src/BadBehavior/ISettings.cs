@@ -7,7 +7,7 @@ namespace BadBehavior
     ///  Provides an interface to the configuration settings.
     /// </summary>
 
-    public interface IConfiguration
+    public interface ISettings
     {
         /// <summary>
         ///  Indicates that we allow postbacks from other sites.

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BadBehavior.Configuration
 {
-    public class BadBehaviorConfigurationSection : ConfigurationSection, IConfiguration
+    public class BadBehaviorConfigurationSection : ConfigurationSection, ISettings
     {
         public const string DefaultReverseProxyHeader = "X-Forwarded-For";
 
@@ -45,7 +45,7 @@ namespace BadBehavior.Configuration
             set { this["reverseProxyAddresses"] = value; }
         }
 
-        IList<string> IConfiguration.ReverseProxyAddresses
+        IList<string> ISettings.ReverseProxyAddresses
         {
             get {
                 return
@@ -69,7 +69,7 @@ namespace BadBehavior.Configuration
             set { this["whitelist"] = value; }
         }
 
-        IList<string> IConfiguration.WhitelistIPRanges
+        IList<string> ISettings.WhitelistIPRanges
         {
             get {
                 return
@@ -79,7 +79,7 @@ namespace BadBehavior.Configuration
             }
         }
 
-        IList<string> IConfiguration.WhitelistUserAgents
+        IList<string> ISettings.WhitelistUserAgents
         {
             get
             {
@@ -89,7 +89,7 @@ namespace BadBehavior.Configuration
             }
         }
 
-        IList<string> IConfiguration.WhitelistUrls
+        IList<string> ISettings.WhitelistUrls
         {
             get
             {

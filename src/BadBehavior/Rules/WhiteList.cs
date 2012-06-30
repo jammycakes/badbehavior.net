@@ -12,14 +12,14 @@ namespace BadBehavior.Rules
             // NB: return RuleProcessing.Stop if this request is whitelisted.
             // Don't throw from this method.
 
-            if (package.OriginatingIP.MatchCidr(package.Configuration.WhitelistIPRanges.ToArray()))
+            if (package.OriginatingIP.MatchCidr(package.Settings.WhitelistIPRanges.ToArray()))
                 return RuleProcessing.Stop;
 
-            if (package.Configuration.WhitelistUserAgents.Any(x => x == package.Request.UserAgent))
+            if (package.Settings.WhitelistUserAgents.Any(x => x == package.Request.UserAgent))
                 return RuleProcessing.Stop;
 
             string url = package.Request.Path;
-            if (package.Configuration.WhitelistUrls.Any(x => url.StartsWith(x)))
+            if (package.Settings.WhitelistUrls.Any(x => url.StartsWith(x)))
                 return RuleProcessing.Stop;
 
             return RuleProcessing.Continue;
