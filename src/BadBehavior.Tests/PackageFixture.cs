@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Web;
-using BadBehavior.Config;
+using BadBehavior.Configuration;
 using Moq;
 using NUnit.Framework;
 

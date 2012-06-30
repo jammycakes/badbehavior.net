@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
-using BadBehavior.Config;
+using BadBehavior.Configuration;
 using NUnit.Framework;
 
 namespace BadBehavior.Tests.Config
