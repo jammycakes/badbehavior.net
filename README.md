@@ -82,7 +82,9 @@ Before contributing a pull request, please note the following code conventions:
  4. An exception means that your method can not do what its name says that it
     does. Absence of an exception means that your method has done what its
     name says that it does. Do not deviate from these conventions.
- 5. Every check-in should:
+ 5. Terminology should normally match that in the original PHP Bad Behavior
+    reference implementation. Exceptions should be noted in porting.txt.
+ 6. Every check-in should:
 
     1. make only one change
     2. have a commit summary that accurately describes that change
