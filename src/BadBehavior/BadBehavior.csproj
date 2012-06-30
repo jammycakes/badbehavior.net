@@ -54,6 +54,7 @@
     <Compile Include="Configuration\BadBehaviorConfigurationSection.cs" />
     <Compile Include="Configuration\ValueCollection.cs" />
     <Compile Include="Configuration\ValueElement.cs" />
+    <Compile Include="Configuration\WhiteListElement.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="HeadersMixedComparer.cs" />
     <Compile Include="IBBEngine.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BadBehavior
 {
@@ -38,7 +39,7 @@ namespace BadBehavior
         ///  These can be specified as a list of CIDR netblocks.
         /// </summary>
 
-        System.Collections.Generic.IList<string> ReverseProxyAddresses { get; }
+        IList<string> ReverseProxyAddresses { get; }
 
         /// <summary>
         ///  The HTTP header which gives the reverse proxy indirections.
@@ -47,5 +48,23 @@ namespace BadBehavior
         /// </summary>
 
         string ReverseProxyHeader { get; }
+
+        /// <summary>
+        ///  The IP address ranges, in CIDR format, to be whitelisted
+        /// </summary>
+
+        IList<string> WhitelistIPRanges { get; }
+
+        /// <summary>
+        ///  User agent substrings to be whitelisted
+        /// </summary>
+
+        IList<string> WhitelistUserAgents { get; }
+
+        /// <summary>
+        ///  URLs on our site to be whitelisted
+        /// </summary>
+
+        IList<string> WhitelistUrls { get; }
     }
 }

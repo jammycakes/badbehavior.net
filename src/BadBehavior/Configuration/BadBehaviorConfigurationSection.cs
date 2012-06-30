@@ -61,5 +61,42 @@ namespace BadBehavior.Configuration
             get { return (string)this["reverseProxyHeader"]; }
             set { this["reverseProxyHeader"] = value; }
         }
+
+        [ConfigurationProperty("whitelist")]
+        public WhiteListElement WhiteList
+        {
+            get { return (WhiteListElement)this["whitelist"]; }
+            set { this["whitelist"] = value; }
+        }
+
+        IList<string> IConfiguration.WhitelistIPRanges
+        {
+            get {
+                return
+                    this.WhiteList.IPRanges.OfType<ValueElement>()
+                        .Select(x => x.Value).ToList();
+
+            }
+        }
+
+        IList<string> IConfiguration.WhitelistUserAgents
+        {
+            get
+            {
+                return
+                    this.WhiteList.UserAgents.OfType<ValueElement>()
+                        .Select(x => x.Value).ToList();
+            }
+        }
+
+        IList<string> IConfiguration.WhitelistUrls
+        {
+            get
+            {
+                return
+                    this.WhiteList.Urls.OfType<ValueElement>()
+                        .Select(x => x.Value).ToList();
+            }
+        }
     }
 }

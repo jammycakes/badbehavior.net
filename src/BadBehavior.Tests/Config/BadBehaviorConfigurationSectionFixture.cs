@@ -37,5 +37,19 @@ namespace BadBehavior.Tests.Config
             var addresses = config.ReverseProxyAddresses;
             CollectionAssert.AreEqual(new string[] { "test.one", "test.two" }, addresses);
         }
+
+        [Test]
+        public void CanLoadWhiteListIPRanges()
+        {
+            var ipRanges = config.WhitelistIPRanges;
+            CollectionAssert.AreEqual(new string[] { "10.0.0.0/8" }, ipRanges);
+        }
+
+        [Test]
+        public void CanLoadWhiteListUrls()
+        {
+            var urls = config.WhitelistUrls;
+            CollectionAssert.IsEmpty(urls);
+        }
     }
 }
