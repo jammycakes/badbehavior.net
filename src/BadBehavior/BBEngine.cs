@@ -130,10 +130,11 @@ namespace BadBehavior
 
         private void Raise(Package package, Error error, bool strict)
         {
+            bool thrown = this.Settings.Strict || !strict;
             var ex = new BadBehaviorException(package, error);
-            Logger.Log(new LogEntry(ex));
+            Logger.Log(new LogEntry(ex, thrown));
             var args = new BadBehaviorEventArgs(package, error);
-            if (this.Settings.Strict || !strict) {
+            if (thrown) {
                 OnBadBehavior(args);
                 throw ex;
             }

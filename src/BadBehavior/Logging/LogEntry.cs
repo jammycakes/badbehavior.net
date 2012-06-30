@@ -29,7 +29,7 @@ namespace BadBehavior.Logging
         public LogEntry()
         { }
 
-        public LogEntry(BadBehaviorException ex)
+        public LogEntry(BadBehaviorException ex, bool thrown)
         {
             this.IP = ex.Package.OriginatingIP;
             this.Date = DateTime.UtcNow;
@@ -40,7 +40,7 @@ namespace BadBehavior.Logging
             this.HttpHeaders = PackageDict(ex.Package.Request.Headers);
             this.UserAgent = ex.Package.Request.UserAgent;
             this.RequestEntity = PackageDict(ex.Package.Request.Form);
-            this.Key = ex.Error.Code;
+            this.Key = thrown ? ex.Error.Code : "00000000";
         }
 
         private string PackageDict(System.Collections.Specialized.NameValueCollection dict)
