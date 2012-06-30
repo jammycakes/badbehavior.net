@@ -1,4 +1,6 @@
 ﻿using System;
+using BadBehavior.Logging;
+
 namespace BadBehavior
 {
     public interface IBBEngine
@@ -9,5 +11,6 @@ namespace BadBehavior
         void Raise(IRule validation, Package package, Error error);
         void ValidateRequest(System.Web.HttpRequestBase request);
         ISettings Settings { get; }
+        ILogWriter Logger { get; set; }
     }
 }
