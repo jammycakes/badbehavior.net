@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -33,6 +34,30 @@ namespace BadBehavior.Logging.SqlServer
                 cmd.Parameters.Add(param);
             }
             return cmd;
+        }
+
+        protected SqlCommand GetCommandFromText(SqlConnection cn, string text)
+        {
+            var cmd = cn.CreateCommand();
+            cmd.CommandText = text;
+            cmd.CommandType = CommandType.Text;
+            return cmd;
+        }
+
+        private string GetScript(string scriptName)
+        {
+            var resourceName = this.GetType().Namespace + "." + scriptName;
+            string script;
+            using (var stream = this.GetType().Assembly.GetManifestResourceStream(resourceName))
+            using (var reader = new StreamReader(stream)) {
+                script = reader.ReadToEnd();
+            }
+            return script;
+        }
+
+        protected SqlCommand GetCommandFromScript(SqlConnection cn, string scriptName)
+        {
+            return GetCommandFromText(cn, GetScript(scriptName));
         }
     }
 }
