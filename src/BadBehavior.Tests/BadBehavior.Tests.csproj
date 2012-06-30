@@ -40,6 +40,7 @@
       <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -53,6 +54,7 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="BBEngineFixture.cs" />
+    <Compile Include="Config\BadBehaviorConfigurationSectionFixture.cs" />
     <Compile Include="FunctionsFixture.cs" />
     <Compile Include="PackageFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,9 +69,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="BadBehavior.Tests.nunit">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="BadBehavior.Tests.config" />
+    <None Include="BadBehavior.Tests.nunit" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
