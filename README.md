@@ -71,6 +71,12 @@ this is available from the Bad Behavior SVN repository at:
 
  * http://plugins.svn.wordpress.org/bad-behavior/
 
+Pull requests will be accepted either via Git (on Github) or Mercurial
+(on Bitbucket). The respective URLs are:
+
+ * https://github.com/jammycakes/badbehavior.net
+ * https://bitbucket.org/jammycakes/badbehavior.net
+
 Before contributing a pull request, please note the following code conventions:
 
  1. We use four spaces for indentation, not tabs. Pull requests that mix tabs
@@ -84,7 +90,10 @@ Before contributing a pull request, please note the following code conventions:
     name says that it does. Do not deviate from these conventions.
  5. Terminology should normally match that in the original PHP Bad Behavior
     reference implementation. Exceptions should be noted in porting.txt.
- 6. Every check-in should:
+ 6. Git users: STRICTLY no octopus merges.
+ 7. Mercurial users: STRICTLY no named branches. Commit only to default.
+ 8. Changes to .gitignore must be reflected in .hgignore and vice versa.
+ 9. Every check-in should:
 
     1. make only one change
     2. have a commit summary that accurately describes that change
