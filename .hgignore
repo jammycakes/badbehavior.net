@@ -1,0 +1,10 @@
+syntax: glob
+src/**/bin
+src/**/obj
+src/*.suo
+src/**/*.user
+**/TestResult.xml
+**/*~
+TestResult.xml
+*~
+output
