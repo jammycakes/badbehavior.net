@@ -1,4 +1,24 @@
+TODO
+----
+
+For Release 0.1 (alpha):
+1.  Update readme with build instructions re database tests
+2.  SQL logger: Purge log entries after 7 days
+3.  Create basic website.
+
+For Release 0.2 (beta):
+4.  Implement blackhole.inc.php
+5.  Implement log reader for SQL Server
+6.  Implement log viewer page
+7.  Ensure log viewer page is secure
+
+For Release 1.0 (stable):
+8.  Comprehensive unit tests for all rules
+9.  Document final API
+
+
 Porting progress from PHP:
+--------------------------
 
 Root folder (platform specific):
 
@@ -64,7 +84,7 @@ Other:
         bb2_screen
 
     functions.inc.php
-        is_ipv6
+        is_ipv6             n/a
         stripos             n/a
         str_split           n/a
         uc_all
@@ -80,8 +100,8 @@ Other:
 
     screener.inc.php
         bb2_screener_cookie     (3)
-        bb2_screener_javascript
-        bb2_screener
+        bb2_screener_javascript (3)
+        bb2_screener            (3)
 
 Notes
 -----
@@ -92,4 +112,7 @@ Notes
 (3) BB2 screener cookie checks are not implemented. They are all commented out
     in BB2 original, noting that there are too many ways for them to give false
     positives. The only exception here is that it blocks postbacks with a delay
-    of more than 48 hours. This one isn't worth implementing.
+    of more than 48 hours. This one isn't worth implementing. It should be
+    noted that this also means we don't need to implement the JavaScript
+    screener either.
+
