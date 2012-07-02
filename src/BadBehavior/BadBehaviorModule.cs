@@ -17,7 +17,16 @@ namespace BadBehavior
         public void Init(HttpApplication context)
         {
             context.BeginRequest += (sender, e) => {
-                BBEngine.Instance.ValidateRequest(new HttpRequestWrapper(context.Request));
+                var sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
+                try {
+                    BBEngine.Instance.ValidateRequest(new HttpRequestWrapper(context.Request));
+                }
+                finally {
+                    sw.Stop();
+                    context.Context.Trace.Write
+                        ("BadBehavior", "Analysis completed in: " + sw.Elapsed.TotalMilliseconds + " milliseconds");
+                }
             };
 
             context.Error += (sender, e) => {
