@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using BadBehavior;
+using BadBehavior.Logging.SqlServer;
 
 namespace Website
 {
@@ -35,6 +38,8 @@ namespace Website
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+            BBEngine.Instance.Logger = new SqlServerLogger
+                (ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString);
         }
     }
 }
