@@ -1,9 +1,59 @@
+@width: 900px;
+@margin: 15px;
+
 body
 {
     font-size: .85em;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
     color: #232323;
-    background-color: #fff;
+    background-color: #9cf;
+    margin: 0px;
+
+    > header, > footer {
+        background-color: #808080;
+        color: white;
+        padding : @margin;
+
+        a, a:visited {
+            color: white;
+        }
+
+        h1, p { 
+            margin: 0 auto;
+            width: @width;
+        }
+    }
+
+    > section {
+        width: @width - 2* @margin;
+        background-color: white;
+        margin: 0 auto;
+        padding: @margin;
+
+        h2 {
+            margin: 0;
+        }
+    }
+}
+
+nav {
+    width: @width;
+    border-radius: 10px 10px 0 0;
+    background-color: black;
+    color: white;
+    margin: -10px auto 0 auto;
+    display: block;
+    overflow: hidden;
+
+    menu {
+        float: left;
+        margin: 0px;
+        padding: 10px;
+
+        a, a:visited {
+            color: white;
+        }
+    }
 }
 
 header,
