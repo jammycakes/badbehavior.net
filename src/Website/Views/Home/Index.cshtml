@@ -22,8 +22,40 @@
 
 </section>
 
-<section id="contributing">
+<section id="about">
 
-    <p></p>
+    <p>
+        Bad Behavior .NET is designed to integrate into your ASP.NET website,
+        blog, wiki or content management system, running right at the start of
+        the HTTP request lifecycle to throw out spam bots before they have the
+        opportunity to vandalize your site with their junk, or even to scrape
+        your pages for e-mail addresses and forms to fill out.
+    </p>
 
+    <p>
+        Bad Behavior .NET works by examining the digital "fingerprint" of each
+        request -- things such as its IP address, HTTP headers, referrer,
+        user agent, protocol and so on -- to determine whether each request is
+        spammy or malicious. For example:
+    </p>
+
+    <ul>
+        <li>
+            Does the user agent claim to be Google? If so, is it coming
+            from an IP address that does not belong to Google?
+        </li>
+        <li>
+            Does the user agent claim to be Internet Explorer? If so, does it
+            do things that no version of Internet Explorer is known to do?
+        </li>
+        <li>
+            Is it using HTTP/1.0? If so, does it do HTTP/1.1 things?
+        </li>
+    </ul>
+
+    <p>
+        Bad Behavior .NET carries out these checks right at the start of the
+        ASP.NET request lifecycle, in the <code>Application_BeginRequest</code>
+        event. The checks typically take a fraction of a millisecond.
+    </p>
 </section>
