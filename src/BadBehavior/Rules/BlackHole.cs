@@ -47,7 +47,19 @@ namespace BadBehavior.Rules
         {
             foreach (string dnsbl in blackholeLists) {
                 var find = GetDnsblLookup(package.OriginatingIP, dnsbl);
-                var dns = Dns.GetHostEntry(find);
+                IPHostEntry dns;
+                try {
+                    dns = Dns.GetHostEntry(find);
+                }
+                catch (SocketException) {
+                    /*
+                     * This error means one of two things:
+                     * (a) we haven't been able to query the DNS server for some reason.
+                     * (b) the DNS server has no data.
+                     * In both cases, keep calm and carry on.
+                     */
+                    return;
+                }
                 if (dns != null && dns.AddressList != null) {
                     IPAddress[] exceptions;
                     if (blackholeExceptions.TryGetValue(dnsbl, out exceptions))
@@ -68,7 +80,14 @@ namespace BadBehavior.Rules
         {
             var test = package.Settings.HttpblKey + "." +
                 GetDnsblLookup(package.OriginatingIP, "dnsbl.httpbl.org");
-            var dns = Dns.GetHostEntry(test);
+            IPHostEntry dns;
+            try {
+                dns = Dns.GetHostEntry(test);
+            }
+            catch (SocketException) {
+                // As above. Assume not a search engine, so don't whitelist.
+                return false;
+            }
             if (dns.AddressList.Any()) {
                 var ip = dns.AddressList[0].GetAddressBytes();
                 if (ip[0] == 127
