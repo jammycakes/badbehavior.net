@@ -66,5 +66,29 @@ namespace BadBehavior
         /// </summary>
 
         IList<string> WhitelistUrls { get; }
+
+        /// <summary>
+        ///  Whether an httpbl key has been configured.
+        /// </summary>
+
+        bool Httpbl { get; }
+
+        /// <summary>
+        ///  The httpbl key.
+        /// </summary>
+
+        string HttpblKey { get; }
+
+        /// <summary>
+        ///  The httpbl threat level required to trap spam.
+        /// </summary>
+
+        int HttpblThreatLevel { get; }
+
+        /// <summary>
+        ///  The httpbl maximum age, in days.
+        /// </summary>
+
+        int HttpblMaxAge { get; }
     }
 }

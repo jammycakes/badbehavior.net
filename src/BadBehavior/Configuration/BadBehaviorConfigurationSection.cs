@@ -54,7 +54,6 @@ namespace BadBehavior.Configuration
             }
         }
 
-
         [ConfigurationProperty("reverseProxyHeader", DefaultValue = DefaultReverseProxyHeader, IsRequired = false)]
         public string ReverseProxyHeader
         {
@@ -69,13 +68,19 @@ namespace BadBehavior.Configuration
             set { this["whitelist"] = value; }
         }
 
+        [ConfigurationProperty("httpbl")]
+        public HttpblElement Httpbl
+        {
+            get { return (HttpblElement)this["httpbl"]; }
+            set { this["httpbl"] = value; }
+        }
+
         IList<string> ISettings.WhitelistIPRanges
         {
             get {
                 return
                     this.WhiteList.IPRanges.OfType<ValueElement>()
                         .Select(x => x.Value).ToList();
-
             }
         }
 
@@ -96,6 +101,39 @@ namespace BadBehavior.Configuration
                 return
                     this.WhiteList.Urls.OfType<ValueElement>()
                         .Select(x => x.Value).ToList();
+            }
+        }
+
+        bool ISettings.Httpbl
+        {
+            get
+            {
+                return this.Httpbl != null && !String.IsNullOrEmpty(this.Httpbl.Key);
+            }
+        }
+
+        string ISettings.HttpblKey
+        {
+            get
+            {
+                return Httpbl.Key;
+            }
+        }
+
+
+        int ISettings.HttpblThreatLevel
+        {
+            get
+            {
+                return Httpbl.ThreatLevel;
+            }
+        }
+
+        int ISettings.HttpblMaxAge
+        {
+            get
+            {
+                return Httpbl.MaxAge;
             }
         }
     }

@@ -52,6 +52,7 @@
     <Compile Include="BadBehaviorModule.cs" />
     <Compile Include="BBEngine.cs" />
     <Compile Include="Configuration\BadBehaviorConfigurationSection.cs" />
+    <Compile Include="Configuration\HttpblElement.cs" />
     <Compile Include="Configuration\ValueCollection.cs" />
     <Compile Include="Configuration\ValueElement.cs" />
     <Compile Include="Configuration\WhiteListElement.cs" />
