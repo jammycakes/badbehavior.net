@@ -8,3 +8,4 @@ src/**/*.user
 TestResult.xml
 *~
 output
+src/**/*.VisualState.xml
