@@ -37,6 +37,13 @@ namespace BadBehavior.Rules
             if (package.OriginatingIP.AddressFamily != AddressFamily.InterNetwork)
                 return RuleProcessing.Continue;
 
+            ValidateDnsBlackHole(package);
+
+            return RuleProcessing.Continue;
+        }
+
+        private void ValidateDnsBlackHole(Package package)
+        {
             foreach (string dnsbl in blackholeLists) {
                 var find = GetDnsblLookup(package.OriginatingIP, dnsbl);
                 var dns = Dns.GetHostEntry(find);
@@ -48,8 +55,6 @@ namespace BadBehavior.Rules
                         AssertNotListed(package, dns.AddressList);
                 }
             }
-
-            return RuleProcessing.Continue;
         }
 
         private void AssertNotListed(Package package, IEnumerable<IPAddress> addresses)
