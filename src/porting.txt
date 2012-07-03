@@ -33,8 +33,8 @@ Root folder (platform specific):
 Tests:
 
     blackhole.inc.php
-        bb2_blackhole
-        bb2_httpbl
+        bb2_blackhole       Rules.BlackHole.ValidateDnsBlackHole
+        bb2_httpbl          Rules.BlackHole.ValidateHttpbl
 
     blacklist.inc.php
         bb2_blacklist       Rules.BlackList
