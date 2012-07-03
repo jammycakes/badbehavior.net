@@ -7,6 +7,11 @@ namespace BadBehavior.Rules
 {
     internal static class Errors
     {
+        public static readonly Error BlacklistedIP = new Error(
+            "136673cd", 403, Explanations.BlacklistedIP,
+            "IP address found on external blacklist"
+        );
+
         public static readonly Error AcceptMissing = new Error(
             "17566707", 403, Explanations.InvalidBrowserRequest,
             "Required header 'Accept' missing"

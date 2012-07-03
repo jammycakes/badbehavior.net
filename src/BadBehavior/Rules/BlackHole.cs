@@ -17,10 +17,12 @@ namespace BadBehavior.Rules
             // "dnsbl.ioerror.us",     // Bad Behavior Blackhole
         };
 
-        private static readonly Dictionary<string, string> blackholeExceptions
-            = new Dictionary<string, string>() {
-            { "sbl-xbl.spamhaus.org", "127.0.0.4" },    // CBL is problematic
-            { "dnsbl.sorbs.net", "127.0.0.10" }         // Dynamic IPs only
+        private static readonly Dictionary<string, IPAddress[]> blackholeExceptions
+            = new Dictionary<string, IPAddress[]>() {
+            { "sbl-xbl.spamhaus.org", new IPAddress[] {
+                IPAddress.Parse("127.0.0.4") } },    // CBL is problematic
+            { "dnsbl.sorbs.net", new IPAddress[] {
+                IPAddress.Parse("127.0.0.10") } }         // Dynamic IPs only
         };
 
         public string GetDnsblLookup(IPAddress ip, string dnsbl)
@@ -35,9 +37,25 @@ namespace BadBehavior.Rules
             if (package.OriginatingIP.AddressFamily != AddressFamily.InterNetwork)
                 return RuleProcessing.Continue;
 
-
+            foreach (string dnsbl in blackholeLists) {
+                var find = GetDnsblLookup(package.OriginatingIP, dnsbl);
+                var dns = Dns.GetHostEntry(find);
+                if (dns != null && dns.AddressList != null) {
+                    IPAddress[] exceptions;
+                    if (blackholeExceptions.TryGetValue(dnsbl, out exceptions))
+                        AssertNotListed(package, dns.AddressList.Except(exceptions));
+                    else
+                        AssertNotListed(package, dns.AddressList);
+                }
+            }
 
             return RuleProcessing.Continue;
+        }
+
+        private void AssertNotListed(Package package, IEnumerable<IPAddress> addresses)
+        {
+            if (addresses.Any())
+                package.Raise(Errors.BlacklistedIP);
         }
     }
 }

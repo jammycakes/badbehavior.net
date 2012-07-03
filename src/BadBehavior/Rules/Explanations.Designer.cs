@@ -61,6 +61,15 @@ namespace BadBehavior.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Internet Protocol address is listed on a blacklist of addresses involved in malicious or illegal activity. See the listing below for more details on specific blacklists and removal procedures..
+        /// </summary>
+        internal static string BlacklistedIP {
+            get {
+                return ResourceManager.GetString("BlacklistedIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expectation failed. Please retry your request..
         /// </summary>
         internal static string ExpectationFailed {

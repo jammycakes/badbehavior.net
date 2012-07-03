@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BlacklistedIP" xml:space="preserve">
+    <value>Your Internet Protocol address is listed on a blacklist of addresses involved in malicious or illegal activity. See the listing below for more details on specific blacklists and removal procedures.</value>
+  </data>
   <data name="ExpectationFailed" xml:space="preserve">
     <value>Expectation failed. Please retry your request.</value>
   </data>
