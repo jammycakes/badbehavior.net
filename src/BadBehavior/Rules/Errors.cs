@@ -22,6 +22,11 @@ namespace BadBehavior.Rules
             "User-Agent was found on blacklist"
         );
 
+        public static readonly Error Httpbl = new Error(
+            "2b021b1f", 403, Explanations.PossibleVirus,
+            "IP address found on http:BL blacklist"
+        );
+
         public static readonly Error InvalidMSIEWithTE = new Error(
             "2b90f772", 403, Explanations.InvalidMSIEWithTE,
             "Connection: TE present, not supported by MSIE"

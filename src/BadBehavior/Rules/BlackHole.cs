@@ -34,10 +34,11 @@ namespace BadBehavior.Rules
 
         public RuleProcessing Validate(Package package)
         {
-            if (package.OriginatingIP.AddressFamily != AddressFamily.InterNetwork)
-                return RuleProcessing.Continue;
-
-            ValidateDnsBlackHole(package);
+            if (package.OriginatingIP.AddressFamily == AddressFamily.InterNetwork) {
+                ValidateDnsBlackHole(package);
+                if (package.Settings.Httpbl)
+                    if (ValidateHttpbl(package)) return RuleProcessing.Stop; // whitelisted
+            }
 
             return RuleProcessing.Continue;
         }
@@ -61,6 +62,24 @@ namespace BadBehavior.Rules
         {
             if (addresses.Any())
                 package.Raise(Errors.BlacklistedIP);
+        }
+
+        private bool ValidateHttpbl(Package package)
+        {
+            var test = package.Settings.HttpblKey + "." +
+                GetDnsblLookup(package.OriginatingIP, "dnsbl.httpbl.org");
+            var dns = Dns.GetHostEntry(test);
+            if (dns.AddressList.Any()) {
+                var ip = dns.AddressList[0].GetAddressBytes();
+                if (ip[0] == 127
+                    && (ip[3] & 7) != 0
+                    && (int)ip[2] >= package.Settings.HttpblThreatLevel
+                    && (int)ip[1] <= package.Settings.HttpblMaxAge)
+                    package.Raise(Errors.Httpbl);
+                else return ip[3] == 0; // Check if search engine.
+            }
+
+            return false;
         }
     }
 }
