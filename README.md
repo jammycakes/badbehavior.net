@@ -41,21 +41,22 @@ you use Web Forms or ASP.NET MVC. It consists of a simple HTTP module that you
 can just drop into your web application and configure with a couple of lines in
 your web.config file.
 
-Installing and configuring Bad Behavior on most platforms is simple and takes
-only a few minutes. In most cases, no configuration at all is needed. Simply
-turn it on and stop worrying about spam!
+Installing and configuring Bad Behavior is simple and takes only a few minutes.
+In most cases, no configuration at all is needed. Simply turn it on and stop
+worrying about spam!
 
 The core of Bad Behavior is free software released under the GNU Lesser General
 Public License, version 3, or at your option, any later version.
 
 Status
 ------
-This project is currently in the early stages of development and is not yet
-ready for production. Some notes on its progress can be found in the
-porting.txt file in the solution.
+Bad Behavior .NET is currently in "alpha" status. All the tests from the
+original PHP version have now been ported to .NET, although more testing is
+required and no guarantees are given as to this project's stability, so use
+it at your own risk.
 
-In particular, the API should be considered unstable and liable to change
-without notice.
+The API is not yet officially stable, but only minor changes are anticipated
+between now and the 1.0 release.
 
 Building
 --------
@@ -63,6 +64,11 @@ You will need the following software installed on your computer:
 
  * The .NET framework SDK version 4.0 or later
  * Python 3.2 or later to run the build scripts
+ * A local SQL Server 2008 Express named instance called SQLEXPRESS
+   with a database called BadBehavior is needed to run the unit tests.
+   The user account running the script should be granted dbo
+   privileges to this database to create the tables and stored
+   procedures.
 
 Contributing
 ------------
