@@ -48,7 +48,6 @@ namespace BadBehavior.Tests
             }
             catch (BadBehaviorException ex) {
                 var content = BBEngine.GetResponseContent(ex);
-                Console.WriteLine(content);
                 Assert.IsFalse(content.Contains("{{email?}}"), "Email only block was not removed.");
                 return;
             }
