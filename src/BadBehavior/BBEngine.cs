@@ -87,7 +87,7 @@ namespace BadBehavior
                      * The only exception here is BadBehaviorException, which of course
                      * indicates bad behaviour. Log the rest to System.Diagnostics.Trace.
                      */
-                    if (ex is BadBehaviorException)
+                    if (ex is BadBehaviorException || this.Settings.Debug)
                         throw;
                     else
                         Trace.TraceWarning(
@@ -168,7 +168,7 @@ namespace BadBehavior
                  * 
                  * So, Pokémon it and log it to System.Diagnostics.Trace.
                  */
-                if (loggingException is BadBehaviorException)
+                if (loggingException is BadBehaviorException || this.Settings.Debug)
                     throw;
                 else
                     Trace.TraceWarning(

@@ -75,6 +75,13 @@ namespace BadBehavior.Configuration
             set { this["httpbl"] = value; }
         }
 
+        [ConfigurationProperty("debug", IsRequired = false, DefaultValue = false)]
+        public bool Debug
+        {
+            get { return (bool)this["debug"]; }
+            set { this["debug"] = value; }
+        }
+
         IList<string> ISettings.WhitelistIPRanges
         {
             get {

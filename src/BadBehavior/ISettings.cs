@@ -10,6 +10,15 @@ namespace BadBehavior
     public interface ISettings
     {
         /// <summary>
+        ///  Indicates that Bad Behavior will run in Debug mode.
+        ///  When this is set, non-Bad Behavior exceptions encountered when
+        ///  validating or logging will be thrown, rather than just being
+        ///  logged to System.Diagnostics.Trace.
+        /// </summary>
+
+        bool Debug { get; }
+
+        /// <summary>
         ///  Indicates that we allow postbacks from other sites.
         ///  Otherwise we'll enforce a same domain policy.
         /// </summary>
