@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
+    <configSections>
+        <section name="badBehavior" type="BadBehavior.Configuration.BadBehaviorConfigurationSection, BadBehavior" />
+    </configSections>
     <system.web>
         <httpModules>
             <add name="BadBehaviorHttpModule" type="BadBehavior.BadBehaviorModule, BadBehavior" />
@@ -10,4 +13,60 @@
             <add name="BadBehaviorHttpModule" type="BadBehavior.BadBehaviorModule, BadBehavior" />
         </modules>
     </system.webServer>
+    <badBehavior offsiteForms="false"
+                 strict="false"
+                 supportEmail="your-email@example.com"
+                 reverseProxy="false"
+                 reverseProxyHeader="X-Forwarded-For"
+                 debug="false">
+        <!--
+            Settings for the Project Honeypot HTTP:BL server.
+        -->
+        <httpbl key="" threatLevel="25" maxAge="30" />
+        <reverseProxyAddresses>
+            <!--
+            <add value="127.0.0.0/8" />
+            -->
+        </reverseProxyAddresses>
+        <whitelist>
+            <!--
+                Inappropriate whitelisting WILL expose you to spam, or cause Bad Behavior
+                to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN
+                that you should.
+            -->
+            <ipRanges>
+                <!-- IP ranges are matched by CIDR -->
+                <!-- Digg -->
+                <!--
+                <add value="64.191.203.0/24" />
+                <add value="208.67.217.130" />
+                -->
+                <!-- RFC 1918 addresses -->
+                <!--
+                <add value="10.0.0.0/8" />
+                <add value="172.16.0.0/12" />
+                <add value="192.168.0.0/16" />
+                -->
+            </ipRanges>
+            <userAgents>
+                <!-- User agents are matched by exact match  only -->
+                <!--
+                <add value="Mozilla/4.0 (It's me, let me in)" />
+                -->
+            </userAgents>
+            <urls>
+                <!--
+                    URLs are matched from the first / after the server name up to, but not
+                    including, the ? (if any). The URL to be whitelisted is a URL on YOUR site.
+                    A partial URL match is permitted, so URL whitelist entries should be as
+                    specific as possible, but no more specific than necessary. For instance,
+                    "/example" would match "/example.php" and "/example/address".
+                -->
+                <!--
+                <add value="/example.aspx" />
+                <add value="/openid/server" />
+                -->
+            </urls>
+        </whitelist>
+    </badBehavior>
 </configuration>
