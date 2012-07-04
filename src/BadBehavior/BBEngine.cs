@@ -91,7 +91,7 @@ namespace BadBehavior
                         throw;
                     else
                         Trace.TraceWarning(
-                            "An error was encountered when attempting to validate this request."
+                            "An error was encountered when attempting to validate this request. "
                             + "Exception details: " + ex.ToString()
                         );
                 }
@@ -151,10 +151,32 @@ namespace BadBehavior
         {
             bool thrown = this.Settings.Strict || !strict;
             var ex = new BadBehaviorException(package, error);
-            Logger.Log(new LogEntry(ex, thrown));
-            var args = new BadBehaviorEventArgs(package, error);
-            if (thrown) {
+            try {
+                Logger.Log(new LogEntry(ex, thrown));
+                var args = new BadBehaviorEventArgs(package, error);
                 OnBadBehavior(args);
+            }
+            catch (Exception loggingException) {
+                /*
+                 * An exception when logging or running the event handler needs to
+                 * be trapped here, for two reasons. First, logging must not bring
+                 * anything to a halt under any circumstances. Second, if we throw
+                 * an "uninteresting" (ie non-BB) exception here, it will be
+                 * swallowed higher up the call stack in ValidateRequest above,
+                 * and the request will be given the all clear when it should have
+                 * been rejected.
+                 * 
+                 * So, Pokémon it and log it to System.Diagnostics.Trace.
+                 */
+                if (loggingException is BadBehaviorException)
+                    throw;
+                else
+                    Trace.TraceWarning(
+                        "An error was encountered when attempting to validate this request. "
+                        + "Exception details: " + loggingException.ToString()
+                    );
+            }
+            if (thrown) {
                 throw ex;
             }
         }
