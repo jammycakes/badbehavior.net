@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -75,9 +76,25 @@ namespace BadBehavior
         public void ValidateRequest(HttpRequestBase request)
         {
             var package = new Package(request, this);
-
             foreach (var rule in this.Rules) {
-                if (rule.Validate(package) == RuleProcessing.Stop) return;
+                try {
+                    if (rule.Validate(package) == RuleProcessing.Stop) return;
+                }
+                catch (Exception ex) {
+                    /*
+                     * An exception in one rule must not bring down the site, or even
+                     * stop other rules from running, no matter what the problem is.
+                     * The only exception here is BadBehaviorException, which of course
+                     * indicates bad behaviour. Log the rest to System.Diagnostics.Trace.
+                     */
+                    if (ex is BadBehaviorException)
+                        throw;
+                    else
+                        Trace.TraceWarning(
+                            "An error was encountered when attempting to validate this request."
+                            + "Exception details: " + ex.ToString()
+                        );
+                }
             }
         }
 

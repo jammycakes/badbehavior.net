@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -51,13 +52,16 @@ namespace BadBehavior.Rules
                 try {
                     dns = Dns.GetHostEntry(find);
                 }
-                catch (SocketException) {
+                catch (SocketException ex) {
                     /*
                      * This error means one of two things:
                      * (a) we haven't been able to query the DNS server for some reason.
                      * (b) the DNS server has no data.
                      * In both cases, keep calm and carry on.
                      */
+                    if (ex.SocketErrorCode != SocketError.NoData)
+                        Trace.TraceWarning("An error was encountered when attempting to connect to "
+                            + dnsbl + ". Exception details: " + ex.ToString());
                     return;
                 }
                 if (dns != null && dns.AddressList != null) {
@@ -84,8 +88,11 @@ namespace BadBehavior.Rules
             try {
                 dns = Dns.GetHostEntry(test);
             }
-            catch (SocketException) {
+            catch (SocketException ex) {
                 // As above. Assume not a search engine, so don't whitelist.
+                if (ex.SocketErrorCode != SocketError.NoData)
+                    Trace.TraceWarning("An error was encountered when attempting to connect to dnsbl.httbl.org. "
+                        + "Exception details: " + ex.ToString());
                 return false;
             }
             if (dns.AddressList.Any()) {
