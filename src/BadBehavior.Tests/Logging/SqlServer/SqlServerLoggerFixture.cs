@@ -22,6 +22,8 @@ namespace BadBehavior.Tests.Logging.SqlServer
             string cs = ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString;
             reader = new SqlServerLogReader(cs);
             writer = new SqlServerLogger(cs);
+            // Force an entry into the log.
+            CanLogError();
         }
 
         [Test]
@@ -43,17 +45,24 @@ namespace BadBehavior.Tests.Logging.SqlServer
         [Test]
         public void CanCount()
         {
-            // Force an entry into the log.
-            CanLogError();
             Assert.Greater(reader.Count(), 0);
         }
 
         [Test]
         public void CanReadAll()
         {
-            // Force an entry into the log.
-            CanLogError();
             foreach (var entry in reader.ReadAll()) {
+                Assert.IsNotNull(entry);
+            }
+        }
+
+        [Test]
+        public void CanReadByDate()
+        {
+            var entries = reader.Read(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1));
+            CollectionAssert.IsNotEmpty(entries);
+
+            foreach (var entry in entries) {
                 Assert.IsNotNull(entry);
             }
         }
