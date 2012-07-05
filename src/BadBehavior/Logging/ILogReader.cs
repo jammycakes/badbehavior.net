@@ -40,7 +40,7 @@ namespace BadBehavior.Logging
         /// </summary>
         /// <returns></returns>
 
-        IEnumerable<LogEntry> Count();
+        long Count();
 
         /// <summary>
         ///  Returns the number of entries in the log on a specific date range.
@@ -49,6 +49,6 @@ namespace BadBehavior.Logging
         /// <param name="end"></param>
         /// <returns></returns>
 
-        IEnumerable<LogEntry> Count(DateTime start, DateTime end);
+        long Count(DateTime start, DateTime end);
     }
 }
