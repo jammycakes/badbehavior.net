@@ -11,6 +11,10 @@
 )
 as
 begin
+
+    delete from BadBehavior_Log
+        where @Date < dateadd(dd, -7, getdate())
+
     insert into BadBehavior_Log(
         IP,
         [Date],
