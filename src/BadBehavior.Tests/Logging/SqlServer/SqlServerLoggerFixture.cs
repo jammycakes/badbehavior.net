@@ -13,13 +13,22 @@ namespace BadBehavior.Tests.Logging.SqlServer
     [TestFixture]
     public class SqlServerLoggerFixture
     {
+        private ILogReader reader;
+        private ILogWriter writer;
+
+        [TestFixtureSetUp]
+        public void Init()
+        {
+            string cs = ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString;
+            reader = new SqlServerLogReader(cs);
+            writer = new SqlServerLogger(cs);
+        }
+
         [Test]
         public void CanLogError()
         {
-            var writer = new SqlServerLogger
-                (ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString);
             writer.Log(new LogEntry() {
-                Date = DateTime.Parse("2012-07-01 00:00:00"),
+                Date = DateTime.Now,
                 HttpHeaders = null,
                 IP = IPAddress.Parse("::1"),
                 Key = "00000000",
@@ -29,6 +38,14 @@ namespace BadBehavior.Tests.Logging.SqlServer
                 ServerProtocol = "HTTP/1.1",
                 UserAgent = "Mozilla/1.0"
             });
+        }
+
+        [Test]
+        public void CanCount()
+        {
+            // Force an entry into the log.
+            CanLogError();
+            Assert.Greater(reader.Count(), 0);
         }
     }
 }

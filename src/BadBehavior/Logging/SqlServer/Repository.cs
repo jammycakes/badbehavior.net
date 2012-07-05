@@ -60,5 +60,11 @@ namespace BadBehavior.Logging.SqlServer
         {
             return GetCommandFromText(cn, GetScript(scriptName));
         }
+
+        protected T ExecuteScalar<T>(SqlCommand command)
+        {
+            var result = command.ExecuteScalar();
+            return (result is T) ? (T)result : default(T);
+        }
     }
 }
