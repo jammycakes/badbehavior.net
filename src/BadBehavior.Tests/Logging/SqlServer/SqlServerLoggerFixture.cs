@@ -23,11 +23,10 @@ namespace BadBehavior.Tests.Logging.SqlServer
             reader = new SqlServerLogReader(cs);
             writer = new SqlServerLogger(cs);
             // Force an entry into the log.
-            CanLogError();
         }
 
-        [Test]
-        public void CanLogError()
+        [SetUp]
+        public void BeforeTest()
         {
             writer.Log(new LogEntry() {
                 Date = DateTime.Now,
@@ -41,6 +40,13 @@ namespace BadBehavior.Tests.Logging.SqlServer
                 UserAgent = "Mozilla/1.0"
             });
         }
+
+        [TearDown]
+        public void AfterTest()
+        {
+            writer.Clear();
+        }
+
 
         [Test]
         public void CanCount()
@@ -65,6 +71,14 @@ namespace BadBehavior.Tests.Logging.SqlServer
             foreach (var entry in entries) {
                 Assert.IsNotNull(entry);
             }
+        }
+
+        [Test]
+        public void CanClearLog()
+        {
+            writer.Clear();
+            var count = reader.Count();
+            Assert.AreEqual(0, count);
         }
     }
 }

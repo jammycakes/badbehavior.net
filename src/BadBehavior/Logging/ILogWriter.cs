@@ -13,5 +13,11 @@ namespace BadBehavior.Logging
         /// <param name="entry"></param>
 
         void Log(LogEntry entry);
+
+        /// <summary>
+        ///  Clears all entries from the logs.
+        /// </summary>
+
+        void Clear();
     }
 }

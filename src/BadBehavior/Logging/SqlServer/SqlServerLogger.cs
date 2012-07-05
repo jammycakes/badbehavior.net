@@ -42,5 +42,13 @@ namespace BadBehavior.Logging.SqlServer
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void Clear()
+        {
+            Init();
+            using (var cn = Connect())
+            using (var cmd = GetCommand(cn, "ClearLog"))
+                cmd.ExecuteNonQuery();
+        }
     }
 }

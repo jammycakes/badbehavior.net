@@ -10,5 +10,9 @@ namespace BadBehavior.Logging
         public void Log(LogEntry entry)
         {
         }
+
+        public void Clear()
+        {
+        }
     }
 }
