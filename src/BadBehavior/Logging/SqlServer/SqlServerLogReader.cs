@@ -15,18 +15,34 @@ namespace BadBehavior.Logging.SqlServer
 
         public IEnumerable<LogEntry> Read(int skip, int take)
         {
-            throw new NotImplementedException();
+            // TODO: this could be implemented more efficiently in SQL.
+            return ReadAll().Skip(skip).Take(take);
         }
 
         public IEnumerable<LogEntry> ReadAll()
         {
+            return Read(null, null);
+        }
+
+        public IEnumerable<LogEntry> Read(DateTime start, DateTime end)
+        {
+            return Read((DateTime?)start, (DateTime?)end);
+        }
+
+        private IEnumerable<LogEntry> Read(DateTime? start, DateTime? end)
+        {
+            var result = new List<LogEntry>();
             using (var cn = this.Connect())
-            using (var cmd = this.GetCommand(cn, "ReadAll"))
+            using (var cmd = this.GetCommand(cn, "Read",
+                new SqlParameter("@Start", start),
+                new SqlParameter("@End", end)
+            ))
             using (var reader = this.ExecuteReader(cmd)) {
                 while (reader.Read()) {
-                    yield return this.ReadEntry(reader);
+                    result.Add(this.ReadEntry(reader));
                 }
             }
+            return result;
         }
 
         private LogEntry ReadEntry(SqlDataReader reader)
@@ -42,12 +58,6 @@ namespace BadBehavior.Logging.SqlServer
                 ServerProtocol = reader["ServerProtocol"] as string,
                 UserAgent = reader["UserAgent"] as string
             };
-        }
-
-
-        public IEnumerable<LogEntry> Read(DateTime start, DateTime end)
-        {
-            throw new NotImplementedException();
         }
 
         public long Count()

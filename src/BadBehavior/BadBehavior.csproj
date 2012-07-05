@@ -109,7 +109,7 @@
     <EmbeddedResource Include="Logging\SqlServer\Sproc.Count.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Logging\SqlServer\Sproc.ReadAll.sql" />
+    <EmbeddedResource Include="Logging\SqlServer\Sproc.Read.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
