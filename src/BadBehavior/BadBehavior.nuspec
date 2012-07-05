@@ -10,9 +10,7 @@
     <projectUrl>https://github.com/jammycakes/badbehavior.net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-        Bad Behavior .NET is a .NET port of the original Bad Behavior WordPress plugin.
-        It is built as an HTTP module, so you can just drop it into any existing website
-        and enable it with a simple change to your web.config file.
+        Bad Behavior .NET is a .NET port of the original Bad Behavior WordPress plugin. It is built as an HTTP module, so you can just drop it into any existing website and enable it with a simple change to your web.config file.
     </description>
     <copyright>Copyright 2012</copyright>
     <tags>web antispam spam</tags>
