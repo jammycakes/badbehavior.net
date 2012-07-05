@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace BadBehavior.Rules
 {
-    internal static class Errors
+    public static class Errors
     {
         public static readonly Error BlacklistedIP = new Error(
             "136673cd", 403, Explanations.BlacklistedIP,
@@ -151,5 +152,25 @@ namespace BadBehavior.Rules
             "f9f2b8b9", 403, Explanations.UserAgentMissing,
             "A User-Agent is required but none was provided."
         );
+
+
+        private static IDictionary<string, Error> table
+            = new Dictionary<string, Error>(StringComparer.InvariantCultureIgnoreCase);
+
+        static Errors()
+        {
+            foreach (var field in typeof(Errors).GetFields(BindingFlags.Static | BindingFlags.Public)) {
+                Error err = field.GetValue(null) as Error;
+                if (err != null) {
+                    table.Add(err.Code, err);
+                }
+            }
+        }
+
+        public static Error Lookup(string code)
+        {
+            Error result;
+            return table.TryGetValue(code, out result) ? result : null;
+        }
     }
 }

@@ -63,6 +63,7 @@
     <Compile Include="RequestFixtureBase.cs" />
     <Compile Include="Rules\BlackHoleFixture.cs" />
     <Compile Include="Rules\BrowserFixture.cs" />
+    <Compile Include="Rules\ErrorFixture.cs" />
     <Compile Include="Rules\SearchEngineFixture.cs" />
   </ItemGroup>
   <ItemGroup>
