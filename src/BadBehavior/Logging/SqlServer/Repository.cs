@@ -66,5 +66,10 @@ namespace BadBehavior.Logging.SqlServer
             var result = command.ExecuteScalar();
             return (result is T) ? (T)result : default(T);
         }
+
+        protected SqlDataReader ExecuteReader(SqlCommand command)
+        {
+            return command.ExecuteReader();
+        }
     }
 }

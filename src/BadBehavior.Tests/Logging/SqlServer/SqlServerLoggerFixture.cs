@@ -47,5 +47,15 @@ namespace BadBehavior.Tests.Logging.SqlServer
             CanLogError();
             Assert.Greater(reader.Count(), 0);
         }
+
+        [Test]
+        public void CanReadAll()
+        {
+            // Force an entry into the log.
+            CanLogError();
+            foreach (var entry in reader.ReadAll()) {
+                Assert.IsNotNull(entry);
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace BadBehavior.Logging.SqlServer
@@ -19,8 +20,30 @@ namespace BadBehavior.Logging.SqlServer
 
         public IEnumerable<LogEntry> ReadAll()
         {
-            throw new NotImplementedException();
+            using (var cn = this.Connect())
+            using (var cmd = this.GetCommand(cn, "ReadAll"))
+            using (var reader = this.ExecuteReader(cmd)) {
+                while (reader.Read()) {
+                    yield return this.ReadEntry(reader);
+                }
+            }
         }
+
+        private LogEntry ReadEntry(SqlDataReader reader)
+        {
+            return new LogEntry() {
+                Date = (DateTime)reader["Date"],
+                HttpHeaders = reader["HttpHeaders"] as string,
+                IP = IPAddress.Parse((string)reader["IP"]),
+                Key = reader["Key"] as string,
+                RequestEntity = reader["RequestEntity"] as string,
+                RequestMethod = reader["RequestMethod"] as string,
+                RequestUri = reader["RequestUri"] as string,
+                ServerProtocol = reader["ServerProtocol"] as string,
+                UserAgent = reader["UserAgent"] as string
+            };
+        }
+
 
         public IEnumerable<LogEntry> Read(DateTime start, DateTime end)
         {
