@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="BadBehaviorEventArgs.cs" />
     <Compile Include="BadBehaviorException.cs" />
+    <Compile Include="BadBehaviorHandler.cs" />
     <Compile Include="BadBehaviorModule.cs" />
     <Compile Include="BBEngine.cs" />
     <Compile Include="Configuration\BadBehaviorConfigurationSection.cs" />
