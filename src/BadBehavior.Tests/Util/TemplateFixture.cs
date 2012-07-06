@@ -15,11 +15,11 @@ namespace BadBehavior.Tests.Util
         {
             string sTemplate = "Testing the {{template}} tags";
             var args = new Dictionary<string, string>() {
-                { "template", "Bad Behavior" }
+                { "template", "<strong>Bad Behavior</strong>" }
             };
 
             var result = new Template(sTemplate).Process(args);
-            Assert.AreEqual("Testing the Bad Behavior tags", result);
+            Assert.AreEqual("Testing the &lt;strong&gt;Bad Behavior&lt;/strong&gt; tags", result);
         }
 
         [Test]
@@ -31,6 +31,17 @@ namespace BadBehavior.Tests.Util
             Assert.AreEqual("****", tpl.Process(args));
             args.Add("template", "Bad Behavior");
             Assert.AreEqual("**Testing the Bad Behavior tags**", tpl.Process(args));
+        }
+
+        [Test]
+        public void CanProcessRawTags()
+        {
+            string sTemplate = "Testing the {{{template}}} tags";
+            var args = new Dictionary<string, string>() {
+                { "template", "<strong>Bad Behavior</strong>" }
+            };
+            var result = new Template(sTemplate).Process(args);
+            Assert.AreEqual("Testing the <strong>Bad Behavior</strong> tags", result);
         }
     }
 }

@@ -70,13 +70,24 @@ namespace BadBehavior.Util
             );
         }
 
-        private static readonly Regex reReplaceTags = new Regex(@"\{\{(.*?)\}\}");
+        private static readonly Regex reReplaceTags = new Regex(@"(\{{2,3})(.*?)(\}{2,3})");
 
         private static string ReplaceTags(string tpl, Func<string, string> getter)
         {
             return reReplaceTags.Replace(
                 tpl,
-                x => HttpUtility.HtmlEncode(getter(x.Groups[1].Value) ?? String.Empty)
+                x => {
+                    string key = x.Groups[2].Value;
+                    if (x.Groups[1].Value.Length == 3 && x.Groups[3].Value.Length == 3) {
+                        return getter(key) ?? String.Empty;
+                    }
+                    else if (x.Groups[1].Value.Length == 2 && x.Groups[3].Value.Length == 2) {
+                        return HttpUtility.HtmlEncode(getter(key) ?? String.Empty);
+                    }
+                    else {
+                        return String.Empty; // invalid tag
+                    }
+                }
             );
         }
 
