@@ -65,6 +65,7 @@
     <Compile Include="Rules\BrowserFixture.cs" />
     <Compile Include="Rules\ErrorFixture.cs" />
     <Compile Include="Rules\SearchEngineFixture.cs" />
+    <Compile Include="Util\TemplateFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BadBehavior\BadBehavior.csproj">

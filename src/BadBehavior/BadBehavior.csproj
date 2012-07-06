@@ -92,6 +92,7 @@
     <Compile Include="Rules\MiscHeaders.cs" />
     <Compile Include="Rules\Protocol.cs" />
     <Compile Include="Rules\WhiteList.cs" />
+    <Compile Include="Util\Template.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules\Explanations.resx">
