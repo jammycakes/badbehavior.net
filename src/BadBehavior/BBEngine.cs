@@ -12,6 +12,7 @@ using System.Web;
 using BadBehavior.Configuration;
 using BadBehavior.Logging;
 using BadBehavior.Rules;
+using BadBehavior.Util;
 
 namespace BadBehavior
 {
@@ -19,22 +20,11 @@ namespace BadBehavior
     {
         public static IBBEngine Instance { get; set; }
 
-        private static readonly string template;
-        private static readonly string templateNoEmail;
+        private static readonly Template template
+            = Template.FromResource("BadBehavior.response.html");
 
         static BBEngine()
         {
-            using (var stream = typeof(BadBehaviorModule).Assembly.GetManifestResourceStream
-                (typeof(BadBehaviorModule).Namespace + ".response.html"))
-            using (var reader = new StreamReader(stream)) {
-                string tpl = reader.ReadToEnd();
-                templateNoEmail =
-                    new Regex(@"\{\{email\?\}\}.*?\{\{/email\?\}\}", RegexOptions.Singleline)
-                    .Replace(tpl, String.Empty);
-                template = new Regex(@"\{\{/?email\?\}\}", RegexOptions.Singleline)
-                    .Replace(tpl, String.Empty);
-            }
-
             BBEngine.Instance = new BBEngine();
         }
 
@@ -113,21 +103,13 @@ namespace BadBehavior
         public static string GetResponseContent(BadBehaviorException ex)
         {
             string email = ex.Package.Settings.SupportEmail;
-            string tpl = email != null ? template : templateNoEmail;
             var dict = new Dictionary<string, string>();
             dict["response"] = ex.Error.HttpCode.ToString();
             dict["request_uri"] = ex.Package.Request.RawUrl;
             dict["explanation"] = ex.Error.Explanation;
             dict["support_key"] = BuildSupportKey(ex.Package.OriginatingIP, ex.Error.Code);
             if (email != null) dict["email"] = email;
-            string content = Regex.Replace(tpl, @"\{\{(.*?)\}\}", m => {
-                string key = m.Groups[1].Value;
-                if (dict.ContainsKey(key))
-                    return HttpUtility.HtmlEncode(dict[key]);
-                else
-                    return m.Value;
-            });
-            return content;
+            return template.Process(dict);
         }
 
         public static string BuildSupportKey(IPAddress ipAddress, string errorCode)
