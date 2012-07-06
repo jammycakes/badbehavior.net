@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace BadBehavior.Util
 {
@@ -32,8 +33,10 @@ namespace BadBehavior.Util
 
         private string ReplaceTags(Func<string, string> getter)
         {
-            return reReplaceTags.Replace
-                (this.Text, x => getter(x.Groups[1].Value) ?? String.Empty);
+            return reReplaceTags.Replace(
+                this.Text,
+                x => HttpUtility.HtmlEncode(getter(x.Groups[1].Value) ?? String.Empty)
+            );
         }
 
         public string Process(IDictionary<string, string> data)
