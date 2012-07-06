@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BadBehavior.Util;
+
 
 namespace BadBehavior.Rules
 {

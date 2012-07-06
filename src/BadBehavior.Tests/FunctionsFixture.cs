@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using NUnit.Framework;
+using BadBehavior.Util;
 
 namespace BadBehavior.Tests
 {

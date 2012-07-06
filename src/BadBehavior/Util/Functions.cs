@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace BadBehavior
+namespace BadBehavior.Util
 {
     public static class Functions
     {
