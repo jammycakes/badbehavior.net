@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Bad Behavior .NET</title>
+    </head>
+    <body>
+        <h1>Bad Behavior .NET</h1>
+        <form method="post">
+            <input type="submit" name="clear" value="Clear logs" />
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>IP/Date/Status</th>
+                    <th>Headers</th>
+                    <th>Entity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="paging">
+                    <td colspan="3">{{pager}}</td>
+                </tr>
+                {{rows}}
+                <tr class="paging">
+                    <td colspan="3">{{pager}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
