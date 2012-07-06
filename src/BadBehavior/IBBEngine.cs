@@ -13,5 +13,6 @@ namespace BadBehavior
         ISettings Settings { get; }
         void RaiseStrict(Package package, Error error);
         ILogWriter Logger { get; set; }
+        ILogReader LogReader { get; set; }
     }
 }

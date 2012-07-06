@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
+using BadBehavior.Util;
 
 namespace BadBehavior
 {
@@ -31,9 +33,24 @@ namespace BadBehavior
 
         #endregion
 
+        const string templatePrefix = "BadBehavior.Admin.templates.";
+        static readonly Template master = Template.FromResource(templatePrefix + "_master.html");
+
+        private string GetView(string viewName, IDictionary<string, string> parameters)
+        {
+            parameters = parameters ?? new Dictionary<string, string>();
+            var view = Template.FromResource(templatePrefix + viewName + ".html");
+            var content = view.Process(parameters);
+            return master.Process(new Dictionary<string, string> {
+                { "content", content }
+            });
+        }
+
         private string GetContent()
         {
-            return "<!doctype html><html><head><title>test</title></head><body><h1>test</h1></body></html>";
+            if (BBEngine.Instance.LogReader == null)
+                return GetView("nolog", null);
+            return GetView("log", null);
         }
     }
 }

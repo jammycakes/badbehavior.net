@@ -35,6 +35,8 @@ namespace BadBehavior
 
         public ILogWriter Logger { get; set; }
 
+        public ILogReader LogReader { get; set; }
+
 
         public BBEngine()
         {
