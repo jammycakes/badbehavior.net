@@ -117,8 +117,12 @@
     <EmbeddedResource Include="Logging\SqlServer\Sproc.ClearLog.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\log.html" />
-    <EmbeddedResource Include="Admin\row.html" />
+    <EmbeddedResource Include="Admin\templates\_master.html" />
+    <EmbeddedResource Include="Admin\templates\log.html" />
+    <EmbeddedResource Include="Admin\templates\row.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\templates\nolog.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
