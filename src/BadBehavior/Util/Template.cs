@@ -8,20 +8,50 @@ using System.Web;
 
 namespace BadBehavior.Util
 {
+    /// <summary>
+    ///  A very basic lightweight templating engine.
+    /// </summary>
+    /// <remarks>
+    ///  This templating engine offers a subset of the mustache syntax.
+    ///  It gives you {{template tags}} and {{conditionals?}} {{/conditionals?}}
+    ///  and that's about it.
+    /// </remarks>
+
     public class Template
     {
+        /// <summary>
+        ///  Gets the text of the template.
+        /// </summary>
+
         public string Text { get; private set; }
+
+        /// <summary>
+        ///  Creates a new template from the given string.
+        /// </summary>
+        /// <param name="text"></param>
 
         public Template(string text)
         {
             this.Text = text;
         }
 
+        /// <summary>
+        ///  Loads a template from a stream.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+
         public static Template FromStream(Stream input)
         {
             using (var reader = new StreamReader(input))
                 return new Template(reader.ReadToEnd());
         }
+
+        /// <summary>
+        ///  Loads a template from a resource in this assembly.
+        /// </summary>
+        /// <param name="resourceName"></param>
+        /// <returns></returns>
 
         internal static Template FromResource(string resourceName)
         {
@@ -49,6 +79,12 @@ namespace BadBehavior.Util
                 x => HttpUtility.HtmlEncode(getter(x.Groups[1].Value) ?? String.Empty)
             );
         }
+
+        /// <summary>
+        ///  Processes the template with the given data.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
 
         public string Process(IDictionary<string, string> data)
         {
