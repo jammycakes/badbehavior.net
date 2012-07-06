@@ -29,12 +29,23 @@ namespace BadBehavior.Util
                 return FromStream(stream);
         }
 
-        private readonly Regex reReplaceTags = new Regex(@"\{\{(.*?)\}\}");
+        private static readonly Regex reReplaceConditionals
+            = new Regex(@"\{\{(.*?)\?\}\}(.*?)\{\{/\1\?\}\}");
 
-        private string ReplaceTags(Func<string, string> getter)
+        private static string ReplaceConditionals(string tpl, Func<string, string> getter)
+        {
+            return reReplaceConditionals.Replace(tpl,
+                x => getter(x.Groups[1].Value) != null
+                    ? x.Groups[2].Value : String.Empty
+            );
+        }
+
+        private static readonly Regex reReplaceTags = new Regex(@"\{\{(.*?)\}\}");
+
+        private static string ReplaceTags(string tpl, Func<string, string> getter)
         {
             return reReplaceTags.Replace(
-                this.Text,
+                tpl,
                 x => HttpUtility.HtmlEncode(getter(x.Groups[1].Value) ?? String.Empty)
             );
         }
@@ -46,7 +57,8 @@ namespace BadBehavior.Util
                 return data.TryGetValue(x, out result) ? result : null;
             };
 
-            return ReplaceTags(getter);
+            string tpl = ReplaceConditionals(this.Text, getter);
+            return ReplaceTags(tpl, getter);
         }
     }
 }
