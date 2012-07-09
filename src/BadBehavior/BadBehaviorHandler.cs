@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Web;
+using BadBehavior.Logging;
+using BadBehavior.Rules;
 using BadBehavior.Util;
 
 namespace BadBehavior
@@ -46,11 +49,42 @@ namespace BadBehavior
             });
         }
 
+        private IEnumerable<LogEntry> ReadEntriesForDisplay()
+        {
+            var logReader = BBEngine.Instance.LogReader;
+            return logReader.ReadAll();
+        }
+
+        private string BuildTableRows(IEnumerable<LogEntry> entries)
+        {
+            var tpl = Template.FromResource("BadBehavior.Admin.templates.row.html");
+            var sb = new StringBuilder();
+            bool alt = false;
+            foreach (var entry in entries) {
+                string row = tpl.Process(new Dictionary<string, string>() {
+                    { "Date", entry.Date.ToString("yyyy-MM-dd HH:mm:ss") },
+                    { "IP", entry.IP.ToString() },
+                    { "LogMessage", Errors.Lookup(entry.Key).Log },
+                    { "class", alt ? "tr2" : null }
+                });
+                sb.Append(row);
+            }
+            return sb.ToString();
+        }
+
         private string GetContent()
         {
             if (BBEngine.Instance.LogReader == null)
                 return GetView("nolog", null);
-            return GetView("log", null);
+
+            var entries = ReadEntriesForDisplay();
+            var tableRows = BuildTableRows(entries);
+
+            var content = GetView("log", new Dictionary<string, string>() {
+                { "pager", "1" },
+                { "rows", tableRows }
+            });
+            return content;
         }
     }
 }

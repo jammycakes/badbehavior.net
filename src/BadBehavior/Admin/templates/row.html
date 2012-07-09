@@ -1,8 +1,8 @@
-﻿<tr class="{{class}}">
+﻿<tr{{class?}} class="{{class}}"{{/class?}}>
     <td>
-        {{ip}}<br /><br />
-        {{date}}<br /><br />
-        {{log_message}}
+        {{IP}}<br /><br />
+        {{Date}}<br /><br />
+        {{LogMessage}}
     </td>
     <td>
         {{request_method}} {{url}} {{protocol}}<br />
