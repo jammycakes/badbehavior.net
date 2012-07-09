@@ -38,8 +38,9 @@ namespace Website
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-            BBEngine.Instance.Logger = new SqlServerLogger
-                (ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString);
+            var connectionString = ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString;
+            BBEngine.Instance.Logger = new SqlServerLogger(connectionString);
+            BBEngine.Instance.LogReader =new SqlServerLogReader(connectionString);
         }
     }
 }
