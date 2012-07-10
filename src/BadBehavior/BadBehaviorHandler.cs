@@ -65,6 +65,11 @@ namespace BadBehavior
                     { "Date", entry.Date.ToString("yyyy-MM-dd HH:mm:ss") },
                     { "IP", entry.IP.ToString() },
                     { "LogMessage", Errors.Lookup(entry.Key).Log },
+                    { "RequestMethod", entry.RequestMethod },
+                    { "Url", entry.RequestUri },
+                    { "Protocol", entry.ServerProtocol },
+                    { "Headers", entry.HttpHeaders },
+                    { "Form", entry.RequestEntity },
                     { "class", alt ? "alt" : null }
                 });
                 sb.Append(row);
