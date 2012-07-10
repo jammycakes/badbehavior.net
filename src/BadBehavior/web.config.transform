@@ -3,17 +3,28 @@
     <configSections>
         <section name="badBehavior" type="BadBehavior.Configuration.BadBehaviorConfigurationSection, BadBehavior" />
     </configSections>
+    <connectionStrings>
+        <add name="BadBehavior" providerName="System.Data.SqlClient"
+            connectionString="Server=(local)\sqlexpress;Database=BadBehavior;Integrated Security=True"/>
+    </connectionStrings>
     <system.web>
+        <httpHandlers>
+            <add path="BadBehavior.axd" verb="GET,POST" type="BadBehavior.BadBehaviorHandler, BadBehavior" />
+        </httpHandlers>
         <httpModules>
             <add name="BadBehaviorHttpModule" type="BadBehavior.BadBehaviorModule, BadBehavior" />
         </httpModules>
     </system.web>
     <system.webServer>
+        <handlers>
+            <add name="BadBehavior" path="BadBehavior.axd" verb="GET,POST" type="BadBehavior.BadBehaviorHandler, BadBehavior" />
+        </handlers>
         <modules runAllManagedModulesForAllRequests="true">
             <add name="BadBehaviorHttpModule" type="BadBehavior.BadBehaviorModule, BadBehavior" />
         </modules>
     </system.webServer>
-    <badBehavior offsiteForms="false"
+    <badBehavior allowRemoteLogViewing="false"
+                 offsiteForms="false"
                  strict="false"
                  supportEmail="your-email@example.com"
                  reverseProxy="false"
