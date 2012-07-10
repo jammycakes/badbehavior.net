@@ -65,9 +65,10 @@ namespace BadBehavior
                     { "Date", entry.Date.ToString("yyyy-MM-dd HH:mm:ss") },
                     { "IP", entry.IP.ToString() },
                     { "LogMessage", Errors.Lookup(entry.Key).Log },
-                    { "class", alt ? "tr2" : null }
+                    { "class", alt ? "alt" : null }
                 });
                 sb.Append(row);
+                alt = !alt;
             }
             return sb.ToString();
         }
