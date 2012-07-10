@@ -10,6 +10,13 @@ namespace BadBehavior
     public interface ISettings
     {
         /// <summary>
+        ///  Indicates that the Bad Behavior logs can be viewed on a remote server.
+        ///  If this is not set, the logs can only be viewed by logging on to localhost.
+        /// </summary>
+
+        bool AllowRemoteLogViewing { get; }
+
+        /// <summary>
         ///  Indicates that Bad Behavior will run in Debug mode.
         ///  When this is set, non-Bad Behavior exceptions encountered when
         ///  validating or logging will be thrown, rather than just being

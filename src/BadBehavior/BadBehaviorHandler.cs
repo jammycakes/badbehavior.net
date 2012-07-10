@@ -29,9 +29,20 @@ namespace BadBehavior
         public void ProcessRequest(HttpContext context)
         {
             this.Context = new HttpContextWrapper(context);
+            if (!BBEngine.Instance.Settings.AllowRemoteLogViewing) {
+                AssertLocal();
+            }
+
             var content = this.GetContent();
             this.Context.Response.ContentType = "text/html";
             this.Context.Response.Write(content);
+        }
+
+        private void AssertLocal()
+        {
+            if (!this.Context.Request.IsLocal)
+                throw new HttpException
+                    (404, "The resource you requested was not found on this server.");
         }
 
         #endregion

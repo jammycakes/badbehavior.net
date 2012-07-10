@@ -10,6 +10,13 @@ namespace BadBehavior.Configuration
     {
         public const string DefaultReverseProxyHeader = "X-Forwarded-For";
 
+        [ConfigurationProperty("allowRemoteLogViewing", DefaultValue = false, IsRequired = false)]
+        public bool AllowRemoteLogViewing
+        {
+            get { return (bool)this["allowRemoteLogViewing"]; }
+            set { this["allowRemoteLogViewing"] = value; }
+        }
+
         [ConfigurationProperty("offsiteForms", DefaultValue = false, IsRequired = false)]
         public bool OffsiteForms
         {
