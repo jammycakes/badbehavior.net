@@ -70,6 +70,14 @@ namespace BadBehavior.Util
             );
         }
 
+        private static readonly Regex reReplaceLineBreaks = new Regex(@"\r?\n", RegexOptions.Singleline);
+
+        private static string HtmlEncode(string str)
+        {
+            var result = HttpUtility.HtmlEncode(str);
+            return reReplaceLineBreaks.Replace(result, "<br />");
+        }
+
         private static readonly Regex reReplaceTags = new Regex(@"(\{{2,3})(.*?)(\}{2,3})");
 
         private static string ReplaceTags(string tpl, Func<string, string> getter)
@@ -82,7 +90,7 @@ namespace BadBehavior.Util
                         return getter(key) ?? String.Empty;
                     }
                     else if (x.Groups[1].Value.Length == 2 && x.Groups[3].Value.Length == 2) {
-                        return HttpUtility.HtmlEncode(getter(key) ?? String.Empty);
+                        return HtmlEncode(getter(key) ?? String.Empty);
                     }
                     else {
                         return String.Empty; // invalid tag

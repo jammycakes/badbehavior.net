@@ -43,5 +43,16 @@ namespace BadBehavior.Tests.Util
             var result = new Template(sTemplate).Process(args);
             Assert.AreEqual("Testing the <strong>Bad Behavior</strong> tags", result);
         }
+
+        [Test]
+        public void CanProcessLineBreaks()
+        {
+            string sLine = "Unix\nWindows\r\netc";
+            string sTemplate = "{{test}}";
+            var result = new Template(sTemplate).Process(new Dictionary<string, string>() {
+                { "test", sLine }
+            });
+            Assert.AreEqual("Unix<br />Windows<br />etc", result);
+        }
     }
 }
