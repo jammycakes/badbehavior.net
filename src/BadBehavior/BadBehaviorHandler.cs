@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Web;
 using BadBehavior.Logging;
@@ -95,6 +96,8 @@ namespace BadBehavior
                 return GetView("nolog", null);
 
             var entries = ReadEntriesForDisplay();
+            if (!entries.Any())
+                return GetView("empty", null);
             var tableRows = BuildTableRows(entries);
 
             var content = GetView("log", new Dictionary<string, string>() {
