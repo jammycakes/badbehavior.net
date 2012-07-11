@@ -98,7 +98,7 @@ namespace BadBehavior
             var tableRows = BuildTableRows(entries);
 
             var content = GetView("log", new Dictionary<string, string>() {
-                { "pager", "1" },
+                { "pager", null },
                 { "rows", tableRows }
             });
             return content;
