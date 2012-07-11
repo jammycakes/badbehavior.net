@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BadBehavior.Logging.SqlServer
 {
-    public class DatabaseInstaller : Repository
+    public class DatabaseInstaller : SqlObject
     {
         public DatabaseInstaller(string connectionString)
             : base(connectionString)

@@ -67,7 +67,7 @@
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\NullLogger.cs" />
     <Compile Include="Logging\SqlServer\DatabaseInstaller.cs" />
-    <Compile Include="Logging\SqlServer\Repository.cs" />
+    <Compile Include="Logging\SqlServer\SqlObject.cs" />
     <Compile Include="Logging\SqlServer\SqlServerLogger.cs" />
     <Compile Include="Logging\SqlServer\SqlServerLogReader.cs" />
     <Compile Include="RuleProcessing.cs" />

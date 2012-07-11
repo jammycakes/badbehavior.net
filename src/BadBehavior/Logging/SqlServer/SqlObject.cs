@@ -8,11 +8,11 @@ using System.Text;
 
 namespace BadBehavior.Logging.SqlServer
 {
-    public class Repository
+    public class SqlObject
     {
         protected string connectionString { get; private set; }
 
-        public Repository(string connectionString)
+        public SqlObject(string connectionString)
         {
             this.connectionString = connectionString;
         }

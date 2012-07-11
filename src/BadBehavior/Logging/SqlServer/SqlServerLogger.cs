@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BadBehavior.Logging.SqlServer
 {
-    public class SqlServerLogger : Repository, ILogger
+    public class SqlServerLogger : SqlObject, ILogger
     {
         public SqlServerLogger(string connectionString)
             : base(connectionString)

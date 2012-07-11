@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace BadBehavior.Tests.Logging.SqlServer
 {
     [TestFixture]
-    public class DatabaseInstallerFixture : Repository
+    public class DatabaseInstallerFixture : SqlObject
     {
         public DatabaseInstallerFixture()
             : base(ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString)
