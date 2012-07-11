@@ -50,5 +50,11 @@ namespace BadBehavior.Logging.SqlServer
             using (var cmd = GetCommand(cn, "ClearLog"))
                 cmd.ExecuteNonQuery();
         }
+
+
+        public ILogQuery Query(int page, int pageSize, string filter)
+        {
+            return null;
+        }
     }
 }

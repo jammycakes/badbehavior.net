@@ -14,5 +14,10 @@ namespace BadBehavior.Logging
         public void Clear()
         {
         }
+
+        public ILogQuery Query(int page, int pageSize, string filter)
+        {
+            return null;
+        }
     }
 }
