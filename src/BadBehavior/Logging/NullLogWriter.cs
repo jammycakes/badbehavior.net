@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BadBehavior.Logging
 {
-    public class NullLogWriter : ILogWriter
+    public class NullLogWriter : ILogger
     {
         public void Log(LogEntry entry)
         {

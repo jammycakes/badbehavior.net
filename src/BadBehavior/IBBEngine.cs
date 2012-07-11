@@ -12,7 +12,7 @@ namespace BadBehavior
         void ValidateRequest(System.Web.HttpRequestBase request);
         ISettings Settings { get; }
         void RaiseStrict(Package package, Error error);
-        ILogWriter Logger { get; set; }
+        ILogger Logger { get; set; }
         ILogReader LogReader { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace BadBehavior.Tests.Logging.SqlServer
     public class SqlServerLoggerFixture
     {
         private ILogReader reader;
-        private ILogWriter writer;
+        private ILogger writer;
 
         [TestFixtureSetUp]
         public void Init()

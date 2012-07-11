@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BadBehavior.Logging
 {
-    public interface ILogWriter
+    public interface ILogger
     {
         /// <summary>
         ///  Adds a new entry to the logs.

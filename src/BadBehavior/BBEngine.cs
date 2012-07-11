@@ -33,7 +33,7 @@ namespace BadBehavior
 
         public ISettings Settings { get; private set; }
 
-        public ILogWriter Logger { get; set; }
+        public ILogger Logger { get; set; }
 
         public ILogReader LogReader { get; set; }
 
