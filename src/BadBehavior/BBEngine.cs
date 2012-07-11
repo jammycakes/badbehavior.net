@@ -40,7 +40,7 @@ namespace BadBehavior
 
         public BBEngine()
         {
-            this.Logger = new NullLogWriter();
+            this.Logger = new NullLogger();
             this.Settings = ConfigurationManager.GetSection("badBehavior") as ISettings
                 ?? new BadBehaviorConfigurationSection();
             this.Rules = new IRule[] {
@@ -59,7 +59,7 @@ namespace BadBehavior
 
         public BBEngine(ISettings settings, params IRule[] rules)
         {
-            this.Logger = new NullLogWriter();
+            this.Logger = new NullLogger();
             this.Settings = settings;
             this.Rules = rules.ToList();
         }
