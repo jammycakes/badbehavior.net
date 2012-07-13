@@ -51,6 +51,7 @@
     <Compile Include="BadBehaviorException.cs" />
     <Compile Include="BadBehaviorHandler.cs" />
     <Compile Include="BadBehaviorModule.cs" />
+    <None Include="BadBehaviorSettings.cs.pp" />
     <Compile Include="BBEngine.cs" />
     <Compile Include="Configuration\BadBehaviorConfigurationSection.cs" />
     <Compile Include="Configuration\HttpblElement.cs" />
