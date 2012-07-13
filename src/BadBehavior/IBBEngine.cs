@@ -10,7 +10,7 @@ namespace BadBehavior
         System.Collections.Generic.IList<IRule> Rules { get; }
         void Raise(Package package, Error error);
         void ValidateRequest(System.Web.HttpRequestBase request);
-        ISettings Settings { get; }
+        ISettings Settings { get; set; }
         void RaiseStrict(Package package, Error error);
         ILogWriter Logger { get; set; }
         ILogReader LogReader { get; set; }
