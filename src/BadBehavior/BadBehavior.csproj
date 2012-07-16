@@ -117,9 +117,6 @@
     <EmbeddedResource Include="Logging\SqlServer\Sproc.Read.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Logging\SqlServer\Sproc.ClearLog.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Admin\templates\_master.html" />
     <EmbeddedResource Include="Admin\templates\log.html" />
     <EmbeddedResource Include="Admin\templates\row.html" />
