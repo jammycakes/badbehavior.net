@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BadBehavior.Logging
 {
-    public interface ILogQuery
+    public interface ILogResultSet
     {
         /// <summary>
         ///  Get the current page number of the query.

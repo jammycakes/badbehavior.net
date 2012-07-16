@@ -36,6 +36,6 @@ namespace BadBehavior.Logging
         ///  A query result, or null if querying is not available.
         /// </returns>
 
-        ILogQuery Query(int page, int pageSize, string filter);
+        ILogResultSet Query(int page, int pageSize, string filter);
     }
 }

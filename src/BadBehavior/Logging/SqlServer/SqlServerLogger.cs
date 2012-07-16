@@ -46,7 +46,7 @@ namespace BadBehavior.Logging.SqlServer
         }
 
 
-        public ILogQuery Query(int page, int pageSize, string filter)
+        public ILogResultSet Query(int page, int pageSize, string filter)
         {
             return null;
         }
