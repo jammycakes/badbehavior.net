@@ -6,14 +6,14 @@ using System.Text;
 
 namespace BadBehavior.Logging.SqlServer
 {
-    public class Repository : RepositoryBase
+    public class WriterRepository : RepositoryBase
     {
-        public Repository(string connectionString)
+        public WriterRepository(string connectionString)
             : base(connectionString)
         {
         }
 
-        public Repository() : base()
+        public WriterRepository() : base()
         {
         }
 

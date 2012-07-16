@@ -10,16 +10,16 @@ namespace BadBehavior.Logging.SqlServer
 {
     public class SqlServerLogger : ILogger
     {
-        public Repository Repository { get; set; }
+        public WriterRepository Repository { get; set; }
 
         public SqlServerLogger()
         {
-            this.Repository = new Repository();
+            this.Repository = new WriterRepository();
         }
 
         public SqlServerLogger(string connectionString)
         {
-            this.Repository = new Repository(connectionString);
+            this.Repository = new WriterRepository(connectionString);
         }
 
         private bool initialised = false;
