@@ -61,7 +61,7 @@
     <Compile Include="HeadersMixedComparer.cs" />
     <Compile Include="IBBEngine.cs" />
     <Compile Include="ISettings.cs" />
-    <Compile Include="Logging\ILogResultSet.cs" />
+    <Compile Include="Logging\LogResultSet.cs" />
     <Compile Include="Logging\ILogReader.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogEntry.cs" />

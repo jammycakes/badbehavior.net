@@ -15,7 +15,7 @@ namespace BadBehavior.Logging
         {
         }
 
-        public ILogResultSet Query(LogQuery criteria)
+        public LogResultSet Query(LogQuery criteria)
         {
             return null;
         }

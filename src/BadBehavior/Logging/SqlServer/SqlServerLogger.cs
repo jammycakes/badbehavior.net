@@ -46,7 +46,7 @@ namespace BadBehavior.Logging.SqlServer
         }
 
 
-        public ILogResultSet Query(LogQuery criteria)
+        public LogResultSet Query(LogQuery criteria)
         {
             return null;
         }

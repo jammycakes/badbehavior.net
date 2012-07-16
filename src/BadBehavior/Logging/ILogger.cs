@@ -31,6 +31,6 @@ namespace BadBehavior.Logging
         ///  A query result, or null if querying is not available.
         /// </returns>
 
-        ILogResultSet Query(LogQuery criteria);
+        LogResultSet Query(LogQuery criteria);
     }
 }
