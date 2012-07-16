@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BadBehavior.Logging
 {
@@ -11,6 +12,18 @@ namespace BadBehavior.Logging
 
     public class LogQuery
     {
+        private string _filter;
+        private string _sort;
+
+        private static readonly Regex reCheckValue = new Regex(@"^[A-Za-z0-9_]+$", RegexOptions.Singleline);
+
+        private static void CheckValue(string value)
+        {
+            if (!String.IsNullOrEmpty(value) && !reCheckValue.IsMatch(value))
+                throw new ArgumentException("Not a valid value");
+        }
+
+
         /// <summary>
         ///  The number of the page to return.
         /// </summary>
@@ -27,7 +40,14 @@ namespace BadBehavior.Logging
         ///  The name of the column on which to filter, or null if none.
         /// </summary>
 
-        public string Filter { get; set; }
+        public string Filter {
+            get { return _filter; }
+            set
+            {
+                CheckValue(value);
+                _filter = value;
+            }
+        }
 
         /// <summary>
         ///  The value of the column to be filtered, or null if none.
@@ -39,7 +59,15 @@ namespace BadBehavior.Logging
         ///  The column to sort on, or null for the default.
         /// </summary>
 
-        public string Sort { get; set; }
+        public string Sort
+        {
+            get { return _sort; }
+            set
+            {
+                CheckValue(value);
+                _sort = value;
+            }
+        }
 
         /// <summary>
         ///  true to sort in ascending order, otherwise descending.
