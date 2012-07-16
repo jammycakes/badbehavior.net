@@ -9,30 +9,20 @@ using NUnit.Framework;
 namespace BadBehavior.Tests.Logging.SqlServer
 {
     [TestFixture]
-    public class DatabaseInstallerFixture : SqlObject
+    public class DatabaseInstallerFixture : RepositoryBase
     {
-        public DatabaseInstallerFixture()
-            : base(ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString)
-        { }
-
         [TestFixtureSetUp]
         public void SetupDatabase()
         {
-            var installer = new DatabaseInstaller(connectionString);
-            installer.InstallObjects();
+            var installer = new SqlServerLogger();
+            installer.Init();
         }
 
         [Test]
         public void CanCreateObjects()
         {
             string s = "select name from dbo.sysobjects where xtype='P'";
-            using (var cn = Connect())
-            using (var cmd = this.GetCommandFromText(cn, s))
-            using (var reader = cmd.ExecuteReader())
-                while (reader.Read())
-                    if (reader.GetString(0) == "BadBehavior_AddEntry") return;
-            Assert.Fail("Stored procedure BadBehavior_AddEntry was not found in the database.");
-
+            CollectionAssert.Contains(this.Read(s, x => x.GetString(0)), "BadBehavior_AddEntry");
         }
     }
 }

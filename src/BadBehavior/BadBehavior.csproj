@@ -66,7 +66,8 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\NullLogger.cs" />
-    <Compile Include="Logging\SqlServer\DatabaseInstaller.cs" />
+    <Compile Include="Logging\SqlServer\Repository.cs" />
+    <Compile Include="Logging\SqlServer\RepositoryBase.cs" />
     <Compile Include="Logging\SqlServer\SqlObject.cs" />
     <Compile Include="Logging\SqlServer\SqlServerLogger.cs" />
     <Compile Include="Logging\SqlServer\SqlServerLogReader.cs" />
@@ -106,7 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Logging\SqlServer\CreateTable.sql" />
-    <EmbeddedResource Include="Logging\SqlServer\Sproc.AddEntry.sql" />
+    <EmbeddedResource Include="Logging\SqlServer\AddEntry.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Logging\SqlServer\Sproc.Count.sql" />
