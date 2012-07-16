@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -42,6 +44,29 @@ namespace BadBehavior.Logging.SqlServer
         {
             string sql = "select count(*) from BadBehavior_Log" + GetWhereClause(query);
             return base.ExecuteScalar<int>(sql, GetParameters(query));
+        }
+
+
+        public IEnumerable<LogEntry> GetLogEntries(LogQuery query)
+        {
+            string sql = "select * from BadBehavior_Log"
+                + GetWhereClause(query) + GetOrderByClause(query);
+            return base.Read(sql, ReadLogEntry, GetParameters(query));
+        }
+
+        private LogEntry ReadLogEntry(IDataRecord reader)
+        {
+            return new LogEntry() {
+                Date = (DateTime)reader["Date"],
+                HttpHeaders = reader["HttpHeaders"] as string,
+                IP = IPAddress.Parse((string)reader["IP"]),
+                Key = reader["Key"] as string,
+                RequestEntity = reader["RequestEntity"] as string,
+                RequestMethod = reader["RequestMethod"] as string,
+                RequestUri = reader["RequestUri"] as string,
+                ServerProtocol = reader["ServerProtocol"] as string,
+                UserAgent = reader["UserAgent"] as string
+            };
         }
     }
 }
