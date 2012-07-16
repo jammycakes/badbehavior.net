@@ -15,7 +15,7 @@ namespace BadBehavior.Logging
         {
         }
 
-        public ILogResultSet Query(int page, int pageSize, string filter)
+        public ILogResultSet Query(LogQuery criteria)
         {
             return null;
         }

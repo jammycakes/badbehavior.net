@@ -23,19 +23,14 @@ namespace BadBehavior.Logging
         /// <summary>
         ///  Queries the logs for a page of records.
         /// </summary>
-        /// <param name="page">
-        ///  The page number to return.
-        /// </param>
-        /// <param name="pageSize">
-        ///  The number of records to return on each page.
-        /// </param>
-        /// <param name="filter">
-        ///  The filter to apply to the data set.
+        /// <param name="criteria">
+        ///  A <see cref="LogQuery"/> object containing the criteria on which we wish
+        ///  to sort, filter and page.
         /// </param>
         /// <returns>
         ///  A query result, or null if querying is not available.
         /// </returns>
 
-        ILogResultSet Query(int page, int pageSize, string filter);
+        ILogResultSet Query(LogQuery criteria);
     }
 }
