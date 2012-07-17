@@ -10,16 +10,20 @@ namespace BadBehavior.Logging.SqlServer
 {
     public class SqlServerLogger : ILogger
     {
-        public WriterRepository Repository { get; set; }
+        public WriterRepository Writer { get; set; }
+
+        public ReaderRepository Reader { get; set; }
 
         public SqlServerLogger()
         {
-            this.Repository = new WriterRepository();
+            this.Writer = new WriterRepository();
+            this.Reader = new ReaderRepository();
         }
 
         public SqlServerLogger(string connectionString)
         {
-            this.Repository = new WriterRepository(connectionString);
+            this.Writer = new WriterRepository(connectionString);
+            this.Reader = new ReaderRepository(connectionString);
         }
 
         private bool initialised = false;
@@ -28,21 +32,21 @@ namespace BadBehavior.Logging.SqlServer
         public void Init()
         {
             if (initialised) return;
-            Repository.CreateTable();
+            Writer.CreateTable();
             initialised = true;
         }
 
         public void Log(LogEntry entry)
         {
             Init();
-            Repository.PurgeOldEntries();
-            Repository.AddEntry(entry);
+            Writer.PurgeOldEntries();
+            Writer.AddEntry(entry);
         }
 
         public void Clear()
         {
             Init();
-            Repository.ClearLog();
+            Writer.ClearLog();
         }
 
 
