@@ -59,6 +59,12 @@ namespace BadBehavior.Logging.SqlServer
             result.Page = criteria.PageNumber;
             if (result.Page < 1) result.Page = 1;
             if (result.Page > result.TotalPages) result.Page = result.TotalPages;
+            if (result.Page >= 1)
+                result.LogEntries = Reader.GetLogEntries(criteria)
+                    .Skip((result.Page - 1) * result.PageSize)
+                    .Take(result.PageSize).ToList();
+            else
+                result.LogEntries = new List<LogEntry>(0);
             return result;
         }
     }
