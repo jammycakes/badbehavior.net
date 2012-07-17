@@ -62,5 +62,18 @@ namespace BadBehavior.Tests.Logging
             Assert.AreEqual(5, q.PageNumber);
             Assert.AreEqual(expectedOrder, q.Ascending);
         }
+
+        [TestCase("IP", "::1", "Key", true, "filter=IP&filtervalue=%3a%3a1&sort=Key")]
+        public void CanGetQueryString
+            (string filter, string filterValue, string sort, bool ascending, string expected)
+        {
+            var q = new LogQuery() {
+                Filter = filter,
+                FilterValue = filterValue,
+                Sort = sort,
+                Ascending = ascending
+            };
+            Assert.AreEqual(expected, q.ToString());
+        }
     }
 }

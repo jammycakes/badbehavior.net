@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using BadBehavior.Util;
 
 namespace BadBehavior.Logging
@@ -29,6 +30,8 @@ namespace BadBehavior.Logging
 
         public LogQuery()
         {
+            PageNumber = 1;
+            PageSize = DEFAULT_PAGE_SIZE;
         }
 
         public LogQuery(NameValueCollection queryString)
@@ -99,5 +102,28 @@ namespace BadBehavior.Logging
         /// </summary>
 
         public bool Ascending { get; set; }
+
+
+        public override string ToString()
+        {
+            var collection = new NameValueCollection();
+            if (Filter != null) collection.Add("filter", Filter);
+            if (FilterValue != null) collection.Add("filtervalue", FilterValue);
+            if (Sort != null) collection.Add("sort", Sort);
+            if (!Ascending) collection.Add("order", "desc");
+            if (PageNumber != 1) collection.Add("page", PageNumber.ToString());
+            if (PageSize != DEFAULT_PAGE_SIZE) collection.Add("pageSize", PageSize.ToString());
+
+            var sb = new StringBuilder();
+
+            foreach (string key in collection.Keys) {
+                if (sb.Length > 0) sb.Append("&");
+                sb.Append(HttpUtility.UrlEncode(key));
+                sb.Append("=");
+                sb.Append(HttpUtility.UrlEncode(collection[key]));
+            }
+
+            return sb.ToString();
+        }
     }
 }
