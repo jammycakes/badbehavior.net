@@ -56,6 +56,7 @@
     <Compile Include="BBEngineFixture.cs" />
     <Compile Include="Config\BadBehaviorConfigurationSectionFixture.cs" />
     <Compile Include="Logging\SqlServer\ReaderRepositoryFixture.cs" />
+    <Compile Include="Logging\SqlServer\SqlServerLoggerFixture.cs" />
     <Compile Include="Util\FunctionsFixture.cs" />
     <Compile Include="Logging\SqlServer\DatabaseInstallerFixture.cs" />
     <Compile Include="Logging\SqlServer\SqlServerLoggerFixtureWithData.cs" />
