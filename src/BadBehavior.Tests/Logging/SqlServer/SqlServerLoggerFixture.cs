@@ -43,8 +43,8 @@ namespace BadBehavior.Tests.Logging.SqlServer
             writer.SetupAllProperties();
             var logger = new SqlServerLogger() { Reader = reader.Object, Writer = writer.Object };
             var result = logger.Query(query);
-            Assert.AreEqual(expectedPage, result.Page);
-            Assert.AreEqual(expectedPageCount, result.TotalPages);
+            Assert.AreEqual(expectedPage, result.Page, "Wrong page number");
+            Assert.AreEqual(expectedPageCount, result.TotalPages, "Wrong number of pages");
         }
     }
 }
