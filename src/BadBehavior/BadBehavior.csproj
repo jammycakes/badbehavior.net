@@ -62,7 +62,6 @@
     <Compile Include="IBBEngine.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Logging\LogResultSet.cs" />
-    <Compile Include="Logging\ILogReader.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\LogQuery.cs" />
@@ -72,9 +71,7 @@
     <Compile Include="Logging\SqlServer\ReaderRepository.cs" />
     <Compile Include="Logging\SqlServer\WriterRepository.cs" />
     <Compile Include="Logging\SqlServer\RepositoryBase.cs" />
-    <Compile Include="Logging\SqlServer\SqlObject.cs" />
     <Compile Include="Logging\SqlServer\SqlServerLogger.cs" />
-    <Compile Include="Logging\SqlServer\SqlServerLogReader.cs" />
     <Compile Include="RuleProcessing.cs" />
     <Compile Include="Util\Functions.cs">
       <SubType>Code</SubType>
@@ -112,12 +109,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Logging\SqlServer\CreateTable.sql" />
     <EmbeddedResource Include="Logging\SqlServer\AddEntry.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Logging\SqlServer\Sproc.Count.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Logging\SqlServer\Sproc.Read.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Admin\templates\_master.html" />

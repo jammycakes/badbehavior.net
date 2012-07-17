@@ -28,15 +28,11 @@ namespace BadBehavior
             BBEngine.Instance = new BBEngine();
         }
 
-
         public IList<IRule> Rules { get; private set; }
 
         public ISettings Settings { get; private set; }
 
         public ILogger Logger { get; set; }
-
-        public ILogReader LogReader { get; set; }
-
 
         public BBEngine()
         {
