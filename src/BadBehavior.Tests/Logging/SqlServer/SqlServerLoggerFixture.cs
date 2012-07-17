@@ -30,6 +30,10 @@ namespace BadBehavior.Tests.Logging.SqlServer
         [TestCase(20, 10, 1, 1, 2)]
         [TestCase(20, 10, 2, 2, 2)]
         [TestCase(20, 10, 3, 2, 2)]
+        // If no page size is specified, return everything.
+        [TestCase(20, 0, 0, 1, 1)]
+        [TestCase(20, 0, 1, 1, 1)]
+        [TestCase(20, 0, 2, 1, 1)]
         public void CanCreatePaging
             (int numRecords, int pageSize, int requestedPage, int expectedPage, int expectedPageCount)
         {

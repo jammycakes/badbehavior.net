@@ -53,8 +53,13 @@ namespace BadBehavior.Logging.SqlServer
         public LogResultSet Query(LogQuery criteria)
         {
             var result = new LogResultSet();
-            result.PageSize = criteria.PageSize;
             result.TotalEntries = Reader.Count(criteria);
+            if (criteria.PageSize == 0) {
+                criteria.PageNumber = 1;
+                criteria.PageSize = result.TotalEntries;
+            }
+
+            result.PageSize = criteria.PageSize;
             result.TotalPages = (result.TotalEntries + result.PageSize - 1) / result.PageSize;
             result.Page = criteria.PageNumber;
             if (result.Page < 1) result.Page = 1;
