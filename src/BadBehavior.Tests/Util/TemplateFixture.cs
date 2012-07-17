@@ -25,12 +25,12 @@ namespace BadBehavior.Tests.Util
         [Test]
         public void CanProcessOptionalBlocks()
         {
-            string sTemplate = "**{{template?}}Testing the {{template}} tags{{/template?}}**";
+            string sTemplate = "**{{template?}}Testing\nthe {{template}} tags{{/template?}}**";
             var args = new Dictionary<string, string>();
             var tpl = new Template(sTemplate);
             Assert.AreEqual("****", tpl.Process(args));
             args.Add("template", "Bad Behavior");
-            Assert.AreEqual("**Testing the Bad Behavior tags**", tpl.Process(args));
+            Assert.AreEqual("**Testing\nthe Bad Behavior tags**", tpl.Process(args));
         }
 
         [Test]
