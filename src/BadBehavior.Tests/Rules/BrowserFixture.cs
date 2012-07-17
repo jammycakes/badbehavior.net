@@ -8,7 +8,7 @@ using BadBehavior.Rules;
 using Moq;
 using NUnit.Framework;
 
-namespace BadBehavior.Tests.Validators
+namespace BadBehavior.Tests.Rules
 {
     [TestFixture]
     public class BrowserFixture : RequestFixtureBase
