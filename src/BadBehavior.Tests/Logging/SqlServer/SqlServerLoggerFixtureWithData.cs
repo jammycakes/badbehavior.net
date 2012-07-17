@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace BadBehavior.Tests.Logging.SqlServer
 {
     [TestFixture]
-    public class SqlServerLoggerFixture
+    public class SqlServerLoggerFixtureWithData
     {
         private ILogReader reader;
         private ILogger writer;

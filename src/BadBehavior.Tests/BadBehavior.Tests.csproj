@@ -58,7 +58,7 @@
     <Compile Include="Logging\SqlServer\ReaderRepositoryFixture.cs" />
     <Compile Include="Util\FunctionsFixture.cs" />
     <Compile Include="Logging\SqlServer\DatabaseInstallerFixture.cs" />
-    <Compile Include="Logging\SqlServer\SqlServerLoggerFixture.cs" />
+    <Compile Include="Logging\SqlServer\SqlServerLoggerFixtureWithData.cs" />
     <Compile Include="PackageFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestFixtureBase.cs" />

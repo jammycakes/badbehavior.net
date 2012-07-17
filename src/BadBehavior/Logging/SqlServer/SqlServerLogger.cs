@@ -52,7 +52,9 @@ namespace BadBehavior.Logging.SqlServer
 
         public LogResultSet Query(LogQuery criteria)
         {
-            return null;
+            var result = new LogResultSet();
+            result.TotalEntries = Reader.Count(criteria);
+            return result;
         }
     }
 }
