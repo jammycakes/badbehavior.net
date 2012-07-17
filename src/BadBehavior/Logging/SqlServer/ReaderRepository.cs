@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace BadBehavior.Logging.SqlServer
 {
-    public class ReaderRepository : RepositoryBase
+    public class ReaderRepository : RepositoryBase, IReaderRepository
     {
         public ReaderRepository() : base() { }
 

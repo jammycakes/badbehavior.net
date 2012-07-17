@@ -10,9 +10,9 @@ namespace BadBehavior.Logging.SqlServer
 {
     public class SqlServerLogger : ILogger
     {
-        public WriterRepository Writer { get; set; }
+        public IWriterRepository Writer { get; set; }
 
-        public ReaderRepository Reader { get; set; }
+        public IReaderRepository Reader { get; set; }
 
         public SqlServerLogger()
         {

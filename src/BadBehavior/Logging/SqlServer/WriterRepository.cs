@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BadBehavior.Logging.SqlServer
 {
-    public class WriterRepository : RepositoryBase
+    public class WriterRepository : RepositoryBase, IWriterRepository
     {
         public WriterRepository(string connectionString)
             : base(connectionString)
