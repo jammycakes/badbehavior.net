@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using BadBehavior.Util;
 
 namespace BadBehavior.Logging
 {
@@ -12,6 +14,8 @@ namespace BadBehavior.Logging
 
     public class LogQuery
     {
+        private const int DEFAULT_PAGE_SIZE = 20;
+
         private string _filter;
         private string _sort;
 
@@ -21,6 +25,27 @@ namespace BadBehavior.Logging
         {
             if (!String.IsNullOrEmpty(value) && !reCheckValue.IsMatch(value))
                 throw new ArgumentException("Not a valid value");
+        }
+
+        public LogQuery()
+        {
+        }
+
+        public LogQuery(NameValueCollection queryString)
+        {
+            this.Filter = queryString["filter"];
+            this.FilterValue = queryString["filtervalue"];
+            this.Sort = queryString["sort"];
+            this.Ascending = queryString["order"] != "desc";
+            int i;
+            if (Int32.TryParse(queryString["page"], out i))
+                this.PageNumber = i;
+            else
+                this.PageNumber = 1;
+            if (Int32.TryParse(queryString["pageSize"], out i))
+                this.PageSize = i;
+            else
+                this.PageSize = DEFAULT_PAGE_SIZE;
         }
 
 
