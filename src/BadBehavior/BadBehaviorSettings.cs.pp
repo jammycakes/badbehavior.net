@@ -95,32 +95,65 @@ namespace $rootnamespace$
         /// <summary>
         ///  The IP address ranges, in CIDR format, to be whitelisted
         /// </summary>
+        /// <remarks>
+        ///  Inappropriate whitelisting WILL expose you to spam, or cause Bad Behavior
+        ///  to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN
+        ///  that you should.
+        /// </remarks>
 
         public IList<string> WhitelistIPRanges
         {
-            get { return null; }
+            get
+            { 
+                return new string[] {
+                    /* Digg */
+                    // "64.191.203.0/24",
+                    // "208.67.217.130",
+
+                    /* RFC 1918 addresses */
+                    // "10.0.0.0/8",
+                    // "172.16.0.0/12",
+                    // "192.168.0.0/16"
+                }.ToList();
+            }
         }
 
         /// <summary>
-        ///  User agent substrings to be whitelisted
+        ///  User agent strings to be whitelisted.
         /// </summary>
+        /// <remarks>
+        ///  User agents are matched by exact match only.
+        /// </remarks>
 
         public IList<string> WhitelistUserAgents
         {
-            get { return null; }
+            get {
+                return new string[] {
+                    // "Mozilla/4.0 (It's me, let me in)"
+                }.ToList();
+            }
         }
 
         /// <summary>
-        ///  URLs on our site to be whitelisted
+        ///  URLs are matched from the first / after the server name up to, but not
+        ///  including, the ? (if any). The URL to be whitelisted is a URL on YOUR site.
+        ///  A partial URL match is permitted, so URL whitelist entries should be as
+        ///  specific as possible, but no more specific than necessary. For instance,
+        ///  "/example" would match "/example.aspx" and "/example/address".
         /// </summary>
 
         public IList<string> WhitelistUrls
         {
-            get { return null; }
+            get {
+                return new string[] {
+                    // "/example.aspx",
+                    // "/openid/server"
+                }.ToList();
+            }
         }
 
         /// <summary>
-        ///  Whether an httpbl key has been configured.
+        ///  Whether a key for the Project Honeypot HTTP:BL server has been configured.
         /// </summary>
 
         public bool Httpbl
@@ -129,7 +162,7 @@ namespace $rootnamespace$
         }
 
         /// <summary>
-        ///  The httpbl key.
+        ///  The key for the Project Honeypot HTTP:BL server.
         /// </summary>
 
         public string HttpblKey
@@ -138,7 +171,7 @@ namespace $rootnamespace$
         }
 
         /// <summary>
-        ///  The httpbl threat level required to trap spam.
+        ///  The Project Honeypot HTTP:BL threat level.
         /// </summary>
 
         public int HttpblThreatLevel
@@ -147,7 +180,7 @@ namespace $rootnamespace$
         }
 
         /// <summary>
-        ///  The httpbl maximum age, in days.
+        ///  The Project Honeypot HTTP:BL maximum age, in days.
         /// </summary>
 
         public int HttpblMaxAge
