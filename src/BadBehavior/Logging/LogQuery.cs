@@ -125,5 +125,17 @@ namespace BadBehavior.Logging
 
             return sb.ToString();
         }
+
+        /// <summary>
+        ///  Creates a copy of this log query, allowing us to construct other queries from it.
+        /// </summary>
+        /// <returns>
+        ///  A new <see cref="LogQuery"/> instance.
+        /// </returns>
+
+        public LogQuery Clone()
+        {
+            return (LogQuery)this.MemberwiseClone();
+        }
     }
 }

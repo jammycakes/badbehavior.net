@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using BadBehavior.Admin;
 using BadBehavior.Logging;
 using BadBehavior.Rules;
 using BadBehavior.Util;
@@ -88,17 +89,21 @@ namespace BadBehavior
         {
             if (BBEngine.Instance.Logger == null)
                 return GetView("nolog", null);
-            var query = new LogQuery();
+            var query = new LogQuery(Context.Request.QueryString);
             var entries = BBEngine.Instance.Logger.Query(query);
             if (entries == null)
                 return GetView("nolog", null);
             if (!entries.LogEntries.Any())
                 return GetView("empty", null);
             var tableRows = BuildTableRows(entries.LogEntries);
+            var pager = new Pager(Context.Request.Url, query, entries);
 
             var content = GetView("log", new Dictionary<string, string>() {
-                { "pager", null },
-                { "rows", tableRows }
+                { "pager", pager.GetHtml() },
+                { "rows", tableRows },
+                { "firstEntry", entries.FirstEntry.ToString() },
+                { "lastEntry", entries.LastEntry.ToString() },
+                { "totalEntries", entries.TotalEntries.ToString() }
             });
             return content;
         }

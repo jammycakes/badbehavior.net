@@ -53,6 +53,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Admin\PagerFixture.cs" />
     <Compile Include="BBEngineFixture.cs" />
     <Compile Include="Config\BadBehaviorConfigurationSectionFixture.cs" />
     <Compile Include="Logging\LogQueryFixture.cs" />

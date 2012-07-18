@@ -47,6 +47,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Admin\Pager.cs" />
     <Compile Include="BadBehaviorEventArgs.cs" />
     <Compile Include="BadBehaviorException.cs" />
     <Compile Include="BadBehaviorHandler.cs" />
