@@ -40,7 +40,7 @@ namespace BadBehavior.Tests.Admin
                 Page = pageNumber,
                 TotalPages = totalPages
             };
-            var pageNumbers = new Pager(query, results).GetPageNumbers();
+            var pageNumbers = new Pager(null, query, results).GetPageNumbers();
             CollectionAssert.AreEqual(expected, pageNumbers);
         }
     }
