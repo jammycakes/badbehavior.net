@@ -37,5 +37,25 @@ namespace BadBehavior.Logging
         /// <returns></returns>
 
         public IList<LogEntry> LogEntries { get; set; }
+
+
+        /* ====== Computed properties ======= */
+
+        public int FirstEntry
+        {
+            get
+            {
+                return (Page - 1) * PageSize + 1;
+            }
+        }
+
+
+        public int LastEntry
+        {
+            get
+            {
+                return Math.Min(Page * PageSize, TotalEntries);
+            }
+        }
     }
 }

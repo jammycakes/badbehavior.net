@@ -98,7 +98,10 @@ namespace BadBehavior
 
             var content = GetView("log", new Dictionary<string, string>() {
                 { "pager", null },
-                { "rows", tableRows }
+                { "rows", tableRows },
+                { "firstEntry", entries.FirstEntry.ToString() },
+                { "lastEntry", entries.LastEntry.ToString() },
+                { "totalEntries", entries.TotalEntries.ToString() }
             });
             return content;
         }
