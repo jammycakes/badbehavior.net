@@ -28,19 +28,15 @@ namespace BadBehavior
             BBEngine.Instance = new BBEngine();
         }
 
-
         public IList<IRule> Rules { get; private set; }
 
         public ISettings Settings { get; private set; }
 
-        public ILogWriter Logger { get; set; }
-
-        public ILogReader LogReader { get; set; }
-
+        public ILogger Logger { get; set; }
 
         public BBEngine()
         {
-            this.Logger = new NullLogWriter();
+            this.Logger = new NullLogger();
             this.Settings = ConfigurationManager.GetSection("badBehavior") as ISettings
                 ?? new BadBehaviorConfigurationSection();
             this.Rules = new IRule[] {
@@ -59,7 +55,7 @@ namespace BadBehavior
 
         public BBEngine(ISettings settings, params IRule[] rules)
         {
-            this.Logger = new NullLogWriter();
+            this.Logger = new NullLogger();
             this.Settings = settings;
             this.Rules = rules.ToList();
         }

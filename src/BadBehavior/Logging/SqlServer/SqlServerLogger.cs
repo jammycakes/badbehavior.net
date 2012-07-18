@@ -8,11 +8,23 @@ using System.Text;
 
 namespace BadBehavior.Logging.SqlServer
 {
-    public class SqlServerLogger : Repository, ILogWriter
+    public class SqlServerLogger : ILogger
     {
+        public IWriterRepository Writer { get; set; }
+
+        public IReaderRepository Reader { get; set; }
+
+        public SqlServerLogger()
+        {
+            this.Writer = new WriterRepository();
+            this.Reader = new ReaderRepository();
+        }
+
         public SqlServerLogger(string connectionString)
-            : base(connectionString)
-        { }
+        {
+            this.Writer = new WriterRepository(connectionString);
+            this.Reader = new ReaderRepository(connectionString);
+        }
 
         private bool initialised = false;
 
@@ -20,35 +32,45 @@ namespace BadBehavior.Logging.SqlServer
         public void Init()
         {
             if (initialised) return;
-            new DatabaseInstaller(connectionString).InstallObjects();
+            Writer.CreateTable();
             initialised = true;
         }
 
         public void Log(LogEntry entry)
         {
             Init();
-            using (var cn = Connect())
-            using (var cmd = GetCommand(cn, "AddEntry",
-                new SqlParameter("@IP", entry.IP.ToString()),
-                new SqlParameter("@Date", entry.Date),
-                new SqlParameter("@RequestMethod", entry.RequestMethod),
-                new SqlParameter("@RequestUri", entry.RequestUri),
-                new SqlParameter("@ServerProtocol", entry.ServerProtocol),
-                new SqlParameter("@HttpHeaders", entry.HttpHeaders),
-                new SqlParameter("@UserAgent", entry.UserAgent),
-                new SqlParameter("@RequestEntity", entry.RequestEntity),
-                new SqlParameter("@Key", entry.Key)
-            )) {
-                cmd.ExecuteNonQuery();
-            }
+            Writer.PurgeOldEntries();
+            Writer.AddEntry(entry);
         }
 
         public void Clear()
         {
             Init();
-            using (var cn = Connect())
-            using (var cmd = GetCommand(cn, "ClearLog"))
-                cmd.ExecuteNonQuery();
+            Writer.ClearLog();
+        }
+
+
+        public LogResultSet Query(LogQuery criteria)
+        {
+            var result = new LogResultSet();
+            result.TotalEntries = Reader.Count(criteria);
+            if (criteria.PageSize == 0) {
+                criteria.PageNumber = 1;
+                criteria.PageSize = result.TotalEntries;
+            }
+
+            result.PageSize = criteria.PageSize;
+            result.TotalPages = (result.TotalEntries + result.PageSize - 1) / result.PageSize;
+            result.Page = criteria.PageNumber;
+            if (result.Page < 1) result.Page = 1;
+            if (result.Page > result.TotalPages) result.Page = result.TotalPages;
+            if (result.Page >= 1)
+                result.LogEntries = Reader.GetLogEntries(criteria)
+                    .Skip((result.Page - 1) * result.PageSize)
+                    .Take(result.PageSize).ToList();
+            else
+                result.LogEntries = new List<LogEntry>(0);
+            return result;
         }
     }
 }

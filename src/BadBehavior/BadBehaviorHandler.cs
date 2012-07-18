@@ -61,12 +61,6 @@ namespace BadBehavior
             });
         }
 
-        private IEnumerable<LogEntry> ReadEntriesForDisplay()
-        {
-            var logReader = BBEngine.Instance.LogReader;
-            return logReader.ReadAll();
-        }
-
         private string BuildTableRows(IEnumerable<LogEntry> entries)
         {
             var tpl = Template.FromResource("BadBehavior.Admin.templates.row.html");
@@ -92,13 +86,15 @@ namespace BadBehavior
 
         private string GetContent()
         {
-            if (BBEngine.Instance.LogReader == null)
+            if (BBEngine.Instance.Logger == null)
                 return GetView("nolog", null);
-
-            var entries = ReadEntriesForDisplay();
-            if (!entries.Any())
+            var query = new LogQuery();
+            var entries = BBEngine.Instance.Logger.Query(query);
+            if (entries == null)
+                return GetView("nolog", null);
+            if (!entries.LogEntries.Any())
                 return GetView("empty", null);
-            var tableRows = BuildTableRows(entries);
+            var tableRows = BuildTableRows(entries.LogEntries);
 
             var content = GetView("log", new Dictionary<string, string>() {
                 { "pager", null },

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Net;
 using System.Text;
 using BadBehavior.Logging;
 using BadBehavior.Logging.SqlServer;
+using Moq;
 using NUnit.Framework;
 
 namespace BadBehavior.Tests.Logging.SqlServer
@@ -13,72 +12,43 @@ namespace BadBehavior.Tests.Logging.SqlServer
     [TestFixture]
     public class SqlServerLoggerFixture
     {
-        private ILogReader reader;
-        private ILogWriter writer;
-
-        [TestFixtureSetUp]
-        public void Init()
+        // No records should always return page 0, page count 0.
+        [TestCase(0, 10, 1, 0, 0)]
+        [TestCase(0, 10, 0, 0, 0)]
+        // One page of records should always return page one
+        [TestCase(1, 10, 1, 1, 1)]
+        [TestCase(1, 10, 0, 1, 1)]
+        [TestCase(1, 10, 5, 1, 1)]
+        [TestCase(10, 10, 5, 1, 1)]
+        [TestCase(10, 10, 0, 1, 1)]
+        // More than one page of records should always return a page within range
+        [TestCase(11, 10, 0, 1, 2)]
+        [TestCase(11, 10, 1, 1, 2)]
+        [TestCase(11, 10, 2, 2, 2)]
+        [TestCase(11, 10, 3, 2, 2)]
+        [TestCase(20, 10, 0, 1, 2)]
+        [TestCase(20, 10, 1, 1, 2)]
+        [TestCase(20, 10, 2, 2, 2)]
+        [TestCase(20, 10, 3, 2, 2)]
+        // If no page size is specified, return everything.
+        [TestCase(20, 0, 0, 1, 1)]
+        [TestCase(20, 0, 1, 1, 1)]
+        [TestCase(20, 0, 2, 1, 1)]
+        public void CanCreatePaging
+            (int numRecords, int pageSize, int requestedPage, int expectedPage, int expectedPageCount)
         {
-            string cs = ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString;
-            reader = new SqlServerLogReader(cs);
-            writer = new SqlServerLogger(cs);
-            // Force an entry into the log.
-        }
-
-        [SetUp]
-        public void BeforeTest()
-        {
-            writer.Log(new LogEntry() {
-                Date = DateTime.Now,
-                HttpHeaders = null,
-                IP = IPAddress.Parse("::1"),
-                Key = "00000000",
-                RequestEntity = null,
-                RequestMethod = "POST",
-                RequestUri = "http://example.com/",
-                ServerProtocol = "HTTP/1.1",
-                UserAgent = "Mozilla/1.0"
-            });
-        }
-
-        [TearDown]
-        public void AfterTest()
-        {
-            writer.Clear();
-        }
-
-
-        [Test]
-        public void CanCount()
-        {
-            Assert.Greater(reader.Count(), 0);
-        }
-
-        [Test]
-        public void CanReadAll()
-        {
-            foreach (var entry in reader.ReadAll()) {
-                Assert.IsNotNull(entry);
-            }
-        }
-
-        [Test]
-        public void CanReadByDate()
-        {
-            var entries = reader.Read(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1));
-            CollectionAssert.IsNotEmpty(entries);
-
-            foreach (var entry in entries) {
-                Assert.IsNotNull(entry);
-            }
-        }
-
-        [Test]
-        public void CanClearLog()
-        {
-            writer.Clear();
-            var count = reader.Count();
-            Assert.AreEqual(0, count);
+            var query = new LogQuery() {
+                PageSize = pageSize,
+                PageNumber = requestedPage
+            };
+            var reader = new Mock<IReaderRepository>();
+            reader.Setup(x => x.Count(It.IsAny<LogQuery>())).Returns(numRecords);
+            var writer = new Mock<IWriterRepository>();
+            writer.SetupAllProperties();
+            var logger = new SqlServerLogger() { Reader = reader.Object, Writer = writer.Object };
+            var result = logger.Query(query);
+            Assert.AreEqual(expectedPage, result.Page, "Wrong page number");
+            Assert.AreEqual(expectedPageCount, result.TotalPages, "Wrong number of pages");
         }
     }
 }

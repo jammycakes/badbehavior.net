@@ -60,7 +60,7 @@ namespace BadBehavior.Util
         }
 
         private static readonly Regex reReplaceConditionals
-            = new Regex(@"\{\{(.*?)\?\}\}(.*?)\{\{/\1\?\}\}");
+            = new Regex(@"\{\{(.*?)\?\}\}(.*?)\{\{/\1\?\}\}", RegexOptions.Singleline);
 
         private static string ReplaceConditionals(string tpl, Func<string, string> getter)
         {

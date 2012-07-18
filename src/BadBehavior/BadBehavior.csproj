@@ -61,14 +61,17 @@
     <Compile Include="HeadersMixedComparer.cs" />
     <Compile Include="IBBEngine.cs" />
     <Compile Include="ISettings.cs" />
-    <Compile Include="Logging\ILogReader.cs" />
-    <Compile Include="Logging\ILogWriter.cs" />
+    <Compile Include="Logging\LogResultSet.cs" />
+    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogEntry.cs" />
-    <Compile Include="Logging\NullLogWriter.cs" />
-    <Compile Include="Logging\SqlServer\DatabaseInstaller.cs" />
-    <Compile Include="Logging\SqlServer\Repository.cs" />
+    <Compile Include="Logging\LogQuery.cs" />
+    <Compile Include="Logging\NullLogger.cs" />
+    <Compile Include="Logging\SqlServer\IReaderRepository.cs" />
+    <Compile Include="Logging\SqlServer\IWriterRepository.cs" />
+    <Compile Include="Logging\SqlServer\ReaderRepository.cs" />
+    <Compile Include="Logging\SqlServer\WriterRepository.cs" />
+    <Compile Include="Logging\SqlServer\RepositoryBase.cs" />
     <Compile Include="Logging\SqlServer\SqlServerLogger.cs" />
-    <Compile Include="Logging\SqlServer\SqlServerLogReader.cs" />
     <Compile Include="RuleProcessing.cs" />
     <Compile Include="Util\Functions.cs">
       <SubType>Code</SubType>
@@ -105,16 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Logging\SqlServer\CreateTable.sql" />
-    <EmbeddedResource Include="Logging\SqlServer\Sproc.AddEntry.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Logging\SqlServer\Sproc.Count.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Logging\SqlServer\Sproc.Read.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Logging\SqlServer\Sproc.ClearLog.sql" />
+    <EmbeddedResource Include="Logging\SqlServer\AddEntry.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Admin\templates\_master.html" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BadBehavior.Logging
 {
-    public class NullLogWriter : ILogWriter
+    public class NullLogger : ILogger
     {
         public void Log(LogEntry entry)
         {
@@ -13,6 +13,11 @@ namespace BadBehavior.Logging
 
         public void Clear()
         {
+        }
+
+        public LogResultSet Query(LogQuery criteria)
+        {
+            return null;
         }
     }
 }

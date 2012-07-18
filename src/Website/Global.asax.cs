@@ -40,7 +40,6 @@ namespace Website
             RegisterRoutes(RouteTable.Routes);
             var connectionString = ConfigurationManager.ConnectionStrings["BadBehavior"].ConnectionString;
             BBEngine.Instance.Logger = new SqlServerLogger(connectionString);
-            BBEngine.Instance.LogReader =new SqlServerLogReader(connectionString);
         }
     }
 }
