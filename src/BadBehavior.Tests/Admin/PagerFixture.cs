@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BadBehavior.Admin;
+﻿using BadBehavior.Admin;
 using BadBehavior.Logging;
 using NUnit.Framework;
 

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Web;
+﻿using System.Collections.Generic;
 using BadBehavior.Rules;
-using Moq;
 using NUnit.Framework;
 
 namespace BadBehavior.Tests.Rules

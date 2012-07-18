@@ -1,5 +1,4 @@
-﻿using System;
-using BadBehavior.Logging;
+﻿using BadBehavior.Logging;
 
 namespace BadBehavior
 {

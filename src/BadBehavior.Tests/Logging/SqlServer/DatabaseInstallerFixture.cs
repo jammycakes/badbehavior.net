@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using BadBehavior.Logging.SqlServer;
+﻿using BadBehavior.Logging.SqlServer;
 using NUnit.Framework;
 
 namespace BadBehavior.Tests.Logging.SqlServer

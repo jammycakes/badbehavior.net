@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
 using System.Web;
 using Moq;
 
@@ -20,6 +17,5 @@ namespace BadBehavior.Tests
             mock.SetupGet(x => x.Headers).Returns(h);
             return mock;
         }
-
     }
 }
