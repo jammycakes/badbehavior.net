@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using BadBehavior.Logging.SqlServer;
 
-namespace BadBehavior.Logging.SqlServer
+namespace BadBehavior.Logging
 {
     public class SqlServerLogger : ILogger
     {

@@ -72,7 +72,7 @@
     <Compile Include="Logging\SqlServer\ReaderRepository.cs" />
     <Compile Include="Logging\SqlServer\WriterRepository.cs" />
     <Compile Include="Logging\SqlServer\RepositoryBase.cs" />
-    <Compile Include="Logging\SqlServer\SqlServerLogger.cs" />
+    <Compile Include="Logging\SqlServerLogger.cs" />
     <Compile Include="RuleProcessing.cs" />
     <Compile Include="Util\Functions.cs">
       <SubType>Code</SubType>

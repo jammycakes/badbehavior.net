@@ -1,4 +1,5 @@
-﻿using BadBehavior.Logging.SqlServer;
+﻿using BadBehavior.Logging;
+using BadBehavior.Logging.SqlServer;
 using NUnit.Framework;
 
 namespace BadBehavior.Tests.Logging.SqlServer
