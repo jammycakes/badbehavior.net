@@ -9,5 +9,6 @@
         HttpHeaders    ntext       null,
         UserAgent      ntext       null,
         RequestEntity  ntext       null,
-        [Key]          varchar(8)  null
+        [Key]          varchar(8)  null,
+        ReverseDns     ntext       null
     )

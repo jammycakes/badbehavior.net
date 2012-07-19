@@ -7,7 +7,8 @@
     HttpHeaders,
     UserAgent,
     RequestEntity,
-    [Key]
+    [Key],
+    ReverseDns
 )
 values(
     @IP,
@@ -18,5 +19,6 @@ values(
     @HttpHeaders,
     @UserAgent,
     @RequestEntity,
-    @Key
+    @Key,
+    @ReverseDns
 )

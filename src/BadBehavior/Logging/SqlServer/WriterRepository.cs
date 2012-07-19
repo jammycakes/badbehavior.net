@@ -42,7 +42,8 @@ namespace BadBehavior.Logging.SqlServer
                 new SqlParameter("@HttpHeaders", entry.HttpHeaders),
                 new SqlParameter("@UserAgent", entry.UserAgent),
                 new SqlParameter("@RequestEntity", entry.RequestEntity),
-                new SqlParameter("@Key", entry.Key) { Size = 8 }
+                new SqlParameter("@Key", entry.Key) { Size = 8 },
+                new SqlParameter("@ReverseDns", entry.ReverseDns)
             );
         }
     }

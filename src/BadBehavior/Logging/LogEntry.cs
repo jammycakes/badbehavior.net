@@ -24,6 +24,8 @@ namespace BadBehavior.Logging
 
         public string Key { get; set; }
 
+        public string ReverseDns { get; set; }
+
         public LogEntry()
         { }
 

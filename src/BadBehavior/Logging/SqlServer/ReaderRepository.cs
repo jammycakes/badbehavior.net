@@ -62,7 +62,8 @@ namespace BadBehavior.Logging.SqlServer
                 RequestMethod = reader["RequestMethod"] as string,
                 RequestUri = reader["RequestUri"] as string,
                 ServerProtocol = reader["ServerProtocol"] as string,
-                UserAgent = reader["UserAgent"] as string
+                UserAgent = reader["UserAgent"] as string,
+                ReverseDns = reader["ReverseDns"] as string
             };
         }
     }
