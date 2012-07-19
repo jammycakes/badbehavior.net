@@ -1,8 +1,10 @@
 ﻿namespace BadBehavior
 {
+    /* ====== RuleProcessing enumeration ====== */
+
     /// <summary>
-    ///  Used to indicate whether we should continue processing more rules
-    ///  or stop here.
+    ///  Returned by an <see cref="IRule"/> instance to indicate whether we should continue
+    ///  processing other rules, or stop checking here.
     /// </summary>
 
     public enum RuleProcessing
