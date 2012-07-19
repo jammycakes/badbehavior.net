@@ -1,16 +1,19 @@
-﻿using BadBehavior.Logging;
+﻿using System.Collections.Generic;
+using BadBehavior.Logging;
 
 namespace BadBehavior
 {
     public interface IBBEngine
     {
-        event BadBehaviorEventHandler BadBehavior;
+        ILogger Logger { get; set; }
+        IList<IRule> Rules { get; }
+        ISettings Settings { get; set; }
+
         void HandleError(System.Web.HttpApplication context, BadBehaviorException ex);
-        System.Collections.Generic.IList<IRule> Rules { get; }
         void Raise(Package package, Error error);
         void ValidateRequest(System.Web.HttpRequestBase request);
-        ISettings Settings { get; set; }
         void RaiseStrict(Package package, Error error);
-        ILogger Logger { get; set; }
+
+        event BadBehaviorEventHandler BadBehavior;
     }
 }
