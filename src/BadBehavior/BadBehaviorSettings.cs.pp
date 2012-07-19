@@ -6,11 +6,13 @@ using BadBehavior;
 
 namespace $rootnamespace$
 {
+    /* ====== BadBehaviorSettings ====== */
+
     /// <summary>
     ///  Configures Bad Behavior for use with this web application.
     /// </summary>
 
-    public class BadBehaviorSettings : ISettings
+    public class BadBehaviorSettings : SettingsBase
     {
         /// <summary>
         ///  Indicates that the Bad Behavior logs can be viewed on a remote server.
