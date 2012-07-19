@@ -8,11 +8,27 @@ using BadBehavior.Configuration;
 
 namespace BadBehavior
 {
+    /* ====== BadBehaviorModule class ====== */
+
+    /// <summary>
+    ///  The HTTP module responsible for vetting all your HTTP requests for
+    ///  nefarious activity.
+    /// </summary>
+
     public class BadBehaviorModule : IHttpModule
     {
+        /// <summary>
+        ///  Disposes of any unmanaged resources used by the HTTP module.
+        /// </summary>
+
         public void Dispose()
         {
         }
+
+        /// <summary>
+        ///  Initialises the HTTP module and prepares it to handle requests.
+        /// </summary>
+        /// <param name="context"></param>
 
         public void Init(HttpApplication context)
         {
@@ -38,6 +54,5 @@ namespace BadBehavior
                 }
             };
         }
-
     }
 }
