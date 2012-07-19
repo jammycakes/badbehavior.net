@@ -51,6 +51,7 @@
     <Compile Include="Configuration\AppConfigSettings.cs" />
     <Compile Include="BadBehaviorEventArgs.cs" />
     <Compile Include="BadBehaviorException.cs" />
+    <Compile Include="Configuration\SettingsLocator.cs" />
     <Compile Include="Web\BadBehaviorHandler.cs" />
     <Compile Include="Web\BadBehaviorModule.cs" />
     <None Include="BadBehaviorSettings.cs.pp" />

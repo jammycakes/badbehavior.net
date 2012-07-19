@@ -16,7 +16,7 @@ namespace BadBehavior.Web
 
         public void Init(HttpApplication context)
         {
-            BBEngine.Instance.Settings = FindSettings();
+            BBEngine.Instance.Settings = SettingsLocator.FindSettings();
 
             context.BeginRequest += (sender, e) => {
                 var sw = new System.Diagnostics.Stopwatch();
@@ -39,21 +39,5 @@ namespace BadBehavior.Web
             };
         }
 
-        public SettingsBase FindSettings()
-        {
-            var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
-            var thisAssembly = this.GetType().Assembly;
-
-            var types = from assembly in assemblies
-                        where assembly != thisAssembly
-                        from type in assembly.GetTypes()
-                        where typeof(SettingsBase).IsAssignableFrom(type)
-                            && type.GetConstructor(Type.EmptyTypes) != null
-                        select type;
-            var settings = types.Select(x => Activator.CreateInstance(x))
-                .Cast<SettingsBase>().FirstOrDefault();
-
-            return settings ?? new AppConfigSettings();
-        }
     }
 }
