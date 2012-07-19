@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BadBehavior
+namespace BadBehavior.Util
 {
     /// <summary>
     ///  A case-insensitive string comparer that also ignores the distinction
