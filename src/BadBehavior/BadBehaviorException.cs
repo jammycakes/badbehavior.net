@@ -3,6 +3,8 @@ using System.Runtime.Serialization;
 
 namespace BadBehavior
 {
+    /* ====== BadBehaviorException class ====== */
+
     /// <summary>
     ///  The exception that is thrown when Bad Behavior fails to validate a request.
     /// </summary>
