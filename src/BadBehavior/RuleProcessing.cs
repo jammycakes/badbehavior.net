@@ -14,7 +14,7 @@
         Continue,
 
         /// <summary>
-        ///  Indicates that we should stop checking.
+        ///  Indicates that we should stop checking. This is used for whitelisting.
         /// </summary>
 
         Stop
