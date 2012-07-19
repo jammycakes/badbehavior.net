@@ -7,7 +7,7 @@ using BadBehavior.Logging;
 using BadBehavior.Rules;
 using BadBehavior.Util;
 
-namespace BadBehavior.Web
+namespace BadBehavior
 {
     public class BadBehaviorHandler : IHttpHandler
     {
