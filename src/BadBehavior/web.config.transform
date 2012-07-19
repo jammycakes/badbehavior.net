@@ -9,18 +9,18 @@
     </connectionStrings>
     <system.web>
         <httpHandlers>
-            <add path="BadBehavior.axd" verb="GET,POST" type="BadBehavior.BadBehaviorHandler, BadBehavior" />
+            <add path="BadBehavior.axd" verb="GET,POST" type="BadBehavior.Web.BadBehaviorHandler, BadBehavior" />
         </httpHandlers>
         <httpModules>
-            <add name="BadBehaviorHttpModule" type="BadBehavior.BadBehaviorModule, BadBehavior" />
+            <add name="BadBehaviorHttpModule" type="BadBehavior.Web.BadBehaviorModule, BadBehavior" />
         </httpModules>
     </system.web>
     <system.webServer>
         <handlers>
-            <add name="BadBehavior" path="BadBehavior.axd" verb="GET,POST" type="BadBehavior.BadBehaviorHandler, BadBehavior" />
+            <add name="BadBehavior" path="BadBehavior.axd" verb="GET,POST" type="BadBehavior.Web.BadBehaviorHandler, BadBehavior" />
         </handlers>
         <modules runAllManagedModulesForAllRequests="true">
-            <add name="BadBehaviorHttpModule" type="BadBehavior.BadBehaviorModule, BadBehavior" />
+            <add name="BadBehaviorHttpModule" type="BadBehavior.Web.BadBehaviorModule, BadBehavior" />
         </modules>
     </system.webServer>
 </configuration>

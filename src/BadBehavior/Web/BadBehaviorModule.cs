@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Compilation;
 using BadBehavior.Configuration;
 
-namespace BadBehavior
+namespace BadBehavior.Web
 {
     public class BadBehaviorModule : IHttpModule
     {
