@@ -9,23 +9,41 @@ using BadBehavior.Util;
 
 namespace BadBehavior
 {
+    /* ====== BadBehaviorHandler class ====== */
+
+    /// <summary>
+    ///  An HTTP handler to display and manage the Bad Behavior event logs.
+    /// </summary>
+    /// <remarks>
+    ///  Assuming you've used the web.config transforms in the NuGet package,
+    ///  this handler will respond to requests for ~/BadBehavior.axd
+    /// </remarks>
+
     public class BadBehaviorHandler : IHttpHandler
     {
+        /// <summary>
+        ///  Gets the <see cref="HttpContextBase"/> for this request
+        ///  and its corresponding response..
+        /// </summary>
+
         public HttpContextBase Context { get; set; }
 
         /// <summary>
-        /// You will need to configure this handler in the Web.config file of your 
-        /// web and register it with IIS before being able to use it. For more information
-        /// see the following link: http://go.microsoft.com/?linkid=8101007
+        ///  Returns false to indicate that this handler is not reusable
+        ///  (because it keeps its own copy of the HTTP context).
         /// </summary>
-        #region IHttpHandler Members
 
         public bool IsReusable
         {
-            // Return false in case your Managed Handler cannot be reused for another request.
-            // Usually this would be false in case you have some state information preserved per request.
             get { return false; }
         }
+
+        /// <summary>
+        ///  Processes a web request to BadBehavior.axd.
+        /// </summary>
+        /// <param name="context">
+        ///  The <see cref="HttpContext"/> for this request and its corresponding response.
+        /// </param>
 
         public void ProcessRequest(HttpContext context)
         {
@@ -45,8 +63,6 @@ namespace BadBehavior
                 throw new HttpException
                     (404, "The resource you requested was not found on this server.");
         }
-
-        #endregion
 
         const string templatePrefix = "BadBehavior.Admin.templates.";
         static readonly Template master = Template.FromResource(templatePrefix + "_master.html");
