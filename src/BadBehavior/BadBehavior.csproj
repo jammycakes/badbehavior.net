@@ -48,6 +48,7 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Admin\Pager.cs" />
+    <Compile Include="Configuration\AppConfigSettings.cs" />
     <Compile Include="BadBehaviorEventArgs.cs" />
     <Compile Include="BadBehaviorException.cs" />
     <Compile Include="Web\BadBehaviorHandler.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Configuration\WhiteListElement.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="HeadersMixedComparer.cs" />
-    <Compile Include="ISettings.cs" />
+    <Compile Include="SettingsBase.cs" />
     <Compile Include="Logging\LogResultSet.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogEntry.cs" />

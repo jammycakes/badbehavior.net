@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BadBehavior
 {
@@ -6,14 +8,14 @@ namespace BadBehavior
     ///  Provides an interface to the configuration settings.
     /// </summary>
 
-    public interface ISettings
+    public abstract class SettingsBase
     {
         /// <summary>
         ///  Indicates that the Bad Behavior logs can be viewed on a remote server.
         ///  If this is not set, the logs can only be viewed by logging on to localhost.
         /// </summary>
 
-        bool AllowRemoteLogViewing { get; }
+        public virtual bool AllowRemoteLogViewing { get { return false; } }
 
         /// <summary>
         ///  Indicates that Bad Behavior will run in Debug mode.
@@ -22,39 +24,45 @@ namespace BadBehavior
         ///  logged to System.Diagnostics.Trace.
         /// </summary>
 
-        bool Debug { get; }
+        public virtual bool Debug { get { return false; } }
 
         /// <summary>
         ///  Indicates that we allow postbacks from other sites.
         ///  Otherwise we'll enforce a same domain policy.
         /// </summary>
 
-        bool OffsiteForms { get; }
+        public virtual bool OffsiteForms { get { return false; } }
 
         /// <summary>
         ///  Indicates that we are operating in strict mode.
         /// </summary>
 
-        bool Strict { get; }
+        public virtual bool Strict { get { return false; } }
 
         /// <summary>
         ///  The e-mail address that should be contacted for support.
         /// </summary>
 
-        string SupportEmail { get; }
+        public virtual string SupportEmail { get { return String.Empty; } }
 
         /// <summary>
         ///  Indicates that this site is behind a reverse proxy.
         /// </summary>
 
-        bool ReverseProxy { get; }
+        public virtual bool ReverseProxy { get { return false; } }
 
         /// <summary>
         ///  Gives a list of all the known reverse proxy addresses.
         ///  These can be specified as a list of CIDR netblocks.
         /// </summary>
 
-        IList<string> ReverseProxyAddresses { get; }
+        public virtual IList<string> ReverseProxyAddresses
+        {
+            get
+            {
+                return new string[0].ToList();
+            }
+        }
 
         /// <summary>
         ///  The HTTP header which gives the reverse proxy indirections.
@@ -62,48 +70,66 @@ namespace BadBehavior
         ///  set to "CF-Connecting-IP".
         /// </summary>
 
-        string ReverseProxyHeader { get; }
+        public virtual string ReverseProxyHeader { get { return "X-Forwarded-For"; } }
 
         /// <summary>
         ///  The IP address ranges, in CIDR format, to be whitelisted
         /// </summary>
 
-        IList<string> WhitelistIPRanges { get; }
+        public virtual IList<string> WhitelistIPRanges
+        {
+            get
+            {
+                return new string[0].ToList();
+            }
+        }
 
         /// <summary>
         ///  User agent substrings to be whitelisted
         /// </summary>
 
-        IList<string> WhitelistUserAgents { get; }
+        public virtual IList<string> WhitelistUserAgents
+        {
+            get
+            {
+                return new string[0].ToList();
+            }
+        }
 
         /// <summary>
         ///  URLs on our site to be whitelisted
         /// </summary>
 
-        IList<string> WhitelistUrls { get; }
+        public virtual IList<string> WhitelistUrls
+        {
+            get
+            {
+                return new string[0].ToList();
+            }
+        }
 
         /// <summary>
         ///  Whether an httpbl key has been configured.
         /// </summary>
 
-        bool Httpbl { get; }
+        public virtual bool Httpbl { get { return false; } }
 
         /// <summary>
         ///  The httpbl key.
         /// </summary>
 
-        string HttpblKey { get; }
+        public virtual string HttpblKey { get { return null; } }
 
         /// <summary>
         ///  The httpbl threat level required to trap spam.
         /// </summary>
 
-        int HttpblThreatLevel { get; }
+        public virtual int HttpblThreatLevel { get { return 25; } }
 
         /// <summary>
         ///  The httpbl maximum age, in days.
         /// </summary>
 
-        int HttpblMaxAge { get; }
+        public virtual int HttpblMaxAge { get { return 30; } }
     }
 }

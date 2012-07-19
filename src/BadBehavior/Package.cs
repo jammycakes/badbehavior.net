@@ -15,7 +15,7 @@ namespace BadBehavior
         ///  The configuration settings to be used with this package.
         /// </summary>
 
-        public ISettings Settings { get { return Engine.Settings; } }
+        public SettingsBase Settings { get { return Engine.Settings; } }
 
         /// <summary>
         ///  Gets the HTTP headers case insensitively by key.

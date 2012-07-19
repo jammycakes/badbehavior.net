@@ -39,7 +39,7 @@ namespace BadBehavior.Web
             };
         }
 
-        public ISettings FindSettings()
+        public SettingsBase FindSettings()
         {
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
             var thisAssembly = this.GetType().Assembly;
@@ -47,15 +47,13 @@ namespace BadBehavior.Web
             var types = from assembly in assemblies
                         where assembly != thisAssembly
                         from type in assembly.GetTypes()
-                        where typeof(ISettings).IsAssignableFrom(type)
+                        where typeof(SettingsBase).IsAssignableFrom(type)
                             && type.GetConstructor(Type.EmptyTypes) != null
                         select type;
             var settings = types.Select(x => Activator.CreateInstance(x))
-                .Cast<ISettings>().FirstOrDefault();
+                .Cast<SettingsBase>().FirstOrDefault();
 
-            return settings
-                ?? ConfigurationManager.GetSection("badBehavior") as ISettings
-                ?? new BadBehaviorConfigurationSection();
+            return settings ?? new AppConfigSettings();
         }
     }
 }

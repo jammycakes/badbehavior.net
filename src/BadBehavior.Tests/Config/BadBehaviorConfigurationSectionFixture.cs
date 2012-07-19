@@ -7,13 +7,12 @@ namespace BadBehavior.Tests.Config
     [TestFixture]
     public class BadBehaviorConfigurationSectionFixture
     {
-        private ISettings config;
+        private SettingsBase config;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            this.config = ConfigurationManager.GetSection("badBehavior")
-                as BadBehaviorConfigurationSection;
+            this.config = new AppConfigSettings();
         }
 
         [Test]

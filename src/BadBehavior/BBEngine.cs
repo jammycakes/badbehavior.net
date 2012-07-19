@@ -28,15 +28,14 @@ namespace BadBehavior
 
         public IList<IRule> Rules { get; private set; }
 
-        public ISettings Settings { get; set; }
+        public SettingsBase Settings { get; set; }
 
         public ILogger Logger { get; set; }
 
         public BBEngine()
         {
             this.Logger = new NullLogger();
-            this.Settings = ConfigurationManager.GetSection("badBehavior") as ISettings
-                ?? new BadBehaviorConfigurationSection();
+            this.Settings = new AppConfigSettings();
             this.Rules = new IRule[] {
                 new CloudFlare(),
                 new WhiteList(),
@@ -51,7 +50,7 @@ namespace BadBehavior
             }.ToList();
         }
 
-        public BBEngine(ISettings settings, params IRule[] rules)
+        public BBEngine(SettingsBase settings, params IRule[] rules)
         {
             this.Logger = new NullLogger();
             this.Settings = settings;

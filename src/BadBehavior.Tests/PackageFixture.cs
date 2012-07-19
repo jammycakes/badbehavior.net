@@ -31,7 +31,7 @@ namespace BadBehavior.Tests
             params string[] knownProxies)
         {
             var request = CreateRequest(ipAddress, forwardedFor);
-            var settings = new Mock<ISettings>(MockBehavior.Loose);
+            var settings = new Mock<SettingsBase>(MockBehavior.Loose);
             settings.SetupGet(x => x.ReverseProxy).Returns(forwardedFor != null);
             settings.SetupGet(x => x.ReverseProxyHeader)
                 .Returns(BadBehaviorConfigurationSection.DefaultReverseProxyHeader);
