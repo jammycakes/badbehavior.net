@@ -61,7 +61,6 @@
     <Compile Include="Configuration\WhiteListElement.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="HeadersMixedComparer.cs" />
-    <Compile Include="IBBEngine.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Logging\LogResultSet.cs" />
     <Compile Include="Logging\ILogger.cs" />

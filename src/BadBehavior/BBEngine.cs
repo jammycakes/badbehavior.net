@@ -14,9 +14,9 @@ using BadBehavior.Util;
 
 namespace BadBehavior
 {
-    public class BBEngine : BadBehavior.IBBEngine
+    public class BBEngine
     {
-        public static IBBEngine Instance { get; set; }
+        public static BBEngine Instance { get; set; }
 
         private static readonly Template template
             = Template.FromResource("BadBehavior.response.html");
@@ -59,7 +59,7 @@ namespace BadBehavior
         }
 
 
-        public void ValidateRequest(HttpRequestBase request)
+        public virtual void ValidateRequest(HttpRequestBase request)
         {
             var package = new Package(request, this);
             foreach (var rule in this.Rules) {
@@ -84,7 +84,7 @@ namespace BadBehavior
             }
         }
 
-        public void HandleError(HttpApplication context, BadBehaviorException ex)
+        public virtual void HandleError(HttpApplication context, BadBehaviorException ex)
         {
             string content = GetResponseContent(ex);
             context.Response.StatusCode = ex.Error.HttpCode;
@@ -125,7 +125,7 @@ namespace BadBehavior
             Raise(package, error, false);
         }
 
-        private void Raise(Package package, Error error, bool strict)
+        protected virtual void Raise(Package package, Error error, bool strict)
         {
             bool thrown = this.Settings.Strict || !strict;
             var ex = new BadBehaviorException(package, error);
@@ -166,7 +166,7 @@ namespace BadBehavior
 
         public event BadBehaviorEventHandler BadBehavior;
 
-        private void OnBadBehavior(BadBehaviorEventArgs args)
+        protected virtual void OnBadBehavior(BadBehaviorEventArgs args)
         {
             if (this.BadBehavior != null)
                 this.BadBehavior(this, args);
