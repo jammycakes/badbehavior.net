@@ -4,8 +4,11 @@ using System.Linq;
 
 namespace BadBehavior
 {
+    /* ====== SettingsBase class ====== */
+
     /// <summary>
-    ///  Provides an interface to the configuration settings.
+    ///  Provides a base class for the Bad Behavior configuration settings,
+    ///  with some default values.
     /// </summary>
 
     public abstract class SettingsBase
