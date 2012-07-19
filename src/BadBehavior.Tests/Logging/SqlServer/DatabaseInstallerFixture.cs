@@ -16,8 +16,8 @@ namespace BadBehavior.Tests.Logging.SqlServer
         [Test]
         public void CanCreateObjects()
         {
-            string s = "select name from dbo.sysobjects where xtype='P'";
-            CollectionAssert.Contains(this.Read(s, x => x.GetString(0)), "BadBehavior_AddEntry");
+            string s = "select name from dbo.sysobjects where xtype='U'";
+            CollectionAssert.Contains(this.Read(s, x => x.GetString(0)), "BadBehavior_Log");
         }
     }
 }
