@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using BadBehavior.Rules;
 using Moq;
 using NUnit.Framework;
@@ -38,7 +35,7 @@ namespace BadBehavior.Tests
                 new Dictionary<string, string> { }
             );
             mock.SetupGet(x => x.UserHostAddress).Returns("127.0.0.1");
-            var mockConfig = new Mock<ISettings>(MockBehavior.Loose);
+            var mockConfig = new Mock<SettingsBase>(MockBehavior.Loose);
             mockConfig.SetupGet(x => x.ReverseProxy).Returns(false);
             mockConfig.SetupGet(x => x.SupportEmail).Returns(email);
 

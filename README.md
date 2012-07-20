@@ -50,13 +50,23 @@ Public License, version 3, or at your option, any later version.
 
 Status
 ------
-Bad Behavior .NET is currently in "alpha" status. All the tests from the
-original PHP version have now been ported to .NET, although more testing is
-required and no guarantees are given as to this project's stability, so use
-it at your own risk.
+Bad Behavior .NET is currently in "beta" status. Its core functionality is
+sufficiently complete for practical use, although further testing is still
+underway and some improvements are planned before the final 1.0 release.
 
-The API is not yet officially stable, but only minor changes are anticipated
-between now and the 1.0 release.
+The following parts of the API can be considered stable as of version 0.2:
+
+ * The BadBehavior and BadBehavior.Logging namespaces
+ * The BadBehavior_Log table created by the SQL Server logger
+ * The <badBehavior> configuration section in web.config
+ * The name (though not the implementation details) of the SqlServerLogger
+   class in BadBehavior.Logging.SqlServer.
+
+This means that unless otherwise documented, no breaking changes are
+anticipated to public and protected members of classes and interfaces within
+these namespaces. On the other hand, classes and interfaces in other
+namespaces are subject to change at any time and you should not rely on
+them to remain stable in your own code.
 
 Building
 --------
@@ -70,6 +80,40 @@ You will need the following software installed on your computer:
    privileges to this database to create the tables and stored
    procedures.
 
+Installation
+------------
+Bad Behavior .NET can be installed using NuGet:
+
+    Install-Package BadBehavior.net -Pre
+
+Alternatively, you can install Bad Behavior .NET manually. First copy
+the BadBehavior.dll file to your website's /bin directory, then add the
+following lines to the <system.web> section of your web.config file:
+
+    <httpHandlers>
+        <add path="BadBehavior.axd" verb="GET,POST"
+            type="BadBehavior.BadBehaviorHandler, BadBehavior" />
+    </httpHandlers>
+    <httpModules>
+        <add name="BadBehaviorHttpModule"
+            type="BadBehavior.BadBehaviorModule, BadBehavior" />
+    </httpModules>
+
+Add the following lines to the <system.webServer> section of your
+web.config file:
+
+    <handlers>
+        <add name="BadBehavior" path="BadBehavior.axd" verb="GET,POST"
+            type="BadBehavior.BadBehaviorHandler, BadBehavior" />
+    </handlers>
+    <modules runAllManagedModulesForAllRequests="true">
+        <add name="BadBehaviorHttpModule"
+            type="BadBehavior.BadBehaviorModule, BadBehavior" />
+    </modules>
+
+Note: if you already have handlers and modules defined in your web.config
+file, Bad Behavior should always be listed first.
+
 Contributing
 ------------
 Bad Behavior .NET uses Bad Behavior 2.7 as a reference. The source code for
@@ -77,9 +121,11 @@ this is available from the Bad Behavior SVN repository at:
 
  * http://plugins.svn.wordpress.org/bad-behavior/
 
-Pull requests will be accepted either via Git (on Github) or Mercurial
-(on Bitbucket). The respective URLs are:
-
+Development primarily takes place on GitHub. A Mercurial clone is provided
+as a courtesy on Bitbucket, and pull requests will be accepted there, though
+it is not guaranteed to be kept up to date. Bug reports and feature requests
+should be raised on GitHub in the first instance.
+ 
  * https://github.com/jammycakes/badbehavior.net
  * https://bitbucket.org/jammycakes/badbehavior.net
 
@@ -96,10 +142,7 @@ Before contributing a pull request, please note the following code conventions:
     name says that it does. Do not deviate from these conventions.
  5. Terminology should normally match that in the original PHP Bad Behavior
     reference implementation. Exceptions should be noted in porting.txt.
- 6. Git users: STRICTLY no octopus merges.
- 7. Mercurial users: STRICTLY no named branches. Commit only to default.
- 8. Changes to .gitignore must be reflected in .hgignore and vice versa.
- 9. Every check-in should:
+ 6. Every check-in should:
 
     1. make only one change
     2. have a commit summary that accurately describes that change

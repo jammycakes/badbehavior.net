@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BadBehavior.Logging
+﻿namespace BadBehavior.Logging
 {
+    /* ====== ILogger interface ====== */
+
+    /// <summary>
+    ///  Represents a backing store for Bad Behavior violations.
+    /// </summary>
+
     public interface ILogger
     {
         /// <summary>
         ///  Adds a new entry to the logs.
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="entry">
+        ///  The <see cref="LogEntry"/> instance to log.
+        /// </param>
 
         void Log(LogEntry entry);
 

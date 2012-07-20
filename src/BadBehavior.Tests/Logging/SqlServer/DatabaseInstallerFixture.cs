@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
+﻿using BadBehavior.Logging;
 using BadBehavior.Logging.SqlServer;
 using NUnit.Framework;
 
@@ -21,8 +17,8 @@ namespace BadBehavior.Tests.Logging.SqlServer
         [Test]
         public void CanCreateObjects()
         {
-            string s = "select name from dbo.sysobjects where xtype='P'";
-            CollectionAssert.Contains(this.Read(s, x => x.GetString(0)), "BadBehavior_AddEntry");
+            string s = "select name from dbo.sysobjects where xtype='U'";
+            CollectionAssert.Contains(this.Read(s, x => x.GetString(0)), "BadBehavior_Log");
         }
     }
 }

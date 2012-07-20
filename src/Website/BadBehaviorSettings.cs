@@ -6,79 +6,79 @@ using BadBehavior;
 
 namespace Website
 {
-    public class BadBehaviorSettings : ISettings
+    public class BadBehaviorSettings : SettingsBase
     {
-        public bool AllowRemoteLogViewing
+        public override bool AllowRemoteLogViewing
         {
             get { return false; }
         }
 
-        public bool Debug
+        public override bool Debug
         {
             get { return false; }
         }
 
-        public bool OffsiteForms
+        public override bool OffsiteForms
         {
             get { return false; }
         }
 
-        public bool Strict
+        public override bool Strict
         {
             get { return false; }
         }
 
-        public string SupportEmail
+        public override string SupportEmail
         {
             get { return "bad.behavior@example.com"; }
         }
 
-        public bool ReverseProxy
+        public override bool ReverseProxy
         {
             get { return false; }
         }
 
-        public IList<string> ReverseProxyAddresses
+        public override IList<string> ReverseProxyAddresses
         {
             get { return null; }
         }
 
-        public string ReverseProxyHeader
+        public override string ReverseProxyHeader
         {
             get { return null; }
         }
 
-        public IList<string> WhitelistIPRanges
+        public override IList<string> WhitelistIPRanges
         {
             get { return null; }
         }
 
-        public IList<string> WhitelistUserAgents
+        public override IList<string> WhitelistUserAgents
         {
             get { return null; }
         }
 
-        public IList<string> WhitelistUrls
+        public override IList<string> WhitelistUrls
         {
             get { return null; }
         }
 
-        public bool Httpbl
+        public override bool Httpbl
         {
             get { return false; }
         }
 
-        public string HttpblKey
+        public override string HttpblKey
         {
             get { return null; }
         }
 
-        public int HttpblThreatLevel
+        public override int HttpblThreatLevel
         {
             get { return 25; }
         }
 
-        public int HttpblMaxAge
+        public override int HttpblMaxAge
         {
             get { return 30; }
         }

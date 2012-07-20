@@ -48,10 +48,13 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Admin\Pager.cs" />
+    <Compile Include="Configuration\AppConfigSettings.cs" />
     <Compile Include="BadBehaviorEventArgs.cs" />
     <Compile Include="BadBehaviorException.cs" />
+    <Compile Include="Configuration\SettingsLocator.cs" />
     <Compile Include="BadBehaviorHandler.cs" />
     <Compile Include="BadBehaviorModule.cs" />
+    <None Include="BadBehaviorSettings.cs.pp" />
     <Compile Include="BBEngine.cs" />
     <Compile Include="Configuration\BadBehaviorConfigurationSection.cs" />
     <Compile Include="Configuration\HttpblElement.cs" />
@@ -59,9 +62,8 @@
     <Compile Include="Configuration\ValueElement.cs" />
     <Compile Include="Configuration\WhiteListElement.cs" />
     <Compile Include="Error.cs" />
-    <Compile Include="HeadersMixedComparer.cs" />
-    <Compile Include="IBBEngine.cs" />
-    <Compile Include="ISettings.cs" />
+    <Compile Include="Util\HeadersMixedComparer.cs" />
+    <Compile Include="SettingsBase.cs" />
     <Compile Include="Logging\LogResultSet.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogEntry.cs" />
@@ -96,7 +98,9 @@
     <Compile Include="Rules\MiscHeaders.cs" />
     <Compile Include="Rules\Protocol.cs" />
     <Compile Include="Rules\WhiteList.cs" />
+    <Compile Include="Util\StringExtensions.cs" />
     <Compile Include="Util\Template.cs" />
+    <None Include="web.config.transform" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules\Explanations.resx">

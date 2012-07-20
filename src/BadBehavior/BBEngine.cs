@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Web;
 using BadBehavior.Configuration;
 using BadBehavior.Logging;
@@ -16,9 +14,20 @@ using BadBehavior.Util;
 
 namespace BadBehavior
 {
-    public class BBEngine : BadBehavior.IBBEngine
+    /* ====== BBEngine class ====== */
+
+    /// <summary>
+    ///  The "guts" of Bad Behavior, where requests are vetted.
+    /// </summary>
+
+    public class BBEngine
     {
-        public static IBBEngine Instance { get; set; }
+        /// <summary>
+        ///  The singleton instance of <see cref="BBEngine"/>, set up with
+        ///  all the rules and configuration settings used to verify requests.
+        /// </summary>
+
+        public static BBEngine Instance { get; set; }
 
         private static readonly Template template
             = Template.FromResource("BadBehavior.response.html");
@@ -28,17 +37,42 @@ namespace BadBehavior
             BBEngine.Instance = new BBEngine();
         }
 
+        /// <summary>
+        ///  A list of <see cref="IRule" /> instances which will vet the requests.
+        /// </summary>
+
         public IList<IRule> Rules { get; private set; }
 
-        public ISettings Settings { get; private set; }
+        /// <summary>
+        ///  A <see cref="SettingsBase"/> instance containing the settings for
+        ///  Bad Behavior .NET.
+        /// </summary>
+
+        public SettingsBase Settings { get; set; }
+
+        /// <summary>
+        ///  An <see cref="ILogger"/> instance used to log bad and suspicious requests.
+        /// </summary>
+        /// <remarks>
+        ///  By default, this is a <see cref="NullLogger"/> instance, which does not do
+        ///  any logging. You can change this behaviour by assigning, for example, a
+        ///  <see cref="SqlServerLogger"/> instance to do the heavy lifting.
+        /// </remarks>
 
         public ILogger Logger { get; set; }
+
+
+        /* ====== Constructors ====== */
+
+        /// <summary>
+        ///  Creates a new instance of the <see cref="BBEngine"/> class,
+        ///  with a default set of rules.
+        /// </summary>
 
         public BBEngine()
         {
             this.Logger = new NullLogger();
-            this.Settings = ConfigurationManager.GetSection("badBehavior") as ISettings
-                ?? new BadBehaviorConfigurationSection();
+            this.Settings = new AppConfigSettings();
             this.Rules = new IRule[] {
                 new CloudFlare(),
                 new WhiteList(),
@@ -53,15 +87,42 @@ namespace BadBehavior
             }.ToList();
         }
 
-        public BBEngine(ISettings settings, params IRule[] rules)
+        /// <summary>
+        ///  Creates a new instance of the <see cref="BBEngine"/> class,
+        ///  with a custom settings object and a custom list of rules.
+        /// </summary>
+        /// <param name="settings">
+        ///  An object derived from the <see cref="SettingsBase"/> class
+        ///  containing the settings for Bad Behavior.
+        /// </param>
+        /// <param name="rules">
+        ///  A list of <see cref="IRule"/> objects, used to vet the web
+        ///  requests.
+        /// </param>
+
+        public BBEngine(SettingsBase settings, params IRule[] rules)
         {
             this.Logger = new NullLogger();
             this.Settings = settings;
             this.Rules = rules.ToList();
         }
 
+        /// <summary>
+        ///  Validates a request.
+        /// </summary>
+        /// <param name="request">
+        ///  The request to validate.
+        /// </param>
+        /// <exception cref="BadBehaviorException">
+        ///  Indicates that the request failed to validate.
+        /// </exception>
+        /// <remarks>
+        ///  This method will not throw exceptions (other than BadBehaviorException)
+        ///  in a production environment. In this case, exceptions will be logged to
+        ///  System.Diagnostics.Trace.
+        /// </remarks>
 
-        public void ValidateRequest(HttpRequestBase request)
+        public virtual void ValidateRequest(HttpRequestBase request)
         {
             var package = new Package(request, this);
             foreach (var rule in this.Rules) {
@@ -86,7 +147,17 @@ namespace BadBehavior
             }
         }
 
-        public void HandleError(HttpApplication context, BadBehaviorException ex)
+        /// <summary>
+        ///  Handles an error and sends an appropriate response to the client.
+        /// </summary>
+        /// <param name="context">
+        ///  The <see cref="HttpApplication"/> instance containing the web request.
+        /// </param>
+        /// <param name="ex">
+        ///  The exception which was raised by the 
+        /// </param>
+
+        public virtual void HandleError(HttpApplication context, BadBehaviorException ex)
         {
             string content = GetResponseContent(ex);
             context.Response.StatusCode = ex.Error.HttpCode;
@@ -97,6 +168,16 @@ namespace BadBehavior
             context.Server.ClearError();
             context.CompleteRequest();
         }
+
+        /// <summary>
+        ///  Returns the HTTP response content appropriate to the given error.
+        /// </summary>
+        /// <param name="ex">
+        ///  The exceptoin which was raised.
+        /// </param>
+        /// <returns>
+        ///  The HTML response to return to the client.
+        /// </returns>
 
         public static string GetResponseContent(BadBehaviorException ex)
         {
@@ -110,6 +191,24 @@ namespace BadBehavior
             return template.Process(dict);
         }
 
+        /// <summary>
+        ///  Creates a support key for a particular error condition.
+        /// </summary>
+        /// <param name="ipAddress">
+        ///  The client's IP address.
+        /// </param>
+        /// <param name="errorCode">
+        ///  The Bad Behavior support code for the condition which was raised.
+        /// </param>
+        /// <returns>
+        ///  A formatted support key, based on the user's IP address followed by the support code.
+        /// </returns>
+        /// <remarks>
+        ///  The support key will be in the format used by the original Bad Behavior: four sets of
+        ///  four-digit hexadecimal numbers, separated by hyphens. The last two sets represent the
+        ///  error code; this is preceded by octets representing the user's IP address.
+        /// </remarks>
+
         public static string BuildSupportKey(IPAddress ipAddress, string errorCode)
         {
             string s = ipAddress.AddressFamily == AddressFamily.InterNetwork
@@ -122,12 +221,36 @@ namespace BadBehavior
             return sb.ToString().ToLowerInvariant();
         }
 
+        /// <summary>
+        ///  Called by the validators to raise an error.
+        /// </summary>
+        /// <param name="package">
+        ///  The <see cref="Package"/> instance containing details of the request.
+        /// </param>
+        /// <param name="error">
+        ///  The error condition detailing the problem.
+        /// </param>
+
         public void Raise(Package package, Error error)
         {
             Raise(package, error, false);
         }
 
-        private void Raise(Package package, Error error, bool strict)
+        /// <summary>
+        ///  Called when an error or suspicious condition has been raised.
+        /// </summary>
+        /// <param name="package">
+        ///  The <see cref="Package"/> instance containing details of the request.
+        /// </param>
+        /// <param name="error">
+        ///  The error condition detailing the problem.
+        /// </param>
+        /// <param name="strict">
+        ///  true if this is a strict condition (i.e. should only be trapped when
+        ///  running in strict mode); otherwise false.
+        /// </param>
+
+        protected virtual void Raise(Package package, Error error, bool strict)
         {
             bool thrown = this.Settings.Strict || !strict;
             var ex = new BadBehaviorException(package, error);
@@ -161,14 +284,43 @@ namespace BadBehavior
             }
         }
 
+        /// <summary>
+        ///  Called by the validators when a suspicious condition occurs.
+        /// </summary>
+        /// <param name="package">
+        ///  The <see cref="Package"/> instance containing details of the request.
+        /// </param>
+        /// <param name="error">
+        ///  The error condition detailing the problem.
+        /// </param>
+        /// <remarks>
+        ///  Suspicious conditions (or strict-mode conditions) are only trapped when
+        ///  running in strict mode, as while they often indicate bad behaviour, they
+        ///  can also be triggered by more innocent conditions, such as malfunctioning
+        ///  corporate proxy servers.
+        /// </remarks>
+
         public void RaiseStrict(Package package, Error error)
         {
             Raise(package, error, true);
         }
 
+        /// <summary>
+        ///  Raised when an event has been trapped by Bad Behavior.
+        /// </summary>
+
         public event BadBehaviorEventHandler BadBehavior;
 
-        private void OnBadBehavior(BadBehaviorEventArgs args)
+        /// <summary>
+        ///  Called when an event has been trapped by Bad Behavior. Can be overridden
+        ///  to provide custom behaviour when an event has been logged.
+        /// </summary>
+        /// <param name="args">
+        ///  A <see cref="BadBehaviorEventArgs"/> object containing information about
+        ///  the bad request.
+        /// </param>
+
+        protected virtual void OnBadBehavior(BadBehaviorEventArgs args)
         {
             if (this.BadBehavior != null)
                 this.BadBehavior(this, args);

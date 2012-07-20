@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BadBehavior.Logging
 {
+    /* ====== LogResultSet class ====== */
+
+    /// <summary>
+    ///  The result of a query to an <see cref="ILogger"/> instance.
+    /// </summary>
+
     public class LogResultSet
     {
         /// <summary>
@@ -41,6 +45,10 @@ namespace BadBehavior.Logging
 
         /* ====== Computed properties ======= */
 
+        /// <summary>
+        ///  The number of the first entry in the result set.
+        /// </summary>
+
         public int FirstEntry
         {
             get
@@ -49,6 +57,9 @@ namespace BadBehavior.Logging
             }
         }
 
+        /// <summary>
+        ///  The number of the last entry in the result set.
+        /// </summary>
 
         public int LastEntry
         {

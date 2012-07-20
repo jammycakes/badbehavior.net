@@ -1,16 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
+using BadBehavior.Logging.SqlServer;
 
 namespace BadBehavior.Logging.SqlServer
 {
+    /* ====== SqlServerLogger class ====== */
+
+    /// <summary>
+    ///  Logs Bad Behavior violations to a SQL Server database.
+    /// </summary>
+
     public class SqlServerLogger : ILogger
     {
+        /// <summary>
+        ///  The <see cref="IWriterRepository"/> instance which handles writes
+        ///  to SQL Server.
+        /// </summary>
+
         public IWriterRepository Writer { get; set; }
+
+        /// <summary>
+        ///  The <see cref="IReaderRepository"/> instance which handles reads
+        ///  from SQL Server.
+        /// </summary>
 
         public IReaderRepository Reader { get; set; }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
+﻿using System.Configuration;
 using BadBehavior.Configuration;
 using NUnit.Framework;
 
@@ -11,13 +7,12 @@ namespace BadBehavior.Tests.Config
     [TestFixture]
     public class BadBehaviorConfigurationSectionFixture
     {
-        private ISettings config;
+        private SettingsBase config;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            this.config = ConfigurationManager.GetSection("badBehavior")
-                as BadBehaviorConfigurationSection;
+            this.config = new AppConfigSettings();
         }
 
         [Test]

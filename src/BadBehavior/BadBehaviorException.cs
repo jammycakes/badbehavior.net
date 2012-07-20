@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Web;
 
 namespace BadBehavior
 {
+    /* ====== BadBehaviorException class ====== */
+
     /// <summary>
     ///  The exception that is thrown when Bad Behavior fails to validate a request.
     /// </summary>

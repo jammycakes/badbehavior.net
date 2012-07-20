@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -9,6 +7,8 @@ using BadBehavior.Util;
 
 namespace BadBehavior.Logging
 {
+    /* ====== LogQuery class ====== */
+
     /// <summary>
     ///  Contains the criteria by which we are to filter, sort and page through the logs.
     /// </summary>
@@ -20,19 +20,23 @@ namespace BadBehavior.Logging
         private string _filter;
         private string _sort;
 
-        private static readonly Regex reCheckValue = new Regex(@"^[A-Za-z0-9_]+$", RegexOptions.Singleline);
-
-        private static void CheckValue(string value)
-        {
-            if (!String.IsNullOrEmpty(value) && !reCheckValue.IsMatch(value))
-                throw new ArgumentException("Not a valid value");
-        }
+        /// <summary>
+        ///  Creates a new instance of the <see cref="LogQuery"/> class.
+        /// </summary>
 
         public LogQuery()
         {
             PageNumber = 1;
             PageSize = DEFAULT_PAGE_SIZE;
         }
+
+        /// <summary>
+        ///  Creates a new instance of the <see cref="LogQuery"/> class,
+        ///  based on the query string for an HTTP request.
+        /// </summary>
+        /// <param name="queryString">
+        ///  The query string.
+        /// </param>
 
         public LogQuery(NameValueCollection queryString)
         {
@@ -50,7 +54,6 @@ namespace BadBehavior.Logging
             else
                 this.PageSize = DEFAULT_PAGE_SIZE;
         }
-
 
         /// <summary>
         ///  The number of the page to return.
@@ -72,7 +75,7 @@ namespace BadBehavior.Logging
             get { return _filter; }
             set
             {
-                CheckValue(value);
+                value.AssertSafe();
                 _filter = value;
             }
         }
@@ -92,7 +95,7 @@ namespace BadBehavior.Logging
             get { return _sort; }
             set
             {
-                CheckValue(value);
+                value.AssertSafe();
                 _sort = value;
             }
         }
@@ -103,6 +106,12 @@ namespace BadBehavior.Logging
 
         public bool Ascending { get; set; }
 
+        /// <summary>
+        ///  Converts the <see cref="LogQuery"/> instance to a query string format.
+        /// </summary>
+        /// <returns>
+        ///  A query string representation of the log query.
+        /// </returns>
 
         public override string ToString()
         {

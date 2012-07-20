@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BadBehavior
+﻿namespace BadBehavior
 {
+    /* ====== RuleProcessing enumeration ====== */
+
     /// <summary>
-    ///  Used to indicate whether we should continue processing more rules
-    ///  or stop here.
+    ///  Returned by an <see cref="IRule"/> instance to indicate whether we should continue
+    ///  processing other rules, or stop checking here.
     /// </summary>
 
     public enum RuleProcessing
@@ -19,7 +16,7 @@ namespace BadBehavior
         Continue,
 
         /// <summary>
-        ///  Indicates that we should stop checking.
+        ///  Indicates that we should stop checking. This is used for whitelisting.
         /// </summary>
 
         Stop

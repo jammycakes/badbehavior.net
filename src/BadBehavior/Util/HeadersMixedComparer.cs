@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace BadBehavior
+namespace BadBehavior.Util
 {
     /// <summary>
     ///  A case-insensitive string comparer that also ignores the distinction

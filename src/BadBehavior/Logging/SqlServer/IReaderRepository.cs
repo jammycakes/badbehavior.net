@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BadBehavior.Logging.SqlServer
+﻿namespace BadBehavior.Logging.SqlServer
 {
     public interface IReaderRepository
     {

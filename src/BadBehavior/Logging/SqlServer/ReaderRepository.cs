@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
+using BadBehavior.Util;
 
 namespace BadBehavior.Logging.SqlServer
 {
@@ -15,19 +13,22 @@ namespace BadBehavior.Logging.SqlServer
 
         public ReaderRepository(string connectionString) : base(connectionString) { }
 
-
         private static string GetWhereClause(LogQuery query)
         {
-            if (!String.IsNullOrEmpty(query.Filter) && !String.IsNullOrEmpty(query.FilterValue))
+            if (!String.IsNullOrEmpty(query.Filter) && !String.IsNullOrEmpty(query.FilterValue)) {
+                query.Filter.AssertSafe();
                 return " where [" + query.Filter + "]=@filter";
+            }
             else
                 return String.Empty;
         }
 
         private static string GetOrderByClause(LogQuery query)
         {
-            if (!String.IsNullOrEmpty(query.Sort))
+            if (!String.IsNullOrEmpty(query.Sort)) {
+                query.Sort.AssertSafe();
                 return " order by [" + query.Sort + "]";
+            }
             else
                 return String.Empty;
         }
@@ -65,7 +66,8 @@ namespace BadBehavior.Logging.SqlServer
                 RequestMethod = reader["RequestMethod"] as string,
                 RequestUri = reader["RequestUri"] as string,
                 ServerProtocol = reader["ServerProtocol"] as string,
-                UserAgent = reader["UserAgent"] as string
+                UserAgent = reader["UserAgent"] as string,
+                ReverseDns = reader["ReverseDns"] as string
             };
         }
     }

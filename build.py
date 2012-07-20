@@ -4,9 +4,9 @@ import shutil
 import sys
 from subprocess import check_call
 
-VERSION = '0.1.1'
+VERSION = '0.2.0'
 BUILD = 0
-VERSION_INFO = 'alpha'
+VERSION_INFO = 'beta'
 CONFIG = 'Release'
 
 def join(abs, rel):
@@ -69,6 +69,7 @@ shutil.copytree(PROJECT_BUILD, NUGET_LIB)
 os.makedirs(NUGET_CONTENT)
 shutil.copy(join(PROJECT_ROOT, 'BadBehavior.nuspec'), NUGET_BASE)
 shutil.copy(join(PROJECT_ROOT, 'web.config.transform'), NUGET_CONTENT)
+shutil.copy(join(PROJECT_ROOT, 'BadBehaviorSettings.cs.pp'), NUGET_CONTENT)
 
 run(NUGET, 'pack',
     join(NUGET_BASE, 'BadBehavior.nuspec'),

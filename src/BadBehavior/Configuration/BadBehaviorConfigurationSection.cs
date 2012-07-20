@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
 
 namespace BadBehavior.Configuration
 {
-    public class BadBehaviorConfigurationSection : ConfigurationSection, ISettings
+    public class BadBehaviorConfigurationSection : ConfigurationSection
     {
         public const string DefaultReverseProxyHeader = "X-Forwarded-For";
 
@@ -52,14 +51,6 @@ namespace BadBehavior.Configuration
             set { this["reverseProxyAddresses"] = value; }
         }
 
-        IList<string> ISettings.ReverseProxyAddresses
-        {
-            get {
-                return
-                    this.ReverseProxyAddresses.OfType<ValueElement>()
-                        .Select(x => x.Value).ToList();
-            }
-        }
 
         [ConfigurationProperty("reverseProxyHeader", DefaultValue = DefaultReverseProxyHeader, IsRequired = false)]
         public string ReverseProxyHeader
@@ -89,66 +80,8 @@ namespace BadBehavior.Configuration
             set { this["debug"] = value; }
         }
 
-        IList<string> ISettings.WhitelistIPRanges
-        {
-            get {
-                return
-                    this.WhiteList.IPRanges.OfType<ValueElement>()
-                        .Select(x => x.Value).ToList();
-            }
-        }
-
-        IList<string> ISettings.WhitelistUserAgents
-        {
-            get
-            {
-                return
-                    this.WhiteList.UserAgents.OfType<ValueElement>()
-                        .Select(x => x.Value).ToList();
-            }
-        }
-
-        IList<string> ISettings.WhitelistUrls
-        {
-            get
-            {
-                return
-                    this.WhiteList.Urls.OfType<ValueElement>()
-                        .Select(x => x.Value).ToList();
-            }
-        }
-
-        bool ISettings.Httpbl
-        {
-            get
-            {
-                return this.Httpbl != null && !String.IsNullOrEmpty(this.Httpbl.Key);
-            }
-        }
-
-        string ISettings.HttpblKey
-        {
-            get
-            {
-                return Httpbl.Key;
-            }
-        }
 
 
-        int ISettings.HttpblThreatLevel
-        {
-            get
-            {
-                return Httpbl.ThreatLevel;
-            }
-        }
 
-        int ISettings.HttpblMaxAge
-        {
-            get
-            {
-                return Httpbl.MaxAge;
-            }
-        }
     }
 }

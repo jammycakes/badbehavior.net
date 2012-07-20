@@ -1,21 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
+using System.Configuration;
 using System.Linq;
-using System.Net;
-using System.Text.RegularExpressions;
+using System.Reflection;
 using System.Web;
+using System.Web.Compilation;
+using BadBehavior.Configuration;
 
 namespace BadBehavior
 {
+    /* ====== BadBehaviorModule class ====== */
+
+    /// <summary>
+    ///  The HTTP module responsible for vetting all your HTTP requests for
+    ///  nefarious activity.
+    /// </summary>
+
     public class BadBehaviorModule : IHttpModule
     {
+        /// <summary>
+        ///  Disposes of any unmanaged resources used by the HTTP module.
+        /// </summary>
+
         public void Dispose()
         {
         }
 
+        /// <summary>
+        ///  Initialises the HTTP module and prepares it to handle requests.
+        /// </summary>
+        /// <param name="context"></param>
+
         public void Init(HttpApplication context)
         {
+            BBEngine.Instance.Settings = SettingsLocator.FindSettings();
+
             context.BeginRequest += (sender, e) => {
                 var sw = new System.Diagnostics.Stopwatch();
                 sw.Start();

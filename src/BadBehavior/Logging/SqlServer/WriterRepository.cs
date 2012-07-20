@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+﻿using System.Data.SqlClient;
 
 namespace BadBehavior.Logging.SqlServer
 {
@@ -46,7 +42,8 @@ namespace BadBehavior.Logging.SqlServer
                 new SqlParameter("@HttpHeaders", entry.HttpHeaders),
                 new SqlParameter("@UserAgent", entry.UserAgent),
                 new SqlParameter("@RequestEntity", entry.RequestEntity),
-                new SqlParameter("@Key", entry.Key) { Size = 8 }
+                new SqlParameter("@Key", entry.Key) { Size = 8 },
+                new SqlParameter("@ReverseDns", entry.ReverseDns)
             );
         }
     }
