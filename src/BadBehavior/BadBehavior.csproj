@@ -98,6 +98,7 @@
     <Compile Include="Rules\MiscHeaders.cs" />
     <Compile Include="Rules\Protocol.cs" />
     <Compile Include="Rules\WhiteList.cs" />
+    <Compile Include="Util\StringExtensions.cs" />
     <Compile Include="Util\Template.cs" />
     <None Include="web.config.transform" />
   </ItemGroup>

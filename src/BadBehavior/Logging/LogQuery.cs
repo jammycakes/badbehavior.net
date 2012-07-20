@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using BadBehavior.Util;
 
 namespace BadBehavior.Logging
 {
@@ -18,14 +19,6 @@ namespace BadBehavior.Logging
 
         private string _filter;
         private string _sort;
-
-        private static readonly Regex reCheckValue = new Regex(@"^[A-Za-z0-9_]+$", RegexOptions.Singleline);
-
-        private static void CheckValue(string value)
-        {
-            if (!String.IsNullOrEmpty(value) && !reCheckValue.IsMatch(value))
-                throw new ArgumentException("Not a valid value");
-        }
 
         /// <summary>
         ///  Creates a new instance of the <see cref="LogQuery"/> class.
@@ -82,7 +75,7 @@ namespace BadBehavior.Logging
             get { return _filter; }
             set
             {
-                CheckValue(value);
+                value.AssertSafe();
                 _filter = value;
             }
         }
@@ -102,7 +95,7 @@ namespace BadBehavior.Logging
             get { return _sort; }
             set
             {
-                CheckValue(value);
+                value.AssertSafe();
                 _sort = value;
             }
         }
