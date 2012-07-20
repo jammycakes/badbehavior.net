@@ -5,6 +5,12 @@ using BadBehavior.Logging.SqlServer;
 
 namespace BadBehavior.Logging
 {
+    /* ====== SqlServerLogger class ====== */
+
+    /// <summary>
+    ///  Logs Bad Behavior violations to a SQL Server database.
+    /// </summary>
+
     public class SqlServerLogger : ILogger
     {
         public IWriterRepository Writer { get; set; }
