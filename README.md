@@ -59,6 +59,8 @@ The following parts of the API can be considered stable as of version 0.2:
  * The BadBehavior and BadBehavior.Logging namespaces
  * The BadBehavior_Log table created by the SQL Server logger
  * The <badBehavior> configuration section in web.config
+ * The name (though not the implementation details) of the SqlServerLogger
+   class in BadBehavior.Logging.SqlServer.
 
 This means that unless otherwise documented, no breaking changes are
 anticipated to public and protected members of classes and interfaces within
