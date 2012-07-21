@@ -81,7 +81,11 @@ namespace BadBehavior.Configuration
         }
 
 
-
-
+        public static BadBehaviorConfigurationSection Get()
+        {
+            return ConfigurationManager.GetSection("badBehavior")
+                as BadBehaviorConfigurationSection
+                ?? new BadBehaviorConfigurationSection();
+        }
     }
 }
