@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using BadBehavior.Configuration;
 
 namespace BadBehavior
 {
@@ -122,21 +123,35 @@ namespace BadBehavior
 
         public Settings()
         {
-            this.AllowRemoteLogViewing = false;
-            this.Debug = false;
-            this.Httpbl = false;
-            this.HttpblKey = null;
-            this.HttpblMaxAge = 30;
-            this.HttpblThreatLevel = 25;
-            this.OffsiteForms = false;
-            this.ReverseProxy = false;
-            this.ReverseProxyAddresses = new string[0];
-            this.ReverseProxyHeader = "X-Forwarded-For";
-            this.Strict = false;
-            this.SupportEmail = "bad-behavior@example.com";
-            this.WhitelistIPRanges = new string[0];
-            this.WhitelistUrls = new string[0];
-            this.WhitelistUserAgents = new string[0];
+            var config = BadBehaviorConfigurationSection.Get();
+
+            this.AllowRemoteLogViewing = config.AllowRemoteLogViewing;
+            this.Debug = config.Debug;
+            this.Httpbl = config.Httpbl != null;
+            if (this.Httpbl) {
+                this.HttpblKey = config.Httpbl.Key;
+                this.HttpblMaxAge = config.Httpbl.MaxAge;
+                this.HttpblThreatLevel = config.Httpbl.ThreatLevel;
+            }
+            this.OffsiteForms = config.OffsiteForms;
+            this.ReverseProxy = config.ReverseProxy;
+            this.ReverseProxyAddresses = config.ReverseProxyAddresses
+                .Cast<ValueElement>().Select(x => x.Value).ToArray();
+            this.ReverseProxyHeader = config.ReverseProxyHeader;
+            this.Strict = config.Strict;
+            this.SupportEmail = config.SupportEmail;
+            if (config.WhiteList != null) {
+                this.WhitelistIPRanges = config.WhiteList.IPRanges
+                    .Cast<ValueElement>().Select(x => x.Value).ToArray();
+                this.WhitelistUrls = config.WhiteList.Urls
+                    .Cast<ValueElement>().Select(x => x.Value).ToArray();
+                this.WhitelistUserAgents = config.WhiteList.UserAgents
+                    .Cast<ValueElement>().Select(x => x.Value).ToArray();
+            }
+            else {
+                this.WhitelistIPRanges = this.WhitelistUrls = this.WhitelistUserAgents
+                    = new string[0];
+            }
         }
     }
 }
