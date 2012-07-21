@@ -54,18 +54,13 @@
     <Compile Include="BadBehaviorModule.cs" />
     <None Include="BadBehaviorSettings.cs.pp" />
     <Compile Include="BBEngine.cs" />
-    <Compile Include="Configuration\AppConfigSettings.cs" />
     <Compile Include="Configuration\BadBehaviorConfigurationSection.cs" />
     <Compile Include="Configuration\HttpblElement.cs" />
-    <Compile Include="Configuration\SettingsLocator.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Configuration\ValueCollection.cs" />
     <Compile Include="Configuration\ValueElement.cs" />
     <Compile Include="Configuration\WhiteListElement.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SettingsBase.cs" />
     <Compile Include="Util\HeadersMixedComparer.cs" />
     <Compile Include="Logging\LogResultSet.cs" />
     <Compile Include="Logging\ILogger.cs" />
