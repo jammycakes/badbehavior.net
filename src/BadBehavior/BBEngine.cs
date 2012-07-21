@@ -44,11 +44,11 @@ namespace BadBehavior
         public IList<IRule> Rules { get; private set; }
 
         /// <summary>
-        ///  A <see cref="SettingsBase"/> instance containing the settings for
+        ///  A <see cref="Settings"/> instance containing the settings for
         ///  Bad Behavior .NET.
         /// </summary>
 
-        public SettingsBase Settings { get; set; }
+        public Settings Settings { get; private set; }
 
         /// <summary>
         ///  An <see cref="ILogger"/> instance used to log bad and suspicious requests.
@@ -71,8 +71,8 @@ namespace BadBehavior
 
         public BBEngine()
         {
+            this.Settings = new Settings();
             this.Logger = new NullLogger();
-            this.Settings = new AppConfigSettings();
             this.Rules = new IRule[] {
                 new CloudFlare(),
                 new WhiteList(),
@@ -91,19 +91,15 @@ namespace BadBehavior
         ///  Creates a new instance of the <see cref="BBEngine"/> class,
         ///  with a custom settings object and a custom list of rules.
         /// </summary>
-        /// <param name="settings">
-        ///  An object derived from the <see cref="SettingsBase"/> class
-        ///  containing the settings for Bad Behavior.
-        /// </param>
         /// <param name="rules">
         ///  A list of <see cref="IRule"/> objects, used to vet the web
         ///  requests.
         /// </param>
 
-        public BBEngine(SettingsBase settings, params IRule[] rules)
+        public BBEngine(params IRule[] rules)
         {
+            this.Settings = new Settings();
             this.Logger = new NullLogger();
-            this.Settings = settings;
             this.Rules = rules.ToList();
         }
 
