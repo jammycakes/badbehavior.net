@@ -35,6 +35,8 @@ namespace BadBehavior
         static BBEngine()
         {
             BBEngine.Instance = new BBEngine();
+            var configurator = ConfiguratorLocator.Find();
+            configurator.Configure(BBEngine.Instance);
         }
 
         /// <summary>
