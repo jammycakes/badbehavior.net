@@ -48,11 +48,11 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Admin\Pager.cs" />
+    <None Include="BadBehaviorConfigurator.cs.pp" />
     <Compile Include="BadBehaviorEventArgs.cs" />
     <Compile Include="BadBehaviorException.cs" />
     <Compile Include="BadBehaviorHandler.cs" />
     <Compile Include="BadBehaviorModule.cs" />
-    <None Include="BadBehaviorSettings.cs.pp" />
     <Compile Include="BBEngine.cs" />
     <Compile Include="Configuration\BadBehaviorConfigurationSection.cs" />
     <Compile Include="Configuration\HttpblElement.cs" />
