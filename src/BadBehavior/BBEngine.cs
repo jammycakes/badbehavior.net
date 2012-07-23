@@ -9,6 +9,7 @@ using System.Text;
 using System.Web;
 using BadBehavior.Configuration;
 using BadBehavior.Logging;
+using BadBehavior.Logging.SqlServer;
 using BadBehavior.Rules;
 using BadBehavior.Util;
 
@@ -72,7 +73,7 @@ namespace BadBehavior
         public BBEngine()
         {
             this.Settings = new Settings();
-            this.Logger = new NullLogger();
+            this.Logger = GetDefaultLogger();
             this.Rules = new IRule[] {
                 new CloudFlare(),
                 new WhiteList(),
@@ -99,9 +100,32 @@ namespace BadBehavior
         public BBEngine(params IRule[] rules)
         {
             this.Settings = new Settings();
-            this.Logger = new NullLogger();
+            this.Logger = GetDefaultLogger();
             this.Rules = rules.ToList();
         }
+
+
+        /* ====== GetDefaultLogger ====== */
+
+        /// <summary>
+        ///  Creates a default logger.
+        /// </summary>
+        /// <remarks>
+        ///  The default logger will be a SQL Server logger if the Bad Behavior
+        ///  connection string is defined, otherwise it will be null.
+        /// </remarks>
+
+        public virtual ILogger GetDefaultLogger()
+        {
+            var cs = ConfigurationManager.ConnectionStrings["BadBehavior"];
+            if (cs != null && cs.ProviderName == "System.Data.SqlClient")
+                return new SqlServerLogger(cs.ConnectionString);
+            else
+                return new NullLogger();
+        }
+
+
+        /* ====== Methods ====== */
 
         /// <summary>
         ///  Validates a request.
