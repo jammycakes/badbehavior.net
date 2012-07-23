@@ -52,9 +52,20 @@ namespace BadBehavior
                 AssertLocal();
             }
 
+            if (this.Context.Request.RequestType.ToUpper() == "POST"
+                && this.Context.Request.Form.ContainsKey("clear")) {
+                ClearLogs();
+            }
+
             var content = this.GetContent();
             this.Context.Response.ContentType = "text/html";
             this.Context.Response.Write(content);
+        }
+
+        private void ClearLogs()
+        {
+            if (BBEngine.Instance.Logger != null)
+                BBEngine.Instance.Logger.Clear();
         }
 
         private void AssertLocal()
