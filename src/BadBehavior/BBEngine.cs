@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Web;
@@ -362,6 +363,35 @@ namespace BadBehavior
             foreach (var configurator in configurators)
                 configurator.Configure(this);
             _configured = true;
+        }
+
+        private static string _version;
+
+        /// <summary>
+        ///  Gets the version of Bad Behavior.NET, as stored in the [AssemblyInformationalVersion]
+        ///  attribute.
+        /// </summary>
+
+        public static string InformationalVersion
+        {
+            get
+            {
+                if (_version == null) {
+                    var attribute = typeof(BBEngine).Assembly.GetCustomAttributes
+                        (typeof(AssemblyInformationalVersionAttribute), false)
+                        .OfType<AssemblyInformationalVersionAttribute>()
+                        .FirstOrDefault();
+                    if (attribute == null)
+                        _version = "(unknown)";
+                    else {
+                        _version = attribute.InformationalVersion;
+#if DEBUG
+                        _version += " (debug)";
+#endif
+                    }
+                }
+                return _version;
+            }
         }
     }
 }

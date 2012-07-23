@@ -84,7 +84,8 @@ namespace BadBehavior
             var view = Template.FromResource(templatePrefix + viewName + ".html");
             var content = view.Process(parameters);
             return master.Process(new Dictionary<string, string> {
-                { "content", content }
+                { "content", content },
+                { "version", BBEngine.InformationalVersion }
             });
         }
 

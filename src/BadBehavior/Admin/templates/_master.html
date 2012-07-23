@@ -2,14 +2,15 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
-        <title>Bad Behavior .NET</title>
+        <title>Bad Behavior .NET {{version}}</title>
         <style type="text/css">
             body { font: 8pt verdana, arial, helvetica, sans-serif; margin: 0px; color: #336; }
             #header, #footer { padding: 1em; overflow: hidden; }
             #header { background-color: #808080; color: white; }
-            #footer { background-color: #cccccc; color: white; }
+            #footer { background-color: #cccccc; color: black; }
             #content { padding: 1em; }
             #header h1 { float: left; margin: 0px; padding: 0px; }
+            #footer p { float: left; margin: 0px; padding: 0.5em 0px; }
             #header form, #footer form { float: right; }
             table { border-spacing: 0px; border-collapse: collapse; border: 1px solid black; width: 100%; }
             thead tr { background-color: #99f; color: white; text-align: left; border-bottom: 1px solid black;}
@@ -31,6 +32,7 @@
             {{{content}}}
         </div>
         <div id="footer">
+            <p>Bad Behavior .NET version {{version}}.</p>
             <form method="post">
                 <input type="submit" name="clear" value="Clear logs" />
             </form>
