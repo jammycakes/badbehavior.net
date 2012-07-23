@@ -73,7 +73,7 @@ Building
 You will need the following software installed on your computer:
 
  * The .NET framework SDK version 4.0 or later
- * Python 3.2 or later to run the build scripts
+ * Python 2.6 or later to run the build script. Python 3.x will also work.
  * A local SQL Server 2008 Express named instance called SQLEXPRESS
    with a database called BadBehavior is needed to run the unit tests.
    The user account running the script should be granted dbo
@@ -112,7 +112,7 @@ web.config file:
     </modules>
 
 Note: if you already have handlers and modules defined in your web.config
-file, Bad Behavior should always be listed first.
+file, Bad Behavior should be listed first.
 
 Contributing
 ------------
@@ -121,10 +121,10 @@ this is available from the Bad Behavior SVN repository at:
 
  * http://plugins.svn.wordpress.org/bad-behavior/
 
-Development primarily takes place on GitHub. A Mercurial clone is provided
+Development primarily takes place on Github. A Mercurial clone is provided
 as a courtesy on Bitbucket, and pull requests will be accepted there, though
-it is not guaranteed to be kept up to date. Bug reports and feature requests
-should be raised on GitHub in the first instance.
+Github is the preferred portal for development. Bug reports and feature
+requests should be raised on Github in the first instance.
  
  * https://github.com/jammycakes/badbehavior.net
  * https://bitbucket.org/jammycakes/badbehavior.net
