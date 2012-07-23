@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Web;
 using BadBehavior.Configuration;
@@ -344,6 +345,23 @@ namespace BadBehavior
         {
             if (this.BadBehavior != null)
                 this.BadBehavior(this, args);
+        }
+
+        private bool _configured = false;
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        internal void Configure(IEnumerable<IConfigurator> configurators)
+        {
+            // This method may be called multiple times if IIS creates multiple HttpApplication
+            // instances and hence multiple instances of the Bad Behavior HTTP module. Since
+            // we're only using one BBEngine instance between all of them, we need to make sure
+            // this method only gets called once.
+            // See http://stackoverflow.com/questions/3370839
+
+            if (_configured) return;
+            foreach (var configurator in configurators)
+                configurator.Configure(this);
+            _configured = true;
         }
     }
 }
