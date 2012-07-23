@@ -7,23 +7,23 @@ using System.Web.Compilation;
 
 namespace BadBehavior.Configuration
 {
-    public static class SettingsLocator
+    public static class ConfiguratorLocator
     {
-        public static SettingsBase FindSettings()
+        public static IConfigurator Find()
         {
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
-            var thisAssembly = typeof(SettingsLocator).Assembly;
+            var thisAssembly = typeof(ConfiguratorLocator).Assembly;
 
             var types = from assembly in assemblies
                         where assembly != thisAssembly
                         from type in assembly.GetTypes()
-                        where typeof(SettingsBase).IsAssignableFrom(type)
+                        where typeof(IConfigurator).IsAssignableFrom(type)
                             && type.GetConstructor(Type.EmptyTypes) != null
                         select type;
-            var settings = types.Select(x => Activator.CreateInstance(x))
-                .Cast<SettingsBase>().FirstOrDefault();
+            var config = types.Select(x => Activator.CreateInstance(x))
+                .Cast<IConfigurator>().FirstOrDefault();
 
-            return settings ?? new AppConfigSettings();
+            return config;
         }
     }
 }

@@ -32,7 +32,8 @@ namespace BadBehavior
 
         public void Init(HttpApplication context)
         {
-            BBEngine.Instance.Settings = SettingsLocator.FindSettings();
+            var configurator = ConfiguratorLocator.Find();
+            configurator.Configure(BBEngine.Instance);
 
             context.BeginRequest += (sender, e) => {
                 var sw = new System.Diagnostics.Stopwatch();

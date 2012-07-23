@@ -69,7 +69,7 @@ shutil.copytree(PROJECT_BUILD, NUGET_LIB)
 os.makedirs(NUGET_CONTENT)
 shutil.copy(join(PROJECT_ROOT, 'BadBehavior.nuspec'), NUGET_BASE)
 shutil.copy(join(PROJECT_ROOT, 'web.config.transform'), NUGET_CONTENT)
-shutil.copy(join(PROJECT_ROOT, 'BadBehaviorSettings.cs.pp'), NUGET_CONTENT)
+shutil.copy(join(PROJECT_ROOT, 'BadBehaviorConfigurator.cs.pp'), NUGET_CONTENT)
 
 run(NUGET, 'pack',
     join(NUGET_BASE, 'BadBehavior.nuspec'),

@@ -9,6 +9,7 @@ using System.Text;
 using System.Web;
 using BadBehavior.Configuration;
 using BadBehavior.Logging;
+using BadBehavior.Logging.SqlServer;
 using BadBehavior.Rules;
 using BadBehavior.Util;
 
@@ -44,11 +45,11 @@ namespace BadBehavior
         public IList<IRule> Rules { get; private set; }
 
         /// <summary>
-        ///  A <see cref="SettingsBase"/> instance containing the settings for
+        ///  A <see cref="Settings"/> instance containing the settings for
         ///  Bad Behavior .NET.
         /// </summary>
 
-        public SettingsBase Settings { get; set; }
+        public Settings Settings { get; private set; }
 
         /// <summary>
         ///  An <see cref="ILogger"/> instance used to log bad and suspicious requests.
@@ -71,8 +72,8 @@ namespace BadBehavior
 
         public BBEngine()
         {
-            this.Logger = new NullLogger();
-            this.Settings = new AppConfigSettings();
+            this.Settings = new Settings();
+            this.Logger = GetDefaultLogger();
             this.Rules = new IRule[] {
                 new CloudFlare(),
                 new WhiteList(),
@@ -91,21 +92,40 @@ namespace BadBehavior
         ///  Creates a new instance of the <see cref="BBEngine"/> class,
         ///  with a custom settings object and a custom list of rules.
         /// </summary>
-        /// <param name="settings">
-        ///  An object derived from the <see cref="SettingsBase"/> class
-        ///  containing the settings for Bad Behavior.
-        /// </param>
         /// <param name="rules">
         ///  A list of <see cref="IRule"/> objects, used to vet the web
         ///  requests.
         /// </param>
 
-        public BBEngine(SettingsBase settings, params IRule[] rules)
+        public BBEngine(params IRule[] rules)
         {
-            this.Logger = new NullLogger();
-            this.Settings = settings;
+            this.Settings = new Settings();
+            this.Logger = GetDefaultLogger();
             this.Rules = rules.ToList();
         }
+
+
+        /* ====== GetDefaultLogger ====== */
+
+        /// <summary>
+        ///  Creates a default logger.
+        /// </summary>
+        /// <remarks>
+        ///  The default logger will be a SQL Server logger if the Bad Behavior
+        ///  connection string is defined, otherwise it will be null.
+        /// </remarks>
+
+        public virtual ILogger GetDefaultLogger()
+        {
+            var cs = ConfigurationManager.ConnectionStrings["BadBehavior"];
+            if (cs != null && cs.ProviderName == "System.Data.SqlClient")
+                return new SqlServerLogger(cs.ConnectionString);
+            else
+                return new NullLogger();
+        }
+
+
+        /* ====== Methods ====== */
 
         /// <summary>
         ///  Validates a request.

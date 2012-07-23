@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Linq;
 using BadBehavior.Configuration;
 using NUnit.Framework;
 
@@ -7,12 +8,12 @@ namespace BadBehavior.Tests.Config
     [TestFixture]
     public class BadBehaviorConfigurationSectionFixture
     {
-        private SettingsBase config;
+        private BadBehaviorConfigurationSection config;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            this.config = new AppConfigSettings();
+            this.config = BadBehaviorConfigurationSection.Get();
         }
 
         [Test]
@@ -30,20 +31,26 @@ namespace BadBehavior.Tests.Config
         public void CanLoadReverseProxyAddresses()
         {
             var addresses = config.ReverseProxyAddresses;
-            CollectionAssert.AreEqual(new string[] { "test.one", "test.two" }, addresses);
+            CollectionAssert.AreEqual(
+                new string[] { "test.one", "test.two" },
+                addresses.Cast<ValueElement>().Select(x => x.Value)
+            );
         }
 
         [Test]
         public void CanLoadWhiteListIPRanges()
         {
-            var ipRanges = config.WhitelistIPRanges;
-            CollectionAssert.AreEqual(new string[] { "10.0.0.0/8" }, ipRanges);
+            var ipRanges = config.WhiteList.IPRanges;
+            CollectionAssert.AreEqual(
+                new string[] { "10.0.0.0/8" },
+                ipRanges.Cast<ValueElement>().Select(x => x.Value)
+            );
         }
 
         [Test]
         public void CanLoadWhiteListUrls()
         {
-            var urls = config.WhitelistUrls;
+            var urls = config.WhiteList.Urls;
             CollectionAssert.IsEmpty(urls);
         }
     }
