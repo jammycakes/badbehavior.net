@@ -77,8 +77,7 @@ You will need the following software installed on your computer:
  * A local SQL Server 2008 Express named instance called SQLEXPRESS
    with a database called BadBehavior is needed to run the unit tests.
    The user account running the script should be granted dbo
-   privileges to this database to create the tables and stored
-   procedures.
+   privileges to this database to create the log table.
 
 Installation
 ------------
