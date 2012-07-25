@@ -360,7 +360,7 @@ namespace BadBehavior
             // See http://stackoverflow.com/questions/3370839
 
             if (_configured) return;
-            foreach (var configurator in configurators)
+            foreach (var configurator in configurators.Where(x => x != null))
                 configurator.Configure(this);
             _configured = true;
         }
