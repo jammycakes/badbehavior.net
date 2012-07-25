@@ -9,6 +9,20 @@ namespace BadBehavior.Configuration
 {
     public static class ConfiguratorLocator
     {
+        // Fix Github issue 15: ReflectionTypeLoadException.
+        // HT: Phil Haack http://haacked.com/archive/2012/07/23/get-all-types-in-an-assembly.aspx
+
+        private static IEnumerable<Type> GetLoadableTypes(Assembly assembly)
+        {
+            if (assembly == null) throw new ArgumentNullException("assembly");
+            try {
+                return assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e) {
+                return e.Types.Where(t => t != null);
+            }
+        }
+
         public static IConfigurator Find()
         {
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
@@ -16,7 +30,7 @@ namespace BadBehavior.Configuration
 
             var types = from assembly in assemblies
                         where assembly != thisAssembly
-                        from type in assembly.GetTypes()
+                        from type in GetLoadableTypes(assembly)
                         where typeof(IConfigurator).IsAssignableFrom(type)
                             && type.GetConstructor(Type.EmptyTypes) != null
                         select type;
