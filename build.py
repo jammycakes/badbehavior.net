@@ -4,7 +4,7 @@ import shutil
 import sys
 from subprocess import check_call
 
-VERSION = '0.2.0'
+VERSION = '0.2.1'
 BUILD = 0
 VERSION_INFO = 'beta'
 CONFIG = 'Release'
