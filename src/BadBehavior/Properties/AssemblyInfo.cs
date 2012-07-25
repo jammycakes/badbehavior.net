@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BadBehavior")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("BadBehavior.net")]
+[assembly: AssemblyDescription(".NET port of the Bad Behavior PHP anti-spam library.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jamesmckay.net")]
 [assembly: AssemblyProduct("BadBehavior.net")]
-[assembly: AssemblyCopyright("Copyright © James McKay and others")]
+[assembly: AssemblyCopyright("Open source licensed under the GNU Lesser General Public License, version 3.0 or later.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

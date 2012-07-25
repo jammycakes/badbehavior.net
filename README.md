@@ -18,15 +18,16 @@ which deliver it.
 
 Thousands of sites large and small, like SourceForge, GNOME, the U.S.
 Department of Education, and many more, trust Bad Behavior to help reduce
-incoming link spam and malicious activity.
+incoming link spam and malicious activity. This project brings the same
+technology to ASP.NET.
 
-Bad Behavior complements other link spam solutions by acting as a gatekeeper,
-preventing spammers from ever delivering their junk, and in many cases, from
-ever reading your site in the first place. This keeps your site's load down,
-makes your site logs cleaner, and can help prevent denial of service
+Bad Behavior .NET complements other link spam solutions by acting as a
+gatekeeper, preventing spammers from ever delivering their junk, and in many
+cases, from ever reading your site in the first place. This keeps your site's
+load down, makes your site logs cleaner, and can help prevent denial of service
 conditions caused by spammers.
 
-Bad Behavior also transcends other link spam solutions by working in a
+Bad Behavior .NET also transcends other link spam solutions by working in 
 completely different, unique way. Instead of merely looking at the content of
 potential spam, Bad Behavior analyzes the delivery method as well as the
 software the spammer is using. In this way, Bad Behavior can stop spam attacks
@@ -36,17 +37,14 @@ Bad Behavior is designed to work alongside existing spam prevention services
 to increase their effectiveness and efficiency. Whenever possible, you should
 run it in combination with a more traditional spam prevention service.
 
-Bad Behavior works on virtually any ASP.NET-based Web software package, whether
-you use Web Forms or ASP.NET MVC. It consists of a simple HTTP module that you
-can just drop into your web application and configure with a couple of lines in
-your web.config file.
+Bad Behavior .NET works on virtually any ASP.NET-based Web software package,
+whether you use Web Forms or ASP.NET MVC. It consists of a simple HTTP module
+that you can just drop into your web application and configure with a couple
+of lines in your web.config file. Simply turn it on and stop worrying about spam!
 
-Installing and configuring Bad Behavior is simple and takes only a few minutes.
-In most cases, no configuration at all is needed. Simply turn it on and stop
-worrying about spam!
-
-The core of Bad Behavior is free software released under the GNU Lesser General
-Public License, version 3, or at your option, any later version.
+As with the original PHP version, Bad Behavior .NET is free software released
+under the GNU Lesser General Public License, version 3, or at your option,
+any later version.
 
 Status
 ------
@@ -73,12 +71,11 @@ Building
 You will need the following software installed on your computer:
 
  * The .NET framework SDK version 4.0 or later
- * Python 3.2 or later to run the build scripts
+ * Python 2.6 or later to run the build script. Python 3.x will also work.
  * A local SQL Server 2008 Express named instance called SQLEXPRESS
    with a database called BadBehavior is needed to run the unit tests.
    The user account running the script should be granted dbo
-   privileges to this database to create the tables and stored
-   procedures.
+   privileges to this database to create the log table.
 
 Installation
 ------------
@@ -112,7 +109,7 @@ web.config file:
     </modules>
 
 Note: if you already have handlers and modules defined in your web.config
-file, Bad Behavior should always be listed first.
+file, Bad Behavior should be listed first.
 
 Contributing
 ------------
@@ -121,10 +118,10 @@ this is available from the Bad Behavior SVN repository at:
 
  * http://plugins.svn.wordpress.org/bad-behavior/
 
-Development primarily takes place on GitHub. A Mercurial clone is provided
+Development primarily takes place on Github. A Mercurial clone is provided
 as a courtesy on Bitbucket, and pull requests will be accepted there, though
-it is not guaranteed to be kept up to date. Bug reports and feature requests
-should be raised on GitHub in the first instance.
+Github is the preferred portal for development. Bug reports and feature
+requests should be raised on Github in the first instance.
  
  * https://github.com/jammycakes/badbehavior.net
  * https://bitbucket.org/jammycakes/badbehavior.net
