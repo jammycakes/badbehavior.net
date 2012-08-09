@@ -24,7 +24,7 @@ PROJECT_ROOT = join(ROOT_DIR, 'src/BadBehavior')
 PROJECT_BUILD = join(PROJECT_ROOT, 'bin/' + CONFIG)
 
 MSBUILD = join(os.environ['WINDIR'], 'Microsoft.NET/Framework/v4.0.30319/MSBuild.exe')
-NUNIT = join(ROOT_DIR, 'src/packages/NUnit.Runners.2.6.0.12051/tools/nunit-console.exe')
+NUNIT = join(ROOT_DIR, 'src/packages/NUnit.Runners.2.6.1/tools/nunit-console.exe')
 NUGET = join(ROOT_DIR, 'src/packages/NuGet.CommandLine.2.0.0/tools/NuGet.exe')
 
 if os.path.isdir(OUTPUT_DIR):
