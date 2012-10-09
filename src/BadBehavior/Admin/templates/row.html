@@ -1,11 +1,14 @@
 ﻿<tr{{class?}} class="{{class}}"{{/class?}}>
     <td>
-        {{IP}}<br /><br />
+        <a href="{{IPFilter}}">{{IP}}</a><br /><br />
         {{Date}}<br /><br />
-        {{LogMessage}}
+        <a href="{{KeyFilter}}">{{LogMessage}}</a>
     </td>
     <td>
-        {{RequestMethod}} {{Url}} {{Protocol}}<br />
+        <a href="{{RequestMethodFilter}}">{{RequestMethod}}</a>
+        {{Url}}
+        <a href="{{ProtocolFilter}}">{{Protocol}}</a>
+        <br />
         {{Headers}}
     </td>
     <td>

@@ -6,6 +6,7 @@ using BadBehavior.Admin;
 using BadBehavior.Logging;
 using BadBehavior.Rules;
 using BadBehavior.Util;
+using System;
 
 namespace BadBehavior
 {
@@ -21,6 +22,8 @@ namespace BadBehavior
 
     public class BadBehaviorHandler : IHttpHandler
     {
+        private LogQuery query;
+
         /// <summary>
         ///  Gets the <see cref="HttpContextBase"/> for this request
         ///  and its corresponding response..
@@ -57,6 +60,7 @@ namespace BadBehavior
                 ClearLogs();
             }
 
+            this.query = new LogQuery(Context.Request.QueryString);
             var content = this.GetContent();
             this.Context.Response.ContentType = "text/html";
             this.Context.Response.Write(content);
@@ -89,16 +93,31 @@ namespace BadBehavior
             });
         }
 
+        private string GetFilter(string filter, string value)
+        {
+            var baseQuery = this.query.Clone();
+            baseQuery.Filter = filter;
+            baseQuery.FilterValue = value;
+            return new Uri(Context.Request.Url, "?" + baseQuery.ToString()).ToString();
+        }
+
         private string BuildTableRows(IEnumerable<LogEntry> entries)
         {
             var tpl = Template.FromResource("BadBehavior.Admin.templates.row.html");
             var sb = new StringBuilder();
             bool alt = false;
+
+
             foreach (var entry in entries) {
+                var error = Errors.Lookup(entry.Key);
                 string row = tpl.Process(new Dictionary<string, string>() {
                     { "Date", entry.Date.ToString("yyyy-MM-dd HH:mm:ss") },
                     { "IP", entry.IP.ToString() },
-                    { "LogMessage", Errors.Lookup(entry.Key).Log },
+                    { "LogMessage", error.Log },
+                    { "KeyFilter", GetFilter("Key", error.Code) },
+                    { "IPFilter", GetFilter("IP", entry.IP.ToString()) },
+                    { "RequestMethodFilter", GetFilter("RequestMethod", entry.RequestMethod) },
+                    { "ProtocolFilter", GetFilter("ServerProtocol", entry.ServerProtocol) },
                     { "RequestMethod", entry.RequestMethod },
                     { "Url", entry.RequestUri },
                     { "Protocol", entry.ServerProtocol },
@@ -116,7 +135,6 @@ namespace BadBehavior
         {
             if (BBEngine.Instance.Logger == null)
                 return GetView("nolog", null);
-            var query = new LogQuery(Context.Request.QueryString);
             var entries = BBEngine.Instance.Logger.Query(query);
             if (entries == null)
                 return GetView("nolog", null);
