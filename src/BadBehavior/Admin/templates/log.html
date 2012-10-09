@@ -1,4 +1,7 @@
-﻿<p>Showing entries {{firstEntry}} to {{lastEntry}} of {{totalEntries}}.</p>
+﻿<p>
+    Showing entries {{firstEntry}} to {{lastEntry}} of {{totalEntries}}{{filter?}}, filtered by {{filter}}{{/filter?}}.
+    {{filter?}}<a href="{{nofilter}}">Show all</a>.{{/filter?}}
+</p>
 
 <table>
     <thead>

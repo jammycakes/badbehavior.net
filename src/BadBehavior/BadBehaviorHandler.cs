@@ -7,6 +7,7 @@ using BadBehavior.Logging;
 using BadBehavior.Rules;
 using BadBehavior.Util;
 using System;
+using System.Text.RegularExpressions;
 
 namespace BadBehavior
 {
@@ -107,7 +108,6 @@ namespace BadBehavior
             var sb = new StringBuilder();
             bool alt = false;
 
-
             foreach (var entry in entries) {
                 var error = Errors.Lookup(entry.Key);
                 string row = tpl.Process(new Dictionary<string, string>() {
@@ -143,12 +143,18 @@ namespace BadBehavior
             var tableRows = BuildTableRows(entries.LogEntries);
             var pager = new Pager(Context.Request.Url, query, entries);
 
+            var unfiltered = query.Clone();
+            unfiltered.Filter = unfiltered.FilterValue = null;
+            string filter = Regex.Replace(query.Filter, "([a-z])([A-Z])", @"$1 $2");
+
             var content = GetView("log", new Dictionary<string, string>() {
                 { "pager", pager.GetHtml() },
                 { "rows", tableRows },
                 { "firstEntry", entries.FirstEntry.ToString() },
                 { "lastEntry", entries.LastEntry.ToString() },
-                { "totalEntries", entries.TotalEntries.ToString() }
+                { "totalEntries", entries.TotalEntries.ToString() },
+                { "filter", filter },
+                { "nofilter", unfiltered.ToString() }
             });
             return content;
         }
