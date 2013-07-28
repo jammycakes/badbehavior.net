@@ -118,13 +118,10 @@ this is available from the Bad Behavior SVN repository at:
 
  * http://plugins.svn.wordpress.org/bad-behavior/
 
-Development primarily takes place on Github. A Mercurial clone is provided
-as a courtesy on Bitbucket, and pull requests will be accepted there, though
-Github is the preferred portal for development. Bug reports and feature
-requests should be raised on Github in the first instance.
+Development takes place on Github; bug reports and feature requests should
+be raised there in the first instance.
  
  * https://github.com/jammycakes/badbehavior.net
- * https://bitbucket.org/jammycakes/badbehavior.net
 
 Before contributing a pull request, please note the following code conventions:
 
